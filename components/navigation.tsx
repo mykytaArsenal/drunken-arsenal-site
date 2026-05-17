@@ -23,6 +23,8 @@ export function Navigation({ currency = 'USD' }: NavigationProps) {
   const [isSignedIn, setIsSignedIn] = useState(false);
 
   useEffect(() => {
+    let interval: ReturnType<typeof setInterval> | null = null;
+
     const fetchData = async () => {
       try {
         const [cartResponse, authResponse] = await Promise.all([
@@ -44,9 +46,30 @@ export function Navigation({ currency = 'USD' }: NavigationProps) {
       }
     };
 
-    fetchData();
-    const interval = setInterval(fetchData, 5000);
-    return () => clearInterval(interval);
+    const start = () => {
+      if (interval) return;
+      fetchData();
+      interval = setInterval(fetchData, 5000);
+    };
+
+    const stop = () => {
+      if (!interval) return;
+      clearInterval(interval);
+      interval = null;
+    };
+
+    const onVisibilityChange = () => {
+      if (document.hidden) stop();
+      else start();
+    };
+
+    if (!document.hidden) start();
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    return () => {
+      stop();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    };
   }, []);
 
   return (
