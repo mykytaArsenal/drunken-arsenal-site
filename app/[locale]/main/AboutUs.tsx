@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import { BRAND } from '@/lib/i18n/brand';
 
 export const AboutUs = () => {
   const t = useTranslations();
@@ -18,9 +19,9 @@ export const AboutUs = () => {
           </h2>
 
           <div className="space-y-4 text-lg md:text-xl px-4 text-stone-200 leading-relaxed">
-            <p>{t('home.aboutUs1')}</p>
+            <p>{t('home.aboutUs1', { brand: BRAND })}</p>
             <p>{t('home.aboutUs2')}</p>
-            <p>{t('home.aboutUs3')}</p>
+            <p>{t('home.aboutUs3', { brand: BRAND })}</p>
           </div>
         </div>
 

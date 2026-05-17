@@ -9,7 +9,7 @@
   },
   "home": {
     "ageWarning": "Play hard, drink smart, remember everything",
-    "title": "DRUNKEN ARSENAL",
+    "title": "{brand}",
     "subtitle": "Deploy. Drink. Dominate. The tactical drinking game that turns every party into a battlefield.",
     "browseArsenal": "Browse Arsenal",
     "howToPlay": "How to Play",
@@ -17,15 +17,15 @@
     "featuredSubtitle": "Premium tactical drinking gear designed for maximum party impact",
     "completeArsenal": "Complete Arsenal",
     "ctaTitle": "Ready for Battle?",
-    "ctaSubtitle": "Join thousands of party commanders who have deployed Shot Wave at their gatherings. Free shipping on orders over $50.",
+    "ctaSubtitle": "Join thousands of party commanders who have deployed {productName} at their gatherings. Free shipping on orders over {freeShippingThreshold}.",
     "startShopping": "Start Shopping",
     "bundle": "BUNDLE",
     "inStock": "in stock",
     "outOfStock": "Out of stock",
 
-    "aboutUs1": "Drunken Arsenal is a party brand for grown-ups who like their fun a little over the top. We create tactical-style drinking games and bar accessories that look like they were pulled from an armory, but exist purely for entertainment, laughs, and unforgettable nights with friends. No real weapons, no violence — just a playful parody wrapped in premium, gift-worthy design.",
+    "aboutUs1": "{brand} is a party brand for grown-ups who like their fun a little over the top. We create tactical-style drinking games and bar accessories that look like they were pulled from an armory, but exist purely for entertainment, laughs, and unforgettable nights with friends. No real weapons, no violence — just a playful parody wrapped in premium, gift-worthy design.",
     "aboutUs2": "We want to bring something new into the world of parties: not just another shot game, but a full experience with its own universe — commanders, missions, rules of engagement, and traditions that become part of your group’s story. Our products are made to be gifted: to friends, colleagues, and that one person who “already has everything”, except their own tactical bar setup.",
-    "aboutUs3": "At the core of Drunken Arsenal is a simple philosophy: drink responsibly, play smart, and never take yourself too seriously. We stand for fun that stays fun — with respect for limits, a designated driver sorted in advance, and memories you actually want to remember the next day.",
+    "aboutUs3": "At the core of {brand} is a simple philosophy: drink responsibly, play smart, and never take yourself too seriously. We stand for fun that stays fun — with respect for limits, a designated driver sorted in advance, and memories you actually want to remember the next day.",
 
     "whoWeAreTitle": "WHO WE ARE?",
     "missionTitle": "MISSION",
@@ -46,7 +46,7 @@
     "addToCart": "Add to Cart",
     "adding": "Adding...",
     "freeShipping": "Free Shipping",
-    "freeShippingDesc": "On orders over $50",
+    "freeShippingDesc": "On orders over {freeShippingThreshold}",
     "quality": "Quality Guaranteed",
     "qualityDesc": "Premium tactical-grade materials",
     "returns": "30-Day Returns",
@@ -84,7 +84,7 @@
     "step2": "Your tactical gear will be prepared and packaged",
     "step3": "We'll send you tracking information once shipped",
     "step4": "Estimated delivery: 3-5 business days",
-    "questions": "Questions about your order? Contact us at support@drunkenarsenal.com"
+    "questions": "Questions about your order? Contact us at {supportEmail}"
   },
   "auth": {
     "welcomeBack": "Welcome Back",
@@ -116,7 +116,7 @@
     "notSet": "Not set"
   },
   "howToPlay": {
-    "title": "How to Play Shot Wave",
+    "title": "How to Play {productName}",
     "subtitle": "Master the tactical drinking battlefield in 3 easy steps",
     "step1Title": "1. Deploy Your Forces",
     "step1Desc": "Set up your artillery shells (shot glasses) in formation on the battlefield. Each player positions their tactical mines strategically to create obstacles.",
