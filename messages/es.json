@@ -9,7 +9,7 @@
   },
   "home": {
     "ageWarning": "Juega duro, bebe con cabeza, recuérdalo todo",
-    "title": "ARSENAL BORRACHO",
+    "title": "{brand}",
     "subtitle": "Despliega. Bebe. Domina. El juego táctico de bebidas que convierte cada fiesta en un campo de batalla.",
     "browseArsenal": "Explorar Arsenal",
     "howToPlay": "Cómo Jugar",
@@ -17,15 +17,15 @@
     "featuredSubtitle": "Equipo táctico premium diseñado para máximo impacto en fiestas",
     "completeArsenal": "Arsenal Completo",
     "ctaTitle": "¿Listo para la Batalla?",
-    "ctaSubtitle": "Únete a miles de comandantes de fiestas que han desplegado Shot Wave. Envío gratis en pedidos sobre $50.",
+    "ctaSubtitle": "Únete a miles de comandantes de fiesta que han desplegado {productName} en sus reuniones. Envío gratis en pedidos superiores a {freeShippingThreshold}.",
     "startShopping": "Empezar a Comprar",
     "bundle": "PAQUETE",
     "inStock": "en stock",
     "outOfStock": "Agotado",
 
-    "aboutUs1": "Drunken Arsenal es una marca de fiesta para adultos a los que les gusta la diversión un poco exagerada. Creamos juegos de bebidas y accesorios de bar de estilo táctico que parecen sacados de un arsenal, pero existen únicamente para entretener, hacer reír y crear noches inolvidables con amigos. Sin armas reales, sin violencia: solo una parodia divertida envuelta en un diseño premium perfecto para regalar.",
+    "aboutUs1": "{brand} es una marca de fiesta para adultos a los que les gusta la diversión un poco exagerada. Creamos juegos de bebidas y accesorios de bar de estilo táctico que parecen sacados de un arsenal, pero existen únicamente para entretener, hacer reír y crear noches inolvidables con amigos. Sin armas reales, sin violencia: solo una parodia divertida envuelta en un diseño premium perfecto para regalar.",
     "aboutUs2": "Queremos aportar algo nuevo al mundo de las fiestas: no solo otro juego de chupitos, sino una experiencia completa con su propio universo — comandantes, misiones, reglas de enfrentamiento y tradiciones que se convierten en parte de la historia de tu grupo. Nuestros productos están pensados para regalar: a amigos, compañeros de trabajo y a esa persona que ya lo tiene todo, excepto su propio arsenal de bar táctico.",
-    "aboutUs3": "En el corazón de Drunken Arsenal hay una filosofía sencilla: beber con responsabilidad, jugar con cabeza y no tomarse demasiado en serio. Defendemos una diversión que sigue siendo diversión — con límites claros, un conductor sobrio acordado de antemano y recuerdos que realmente quieras recordar al día siguiente.",
+    "aboutUs3": "En el corazón de {brand} hay una filosofía sencilla: beber con responsabilidad, jugar con cabeza y no tomarse demasiado en serio. Defendemos una diversión que sigue siendo diversión — con límites claros, un conductor sobrio acordado de antemano y recuerdos que de verdad quieras recordar al día siguiente.",
 
     "whoWeAreTitle": "¿QUIÉNES SOMOS?",
     "missionTitle": "MISIÓN",
@@ -37,7 +37,6 @@
     "readyForSomeFun": "¿LISTO PARA DIVERTIRTE?",
     "yesCommander": "¡SÍ, COMANDANTE!",
     "designatedDriverNote": "Despliega la misión con un conductor sobrio y tu mejor escuadrón."
-
   },
   "product": {
     "backToShop": "Volver a la Tienda",
@@ -47,18 +46,18 @@
     "addToCart": "Añadir al Carrito",
     "adding": "Añadiendo...",
     "freeShipping": "Envío Gratis",
-    "freeShippingDesc": "En pedidos sobre $50",
+    "freeShippingDesc": "En pedidos superiores a {freeShippingThreshold}",
     "quality": "Calidad Garantizada",
     "qualityDesc": "Materiales de grado táctico premium",
     "returns": "Devoluciones de 30 Días",
-    "returnsDesc": "¿No satisfecho? Reembolso completo garantizado",
-    "ageWarningFull": "SOLO +18 - BEBE RESPONSABLEMENTE - NO PARA MENORES",
+    "returnsDesc": "¿No estás satisfecho? Reembolso completo garantizado",
+    "ageWarningFull": "SOLO +18 - BEBE RESPONSABLEMENTE - NO APTO PARA MENORES",
     "youMayLike": "También te Puede Gustar"
   },
   "cart": {
     "title": "Carrito de Compras",
     "empty": "Tu Arsenal está Vacío",
-    "emptyDesc": "Es hora de abastecerse de equipo táctico para tu próxima misión.",
+    "emptyDesc": "Es hora de abastecerte de equipo táctico para tu próxima misión.",
     "continueShopping": "Continuar Comprando",
     "orderSummary": "Resumen del Pedido",
     "subtotal": "Subtotal",
@@ -71,11 +70,11 @@
   },
   "checkout": {
     "title": "Pago",
-    "ageConfirm": "Al proceder, confirmas que eres +18 y beberás responsablemente"
+    "ageConfirm": "Al continuar, confirmas que tienes 18 años o más y beberás responsablemente"
   },
   "order": {
     "missionAccomplished": "¡Misión Cumplida!",
-    "confirmed": "Tu pedido ha sido confirmado y está siendo preparado para el despliegue.",
+    "confirmed": "Tu pedido ha sido confirmado y se está preparando para el despliegue.",
     "orderDetails": "Detalles del Pedido",
     "orderId": "ID del Pedido:",
     "email": "Email:",
@@ -83,12 +82,12 @@
     "whatNext": "¿Qué sigue?",
     "step1": "Recibirás un email de confirmación en {email}",
     "step2": "Tu equipo táctico será preparado y empaquetado",
-    "step3": "Te enviaremos información de rastreo una vez enviado",
+    "step3": "Te enviaremos información de seguimiento una vez enviado",
     "step4": "Entrega estimada: 3-5 días hábiles",
-    "questions": "¿Preguntas sobre tu pedido? Contáctanos en support@drunkenarsenal.com"
+    "questions": "¿Preguntas sobre tu pedido? Contáctanos en {supportEmail}"
   },
   "auth": {
-    "welcomeBack": "Bienvenido de Vuelta",
+    "welcomeBack": "Bienvenido de Nuevo",
     "signInDesc": "Inicia sesión para acceder a tu cuenta",
     "email": "Email",
     "password": "Contraseña",
@@ -97,8 +96,8 @@
     "noAccount": "¿No tienes cuenta?",
     "signUp": "Regístrate",
     "joinArsenal": "Únete al Arsenal",
-    "signUpDesc": "Crea una cuenta para rastrear pedidos y más",
-    "mustBe18": "Debes ser +18 para crear una cuenta",
+    "signUpDesc": "Crea una cuenta para hacer seguimiento de tus pedidos y más",
+    "mustBe18": "Debes ser mayor de 18 para crear una cuenta",
     "name": "Nombre (Opcional)",
     "passwordRequirement": "Debe tener al menos 8 caracteres",
     "createAccount": "Crear Cuenta",
@@ -112,24 +111,24 @@
     "profileDesc": "Información de tu cuenta",
     "orders": "Pedidos",
     "ordersDesc": "Ver historial de pedidos",
-    "ordersInfo": "Rastrea tus entregas y ve pedidos anteriores.",
+    "ordersInfo": "Sigue las entregas de tu equipo táctico y consulta pedidos anteriores.",
     "viewOrders": "Ver Pedidos (Próximamente)",
-    "notSet": "No establecido"
+    "notSet": "Sin definir"
   },
   "howToPlay": {
-    "title": "Cómo Jugar Shot Wave",
-    "subtitle": "Domina el campo de batalla táctico en 3 pasos",
+    "title": "Cómo Jugar a {productName}",
+    "subtitle": "Domina el campo de batalla táctico en 3 sencillos pasos",
     "step1Title": "1. Despliega tus Fuerzas",
-    "step1Desc": "Configura tus proyectiles de artillería (vasos de chupito) en formación. Cada jugador posiciona sus minas tácticas estratégicamente.",
+    "step1Desc": "Coloca tus proyectiles de artillería (vasos de chupito) en formación sobre el campo de batalla. Cada jugador posiciona sus minas tácticas de forma estratégica para crear obstáculos.",
     "step2Title": "2. Enfréntate al Enemigo",
-    "step2Desc": "Tomen turnos lanzando sus disparos. Cuando golpeas el proyectil de un oponente, ellos beben. ¿Golpeaste una mina? Todo el escuadrón toma un chupito.",
+    "step2Desc": "Lanzad vuestros disparos por turnos. Cuando alcanzas el proyectil de un oponente, bebe. ¿Has alcanzado una mina? Todo el escuadrón se toma un chupito. La estrategia es clave para la victoria.",
     "step3Title": "3. Reclama la Victoria",
-    "step3Desc": "El último jugador en pie gana la batalla. Los derrotados deben saludar al vencedor y aceptar su destino como mezcladores de bebidas.",
+    "step3Desc": "El último jugador en pie gana la batalla. Los derrotados deben saludar al vencedor y aceptar su destino como mezclador oficial de bebidas de la fiesta.",
     "importantRules": "Reglas Importantes",
-    "rule1": "Los jugadores deben ser +18 para participar",
-    "rule2": "Siempre bebe responsablemente y conoce tus límites",
-    "rule3": "Designa un conductor sobrio antes de comenzar",
-    "rule4": "Deja de jugar si alguien se siente incómodo",
+    "rule1": "Los jugadores deben ser mayores de 18 para participar",
+    "rule2": "Bebe siempre con responsabilidad y conoce tus límites",
+    "rule3": "Designa un conductor sobrio antes de que comience la misión",
+    "rule4": "Dejad de jugar si alguien se siente incómodo o indispuesto",
     "getArsenal": "Consigue tu Arsenal"
   },
   "notFound": {
@@ -139,7 +138,7 @@
     "returnToBase": "Volver a la Base"
   },
   "footer": {
-    "tagline": "El juego táctico de bebidas para comandantes de fiestas.",
+    "tagline": "El juego táctico de bebidas para comandantes de fiesta.",
     "shop": "Tienda",
     "allProducts": "Todos los Productos",
     "bundles": "Paquetes",
@@ -147,7 +146,7 @@
     "support": "Soporte",
     "faq": "Preguntas Frecuentes",
     "contact": "Contáctanos",
-    "shipping": "Info de Envío",
+    "shipping": "Información de Envío",
     "legal": "Legal",
     "privacy": "Política de Privacidad",
     "terms": "Términos de Servicio",
