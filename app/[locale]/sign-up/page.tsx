@@ -1,10 +1,11 @@
 import { SignUpForm } from '@/components/sign-up-form';
 import { getCurrentUser } from '@/app/[locale]/actions/auth';
 import { redirect } from 'next/navigation';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+import { getTranslations } from 'next-intl/server';
 
 export const metadata = {
-  title: 'Sign Up - Drunken Arsenal',
+  title: 'Sign Up',
   description: 'Create your account',
 };
 
@@ -15,35 +16,38 @@ export default async function SignUpPage() {
     redirect('/account');
   }
 
+  const t = await getTranslations('auth');
+
   return (
-    <div className="min-h-screen py-16">
+    <div className="min-h-screen py-16 md:py-20 bg-paper">
       <div className="container mx-auto px-4">
         <div className="max-w-md mx-auto">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-2">Join the Arsenal</h1>
-            <p className="text-muted-foreground">
-              Create an account to track orders and more
-            </p>
+          <div className="text-center mb-8 space-y-2">
+            <span className="tag-line">// new recruit</span>
+            <h1 className="font-display text-3xl md:text-4xl text-ink leading-none">
+              {t('joinArsenal')}
+            </h1>
+            <p className="font-stamp text-sm text-ink/70">{t('signUpDesc')}</p>
           </div>
 
-          <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4 mb-6">
-            <p className="text-sm font-bold text-destructive text-center">
-              You must be 18+ to create an account
-            </p>
+          <div className="stripes-warning p-1 mb-6">
+            <div className="bg-ink p-3 text-center">
+              <p className="font-display text-sm text-amber tracking-wider">
+                {t('mustBe18')}
+              </p>
+            </div>
           </div>
 
-          <div className="bg-card border rounded-lg p-6">
+          <div className="pop-card p-6 md:p-8">
             <SignUpForm />
 
-            <div className="mt-6 text-center text-sm">
-              <span className="text-muted-foreground">
-                Already have an account?{' '}
-              </span>
+            <div className="mt-6 text-center font-stamp text-sm">
+              <span className="text-ink/70">{t('haveAccount')} </span>
               <Link
                 href="/sign-in"
-                className="text-primary hover:underline font-medium"
+                className="text-rust-bright font-display tracking-wider uppercase hover:underline"
               >
-                Sign in
+                {t('signIn')}
               </Link>
             </div>
           </div>

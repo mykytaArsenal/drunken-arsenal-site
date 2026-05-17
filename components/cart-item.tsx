@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { useTranslations } from 'next-intl';
 import { MinusIcon, PlusIcon, XIcon } from './icons';
 import { formatPrice } from '@/lib/products';
 import type { ICartItem } from '@/lib/cart';
@@ -18,6 +18,7 @@ export function CartItemComponent({ item, currency }: ICartItemComponentProps) {
   const [quantity, setQuantity] = useState(item.quantity);
   const [isUpdating, setIsUpdating] = useState(false);
   const router = useRouter();
+  const t = useTranslations('cart');
 
   const updateQuantity = async (newQuantity: number) => {
     if (newQuantity < 0 || newQuantity > item.product.stock) return;
@@ -26,18 +27,11 @@ export function CartItemComponent({ item, currency }: ICartItemComponentProps) {
     try {
       const response = await fetch('/api/cart/update', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          itemId: item.id,
-          quantity: newQuantity,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ itemId: item.id, quantity: newQuantity }),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to update cart');
-      }
+      if (!response.ok) throw new Error('Failed to update cart');
 
       setQuantity(newQuantity);
       router.refresh();
@@ -54,17 +48,11 @@ export function CartItemComponent({ item, currency }: ICartItemComponentProps) {
     try {
       const response = await fetch('/api/cart/remove', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          itemId: item.id,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ itemId: item.id }),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to remove item');
-      }
+      if (!response.ok) throw new Error('Failed to remove item');
 
       router.refresh();
     } catch (error) {
@@ -76,11 +64,10 @@ export function CartItemComponent({ item, currency }: ICartItemComponentProps) {
   };
 
   return (
-    <div className="bg-card border rounded-lg p-4 flex gap-4">
-      {/* Product Image */}
+    <div className="pop-card p-4 flex gap-4 items-stretch">
       <Link
         href={`/product/${item.product.slug}`}
-        className="flex-shrink-0 w-24 h-24 bg-muted rounded-lg overflow-hidden"
+        className="flex-shrink-0 w-24 h-24 bg-cream-warm border-2 border-ink overflow-hidden"
       >
         <img
           src={item.product.images[0] || '/placeholder.svg'}
@@ -89,61 +76,59 @@ export function CartItemComponent({ item, currency }: ICartItemComponentProps) {
         />
       </Link>
 
-      {/* Product Info */}
-      <div className="flex-1 flex flex-col justify-between">
+      <div className="flex-1 flex flex-col justify-between min-w-0">
         <div>
           <Link
             href={`/product/${item.product.slug}`}
-            className="hover:text-primary transition-colors"
+            className="hover:text-rust-bright transition-colors"
           >
-            <h3 className="font-semibold text-lg">{item.product.name}</h3>
+            <h3 className="font-display text-base md:text-lg text-ink uppercase line-clamp-1">
+              {item.product.name}
+            </h3>
           </Link>
-          <p className="text-sm text-muted-foreground mt-1">
-            {formatPrice(item.product.price, currency)} each
+          <p className="font-stamp text-xs text-ink/70 mt-1">
+            {formatPrice(item.product.price, currency)} {t('each')}
           </p>
         </div>
 
-        <div className="flex items-center justify-between mt-4">
-          {/* Quantity Controls */}
-          <div className="flex items-center border rounded-lg">
-            <Button
-              variant="ghost"
-              size="icon"
+        <div className="flex items-center justify-between mt-3 flex-wrap gap-3">
+          <div className="flex items-stretch border-2 border-ink bg-cream">
+            <button
+              type="button"
               onClick={() => updateQuantity(quantity - 1)}
               disabled={isUpdating || quantity <= 1}
-              className="h-8 w-8"
+              className="h-8 w-8 flex items-center justify-center disabled:opacity-40 media-hover:hover:bg-amber"
+              aria-label="Decrease"
             >
               <MinusIcon className="h-3 w-3" />
-            </Button>
-            <span className="w-10 text-center text-sm font-medium">
+            </button>
+            <span className="w-10 flex items-center justify-center font-display text-sm border-x-2 border-ink">
               {quantity}
             </span>
-            <Button
-              variant="ghost"
-              size="icon"
+            <button
+              type="button"
               onClick={() => updateQuantity(quantity + 1)}
               disabled={isUpdating || quantity >= item.product.stock}
-              className="h-8 w-8"
+              className="h-8 w-8 flex items-center justify-center disabled:opacity-40 media-hover:hover:bg-amber"
+              aria-label="Increase"
             >
               <PlusIcon className="h-3 w-3" />
-            </Button>
+            </button>
           </div>
 
-          {/* Subtotal */}
           <div className="flex items-center gap-4">
-            <p className="font-bold text-lg">
+            <p className="font-display text-lg text-rust-bright">
               {formatPrice(item.product.price * quantity, currency)}
             </p>
-            <Button
-              variant="ghost"
-              size="icon"
+            <button
+              type="button"
               onClick={removeItem}
               disabled={isUpdating}
-              className="h-8 w-8 text-destructive hover:text-destructive"
+              className="h-8 w-8 flex items-center justify-center text-ink/70 media-hover:hover:text-rust-bright disabled:opacity-40"
+              aria-label="Remove item"
             >
               <XIcon className="h-4 w-4" />
-              <span className="sr-only">Remove item</span>
-            </Button>
+            </button>
           </div>
         </div>
       </div>

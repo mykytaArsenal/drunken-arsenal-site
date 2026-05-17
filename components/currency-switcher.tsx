@@ -28,12 +28,12 @@ export function CurrencySwitcher({
       value={currentCurrency}
       onValueChange={(value) => changeCurrency(value as ICurrency)}
     >
-      <SelectTrigger className="max-w-30 gap-2">
+      <SelectTrigger className="h-9 max-w-28 gap-2 border-2 border-cream/30 bg-transparent text-cream font-stamp text-xs uppercase tracking-wider media-hover:hover:border-amber">
         <DollarSignIcon className="h-4 w-4" />
         <SelectValue />
       </SelectTrigger>
 
-      <SelectContent className="bg-chart-2">
+      <SelectContent className="bg-cream text-ink border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] font-stamp">
         {currencies.map((currency) => (
           <SelectItem key={currency} value={currency}>
             <span className="flex items-center gap-2">

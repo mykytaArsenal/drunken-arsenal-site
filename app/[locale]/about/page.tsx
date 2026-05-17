@@ -1,114 +1,102 @@
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { Heart, Target, Users } from 'lucide-react';
+import { Link } from '@/i18n/navigation';
+import { HeartIcon, TargetIcon, UsersIcon } from '@/components/icons';
+import { getTranslations } from 'next-intl/server';
+import { BRAND } from '@/lib/i18n/brand';
 
 export const metadata = {
-  title: 'About Us - Drunken Arsenal',
-  description: 'Learn about the Drunken Arsenal mission',
+  title: 'About',
+  description: 'Learn about the Drunken Arsenal brand and mission',
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const t = await getTranslations('about');
+
   return (
-    <div className="min-h-screen py-16">
+    <div className="min-h-screen py-12 md:py-16 bg-paper">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-5xl font-bold mb-4">About Drunken Arsenal</h1>
-            <p className="text-xl text-muted-foreground">
-              Where tactical precision meets party perfection
+          <div className="text-center mb-12 space-y-3">
+            <span className="tag-line">// brand dossier</span>
+            <h1 className="font-display text-4xl md:text-6xl text-ink leading-tight">
+              {t('title', { brand: BRAND })}
+            </h1>
+            <p className="font-stamp text-base md:text-lg text-ink/70 max-w-2xl mx-auto">
+              {t('subtitle')}
             </p>
           </div>
 
-          <div className="space-y-12">
-            {/* Mission */}
-            <div className="bg-card border rounded-lg p-8">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full flex-shrink-0">
-                  <Target className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold mb-2">Our Mission</h2>
-                  <p className="text-muted-foreground leading-relaxed">
-                    At Drunken Arsenal, we believe every party deserves
-                    military-grade entertainment. We've taken the strategic
-                    intensity of tactical operations and combined it with the
-                    social fun of drinking games to create an unforgettable
-                    experience. Our mission is to provide premium party gear
-                    that transforms ordinary gatherings into legendary battles.
-                  </p>
-                </div>
+          <div className="space-y-8">
+            <div className="pop-card p-6 md:p-8 flex gap-5 items-start">
+              <div className="flex items-center justify-center w-12 h-12 bg-rust-bright border-2 border-ink flex-shrink-0">
+                <TargetIcon className="h-6 w-6 text-cream" />
+              </div>
+              <div className="space-y-3 flex-1">
+                <h2 className="font-display text-xl md:text-2xl text-ink uppercase leading-tight">
+                  {t('missionTitle')}
+                </h2>
+                <p className="font-stamp text-base text-ink/80 leading-relaxed">
+                  {t('missionText')}
+                </p>
               </div>
             </div>
 
-            {/* Team */}
-            <div className="bg-card border rounded-lg p-8">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full flex-shrink-0">
-                  <Users className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold mb-2">Our Team</h2>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Founded by a group of party commanders who were tired of
-                    boring drinking games, Drunken Arsenal was born from a
-                    simple idea: what if we could bring the strategy and
-                    excitement of tactical games to social gatherings? Our team
-                    combines expertise in game design, military history, and
-                    professional partying to create products that are both fun
-                    and built to last.
-                  </p>
-                </div>
+            <div className="pop-card p-6 md:p-8 flex gap-5 items-start">
+              <div className="flex items-center justify-center w-12 h-12 bg-amber border-2 border-ink flex-shrink-0">
+                <UsersIcon className="h-6 w-6 text-ink" />
+              </div>
+              <div className="space-y-3 flex-1">
+                <h2 className="font-display text-xl md:text-2xl text-ink uppercase leading-tight">
+                  {t('teamTitle')}
+                </h2>
+                <p className="font-stamp text-base text-ink/80 leading-relaxed">
+                  {t('teamText')}
+                </p>
               </div>
             </div>
 
-            {/* Values */}
-            <div className="bg-card border rounded-lg p-8">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full flex-shrink-0">
-                  <Heart className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold mb-2">Our Values</h2>
-                  <div className="space-y-4 text-muted-foreground">
-                    <p className="leading-relaxed">
-                      <span className="font-semibold text-foreground">
-                        Responsible Fun:
-                      </span>{' '}
-                      We promote drinking responsibly and knowing your limits.
-                      Every product comes with clear age restrictions and safety
-                      guidelines.
-                    </p>
-                    <p className="leading-relaxed">
-                      <span className="font-semibold text-foreground">
-                        Quality First:
-                      </span>{' '}
-                      Our products are built with tactical-grade materials to
-                      withstand the most intense party operations.
-                    </p>
-                    <p className="leading-relaxed">
-                      <span className="font-semibold text-foreground">
-                        Community Driven:
-                      </span>{' '}
-                      We listen to our party commanders and continuously improve
-                      our arsenal based on real-world battlefield feedback.
-                    </p>
-                  </div>
+            <div className="pop-card p-6 md:p-8 flex gap-5 items-start">
+              <div className="flex items-center justify-center w-12 h-12 bg-olive border-2 border-ink flex-shrink-0">
+                <HeartIcon className="h-6 w-6 text-cream" />
+              </div>
+              <div className="space-y-3 flex-1">
+                <h2 className="font-display text-xl md:text-2xl text-ink uppercase leading-tight">
+                  {t('valuesTitle')}
+                </h2>
+                <div className="space-y-3 font-stamp text-base text-ink/80">
+                  <p className="leading-relaxed">
+                    <span className="font-display text-rust-bright">
+                      {t('valueResponsibleFun')}:
+                    </span>{' '}
+                    {t('valueResponsibleFunText')}
+                  </p>
+                  <p className="leading-relaxed">
+                    <span className="font-display text-rust-bright">
+                      {t('valueQualityFirst')}:
+                    </span>{' '}
+                    {t('valueQualityFirstText')}
+                  </p>
+                  <p className="leading-relaxed">
+                    <span className="font-display text-rust-bright">
+                      {t('valueCommunity')}:
+                    </span>{' '}
+                    {t('valueCommunityText')}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* CTA */}
-          <div className="mt-12 bg-muted rounded-lg p-8 text-center">
-            <h2 className="text-2xl font-bold mb-4">
-              Ready to Join the Mission?
+          <div className="mt-12 pop-card-dark p-8 text-center space-y-5">
+            <span className="ribbon text-sm">{t('ctaRibbon')}</span>
+            <h2 className="font-display text-2xl md:text-3xl text-cream uppercase">
+              {t('ctaTitle')}
             </h2>
-            <p className="text-muted-foreground mb-6">
-              Thousands of party commanders trust Drunken Arsenal for their
-              tactical entertainment needs.
+            <p className="font-stamp text-base text-cream-warm max-w-xl mx-auto">
+              {t('ctaSubtitle')}
             </p>
-            <Button size="lg" asChild>
-              <Link href="/#products">Shop Now</Link>
+            <Button size="lg" variant="amber" asChild>
+              <Link href="/#products">{t('ctaButton')}</Link>
             </Button>
           </div>
         </div>

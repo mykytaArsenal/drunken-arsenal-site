@@ -5,42 +5,52 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  [
+    'inline-flex items-center justify-center gap-2 whitespace-nowrap font-display uppercase tracking-wider',
+    'border-[3px] border-ink',
+    'shadow-[4px_4px_0_var(--color-ink)]',
+    'transition-transform duration-100 ease-out active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_var(--color-ink)]',
+    'media-hover:hover:-translate-x-[1px] media-hover:hover:-translate-y-[1px] media-hover:hover:shadow-[5px_5px_0_var(--color-ink)]',
+    'disabled:pointer-events-none disabled:opacity-50 disabled:shadow-[4px_4px_0_var(--color-ink)] disabled:translate-x-0 disabled:translate-y-0',
+    'outline-none focus-visible:ring-[3px] focus-visible:ring-amber/70 focus-visible:ring-offset-2',
+    "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+    'shrink-0',
+  ].join(' '),
   {
     variants: {
       variant: {
-        default:
-            'border border-transparent bg-primary text-primary-foreground shadow media-hover:hover:bg-primary/90 active:bg-primary/90',
-        primary:
-            'border border-transparent bg-indigo-600 text-primary-foreground shadow media-hover:hover:bg-indigo-600/90 active:bg-indigo-600/90',
-        accent: 'bg-[image:var(--accent-gradient)] text-white',
-        destructive:
-            'bg-destructive text-destructive-foreground shadow-sm media-hover:hover:bg-destructive/90 active:bg-destructive/90',
-        outline:
-            'border border-input bg-background shadow-sm media-hover:hover:bg-accent active:bg-accent media-hover:hover:text-accent-foreground active:text-accent-foreground active:border-accent',
-        secondary:
-            'bg-secondary text-secondary-foreground shadow-sm media-hover:hover:bg-secondary/80 active:bg-secondary/80',
+        default: 'bg-rust-bright text-cream',
+        primary: 'bg-rust-bright text-cream',
+        accent: 'bg-amber text-ink',
+        secondary: 'bg-olive text-cream',
+        destructive: 'bg-rust text-cream',
+        outline: 'bg-cream text-ink',
         ghost:
-            'media-hover:hover:bg-accent media-hover:hover:text-accent-foreground active:bg-accent active:text-accent-foreground',
-        link: 'text-primary underline-offset-4 media-hover:hover:underline active:underline',
-        shop:
-            'text-black bg-white border border-zinc-200 rounded-md media-hover:hover:bg-gray-200 active:bg-gray-200',
+          'bg-transparent text-ink border-transparent shadow-none media-hover:hover:bg-cream-warm media-hover:hover:shadow-none active:translate-x-0 active:translate-y-0 active:shadow-none active:bg-cream-warm',
+        link: 'bg-transparent text-rust-bright border-transparent shadow-none underline-offset-4 media-hover:hover:underline media-hover:hover:shadow-none active:translate-x-0 active:translate-y-0 active:shadow-none p-0 h-auto',
+        shop: 'bg-cream text-ink',
         transparent:
-            'bg-transparent w-fit rounded-none shadow-none media-hover:hover:bg-none focus-visible:ring-0 active:bg-none',
-        gradient:
-            'bg-green-900 text-white media-hover:hover:opacity-90 active:opacity-90',
+          'bg-transparent border-transparent shadow-none rounded-none active:translate-x-0 active:translate-y-0 active:shadow-none p-0 h-auto',
+        gradient: 'bg-amber text-ink',
+        amber: 'bg-amber text-ink',
+        olive: 'bg-olive text-cream',
+        dark: 'bg-olive-deep text-cream',
       },
       size: {
-        default: 'h-10 px-4 py-2',
-        md: 'h-9 px-4 py-2',
-        sm: 'h-8 rounded-md px-3 text-xs',
-        lg: 'h-10 rounded-md px-8',
-        xl: 'h-12 rounded-md px-4',
-        icon: 'h-9 w-9',
-        shop: 'h-8 py-1.5 px-3',
+        default: 'h-11 px-5 py-2 text-sm',
+        md: 'h-10 px-4 py-2 text-sm',
+        sm: 'h-9 px-3 text-xs',
+        lg: 'h-12 px-7 text-base',
+        xl: 'h-14 px-9 text-lg',
+        icon: 'h-10 w-10',
+        shop: 'h-9 py-1.5 px-3 text-xs',
         inline: 'p-0 m-0',
-        full: 'w-full h-10 px-4 py-2',
+        full: 'w-full h-11 px-5 py-2 text-sm',
       },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
     },
   }
 );

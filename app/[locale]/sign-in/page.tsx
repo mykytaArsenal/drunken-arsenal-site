@@ -1,10 +1,11 @@
 import { SignInForm } from '@/components/sign-in-form';
 import { getCurrentUser } from '@/app/[locale]/actions/auth';
 import { redirect } from 'next/navigation';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+import { getTranslations } from 'next-intl/server';
 
 export const metadata = {
-  title: 'Sign In - Drunken Arsenal',
+  title: 'Sign In',
   description: 'Sign in to your account',
 };
 
@@ -15,29 +16,30 @@ export default async function SignInPage() {
     redirect('/account');
   }
 
+  const t = await getTranslations('auth');
+
   return (
-    <div className="min-h-screen py-16">
+    <div className="min-h-screen py-16 md:py-20 bg-paper">
       <div className="container mx-auto px-4">
         <div className="max-w-md mx-auto">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-2">Welcome Back</h1>
-            <p className="text-muted-foreground">
-              Sign in to access your account
-            </p>
+          <div className="text-center mb-8 space-y-2">
+            <span className="tag-line">// access point</span>
+            <h1 className="font-display text-3xl md:text-4xl text-ink leading-none">
+              {t('welcomeBack')}
+            </h1>
+            <p className="font-stamp text-sm text-ink/70">{t('signInDesc')}</p>
           </div>
 
-          <div className="bg-card border rounded-lg p-6">
+          <div className="pop-card p-6 md:p-8">
             <SignInForm />
 
-            <div className="mt-6 text-center text-sm">
-              <span className="text-muted-foreground">
-                Don't have an account?{' '}
-              </span>
+            <div className="mt-6 text-center font-stamp text-sm">
+              <span className="text-ink/70">{t('noAccount')} </span>
               <Link
                 href="/sign-up"
-                className="text-primary hover:underline font-medium"
+                className="text-rust-bright font-display tracking-wider uppercase hover:underline"
               >
-                Sign up
+                {t('signUp')}
               </Link>
             </div>
           </div>

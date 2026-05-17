@@ -1,6 +1,7 @@
 'use client';
 
 import { useActionState } from 'react';
+import { useTranslations } from 'next-intl';
 import { signUpAction } from '@/app/[locale]/actions/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,17 +12,18 @@ export function SignUpForm() {
     signUpAction,
     undefined
   );
+  const t = useTranslations('auth');
 
   return (
     <form action={formAction} className="space-y-4">
       {state?.error && (
-        <div className="bg-destructive/10 border border-destructive rounded-lg p-3 text-sm text-destructive">
+        <div className="border-[3px] border-rust-bright bg-rust-bright/10 p-3 font-stamp text-sm text-rust">
           {state.error}
         </div>
       )}
 
       <div className="space-y-2">
-        <Label htmlFor="name">Name (Optional)</Label>
+        <Label htmlFor="name">{t('name')}</Label>
         <Input
           id="name"
           name="name"
@@ -32,7 +34,7 @@ export function SignUpForm() {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="email">{t('email')}</Label>
         <Input
           id="email"
           name="email"
@@ -44,7 +46,7 @@ export function SignUpForm() {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="password">Password</Label>
+        <Label htmlFor="password">{t('password')}</Label>
         <Input
           id="password"
           name="password"
@@ -54,13 +56,19 @@ export function SignUpForm() {
           minLength={8}
           disabled={isPending}
         />
-        <p className="text-xs text-muted-foreground">
-          Must be at least 8 characters
+        <p className="font-stamp text-xs text-ink/60">
+          {t('passwordRequirement')}
         </p>
       </div>
 
-      <Button type="submit" className="w-full" disabled={isPending}>
-        {isPending ? 'Creating account...' : 'Create Account'}
+      <Button
+        type="submit"
+        size="lg"
+        variant="primary"
+        className="w-full"
+        disabled={isPending}
+      >
+        {isPending ? t('creatingAccount') : t('createAccount')}
       </Button>
     </form>
   );

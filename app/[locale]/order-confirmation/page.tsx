@@ -1,11 +1,13 @@
 import { stripe } from '@/lib/stripe';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, Package } from 'lucide-react';
-import Link from 'next/link';
+import { CheckCircleIcon, PackageIcon } from '@/components/icons';
+import { Link } from '@/i18n/navigation';
 import { formatPrice } from '@/lib/products';
+import { getTranslations } from 'next-intl/server';
+import { SUPPORT_EMAIL } from '@/lib/i18n/brand';
 
 export const metadata = {
-  title: 'Order Confirmed - Drunken Arsenal',
+  title: 'Order Confirmed',
   description: 'Your order has been confirmed',
 };
 
@@ -16,13 +18,16 @@ export default async function OrderConfirmationPage({
 }) {
   const params = await searchParams;
   const sessionId = params.session_id;
+  const t = await getTranslations('order');
 
   if (!sessionId) {
     return (
-      <div className="min-h-screen py-16">
+      <div className="min-h-screen py-16 bg-paper">
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto text-center">
-            <p className="text-destructive">Invalid order confirmation link</p>
+          <div className="max-w-2xl mx-auto pop-card p-8 text-center">
+            <p className="font-display text-rust-bright">
+              Invalid order confirmation link
+            </p>
           </div>
         </div>
       </div>
@@ -35,10 +40,12 @@ export default async function OrderConfirmationPage({
   } catch (error) {
     console.error('[v0] Error retrieving session:', error);
     return (
-      <div className="min-h-screen py-16">
+      <div className="min-h-screen py-16 bg-paper">
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto text-center">
-            <p className="text-destructive">Failed to load order details</p>
+          <div className="max-w-2xl mx-auto pop-card p-8 text-center">
+            <p className="font-display text-rust-bright">
+              Failed to load order details
+            </p>
           </div>
         </div>
       </div>
@@ -46,41 +53,45 @@ export default async function OrderConfirmationPage({
   }
 
   return (
-    <div className="min-h-screen py-16">
+    <div className="min-h-screen py-12 md:py-16 bg-paper">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
-          {/* Success Header */}
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-green-500/10 rounded-full mb-6">
-              <CheckCircle className="h-10 w-10 text-green-500" />
+          <div className="text-center mb-8 space-y-4">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-allowed border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)]">
+              <CheckCircleIcon className="h-10 w-10 text-cream" />
             </div>
-            <h1 className="text-4xl font-bold mb-4">Mission Accomplished!</h1>
-            <p className="text-lg text-muted-foreground">
-              Your order has been confirmed and is being prepared for
-              deployment.
+            <span className="block stamp text-sm mx-auto">Status: Cleared</span>
+            <h1 className="font-display text-3xl md:text-5xl text-ink leading-tight">
+              {t('missionAccomplished')}
+            </h1>
+            <p className="font-stamp text-base text-ink/70 max-w-lg mx-auto">
+              {t('confirmed')}
             </p>
           </div>
 
-          {/* Order Details */}
-          <div className="bg-card border rounded-lg p-6 space-y-6">
+          <div className="pop-card p-6 md:p-8 space-y-6">
             <div className="flex items-start gap-4">
-              <Package className="h-6 w-6 text-primary mt-1" />
+              <PackageIcon className="h-6 w-6 text-rust-bright mt-1 flex-shrink-0" />
               <div className="flex-1">
-                <h2 className="text-xl font-bold mb-2">Order Details</h2>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Order ID:</span>
-                    <span className="font-mono">
+                <h2 className="font-display text-xl text-ink uppercase mb-3">
+                  {t('orderDetails')}
+                </h2>
+                <div className="space-y-2 font-mono-c text-sm">
+                  <div className="flex justify-between gap-3">
+                    <span className="text-ink/60">{t('orderId')}</span>
+                    <span className="text-ink font-bold">
                       {sessionId.slice(-12).toUpperCase()}
                     </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Email:</span>
-                    <span>{session.customer_details?.email}</span>
+                  <div className="flex justify-between gap-3">
+                    <span className="text-ink/60">{t('email')}</span>
+                    <span className="text-ink break-all">
+                      {session.customer_details?.email}
+                    </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Total:</span>
-                    <span className="font-bold">
+                  <div className="flex justify-between gap-3">
+                    <span className="text-ink/60">{t('total')}</span>
+                    <span className="font-display text-rust-bright">
                       {formatPrice(session.amount_total || 0)}
                     </span>
                   </div>
@@ -88,35 +99,37 @@ export default async function OrderConfirmationPage({
               </div>
             </div>
 
-            <div className="border-t pt-6">
-              <h3 className="font-semibold mb-3">What happens next?</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">1.</span>
+            <div className="border-t-2 border-ink/10 pt-6">
+              <h3 className="font-display text-base text-ink uppercase mb-3">
+                {t('whatNext')}
+              </h3>
+              <ul className="space-y-2 font-stamp text-sm text-ink/80">
+                <li className="flex items-start gap-3">
+                  <span className="font-display text-rust-bright">01</span>
                   <span>
-                    You'll receive an order confirmation email at{' '}
-                    {session.customer_details?.email}
+                    {t('step1', {
+                      email: session.customer_details?.email ?? '',
+                    })}
                   </span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">2.</span>
-                  <span>Your tactical gear will be prepared and packaged</span>
+                <li className="flex items-start gap-3">
+                  <span className="font-display text-rust-bright">02</span>
+                  <span>{t('step2')}</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">3.</span>
-                  <span>We'll send you tracking information once shipped</span>
+                <li className="flex items-start gap-3">
+                  <span className="font-display text-rust-bright">03</span>
+                  <span>{t('step3')}</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">4.</span>
-                  <span>Estimated delivery: 3-5 business days</span>
+                <li className="flex items-start gap-3">
+                  <span className="font-display text-rust-bright">04</span>
+                  <span>{t('step4')}</span>
                 </li>
               </ul>
             </div>
           </div>
 
-          {/* Actions */}
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
-            <Button size="lg" asChild className="flex-1">
+            <Button size="lg" variant="primary" asChild className="flex-1">
               <Link href="/">Continue Shopping</Link>
             </Button>
             <Button size="lg" variant="outline" asChild className="flex-1">
@@ -124,13 +137,9 @@ export default async function OrderConfirmationPage({
             </Button>
           </div>
 
-          {/* Disclaimer */}
-          <div className="mt-8 text-center">
-            <p className="text-sm text-muted-foreground">
-              Questions about your order? Contact us at
-              support@drunkenarsenal.com
-            </p>
-          </div>
+          <p className="mt-8 text-center font-stamp text-sm text-ink/60">
+            {t('questions', { supportEmail: SUPPORT_EMAIL })}
+          </p>
         </div>
       </div>
     </div>

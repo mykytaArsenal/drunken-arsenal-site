@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { ShoppingCartIcon, MinusIcon, PlusIcon } from './icons';
 import { useRouter } from 'next/navigation';
@@ -14,6 +15,8 @@ export function AddToCartButton({ product }: IAddToCartButtonProps) {
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
   const router = useRouter();
+  const t = useTranslations('product');
+  const tHome = useTranslations('home');
 
   const handleAddToCart = async () => {
     if (product.stock < quantity) {
@@ -38,7 +41,6 @@ export function AddToCartButton({ product }: IAddToCartButtonProps) {
         throw new Error('Failed to add to cart');
       }
 
-      // Redirect to cart page
       router.push('/cart');
     } catch (error) {
       console.error('[v0] Error adding to cart:', error);
@@ -49,60 +51,57 @@ export function AddToCartButton({ product }: IAddToCartButtonProps) {
   };
 
   const decreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
+    if (quantity > 1) setQuantity(quantity - 1);
   };
 
   const increaseQuantity = () => {
-    if (quantity < product.stock) {
-      setQuantity(quantity + 1);
-    }
+    if (quantity < product.stock) setQuantity(quantity + 1);
   };
 
   return (
     <div className="space-y-4">
-      {/* Quantity Selector */}
       <div className="flex items-center gap-4">
-        <span className="text-sm font-medium">Quantity:</span>
-        <div className="flex items-center border rounded-lg">
-          <Button
-            variant="ghost"
-            size="icon"
+        <span className="font-stamp text-xs uppercase tracking-[0.15em] text-ink">
+          {t('quantity')}
+        </span>
+        <div className="flex items-stretch border-[3px] border-ink bg-cream shadow-[3px_3px_0_var(--color-ink)]">
+          <button
+            type="button"
             onClick={decreaseQuantity}
             disabled={quantity <= 1}
-            className="h-10 w-10"
+            className="h-10 w-10 flex items-center justify-center text-ink disabled:opacity-40 media-hover:hover:bg-amber"
+            aria-label="Decrease quantity"
           >
             <MinusIcon className="h-4 w-4" />
-            <span className="sr-only">Decrease quantity</span>
-          </Button>
-          <span className="w-12 text-center font-semibold">{quantity}</span>
-          <Button
-            variant="ghost"
-            size="icon"
+          </button>
+          <span className="w-12 flex items-center justify-center font-display text-base text-ink border-x-[3px] border-ink">
+            {quantity}
+          </span>
+          <button
+            type="button"
             onClick={increaseQuantity}
             disabled={quantity >= product.stock}
-            className="h-10 w-10"
+            className="h-10 w-10 flex items-center justify-center text-ink disabled:opacity-40 media-hover:hover:bg-amber"
+            aria-label="Increase quantity"
           >
             <PlusIcon className="h-4 w-4" />
-            <span className="sr-only">Increase quantity</span>
-          </Button>
+          </button>
         </div>
       </div>
 
-      {/* Add to Cart Button */}
       <Button
         size="lg"
+        variant="primary"
         className="w-full"
         onClick={handleAddToCart}
         disabled={product.stock === 0 || isAdding}
       >
         <ShoppingCartIcon className="mr-2 h-5 w-5" />
         {isAdding
-          ? 'Adding...'
+          ? t('adding')
           : product.stock === 0
-            ? 'Out of Stock'
-            : 'Add to Cart'}
+            ? tHome('outOfStock')
+            : t('addToCart')}
       </Button>
     </div>
   );

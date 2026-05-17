@@ -1,64 +1,207 @@
 @import 'tailwindcss';
 
 @theme inline {
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-display: 'Rajdhani', system-ui, sans-serif;
-  --font-notable: 'Notable', system-ui, sans-serif;
+  /* Fonts wired via next/font in app/[locale]/layout.tsx */
+  --font-sans: var(--font-oswald), system-ui, sans-serif;
+  --font-display: var(--font-russo), system-ui, sans-serif;
+  --font-stamp: var(--font-pt-mono), ui-monospace, monospace;
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, monospace;
 
-  /* Military-themed color palette */
-  --color-background: 10 10 10; /* Near black */
-  --color-foreground: 250 250 250; /* Off white */
+  /* Brand palette — Drunken Arsenal v0.1 */
+  --color-olive: #4a5239;
+  --color-olive-dark: #353c28;
+  --color-olive-deep: #1f2516;
+  --color-olive-light: #6b7449;
+  --color-rust: #8a3a2a;
+  --color-rust-bright: #c9472f;
+  --color-amber: #e8a93a;
+  --color-amber-deep: #c08020;
+  --color-cream: #ede4cf;
+  --color-cream-warm: #d8cca8;
+  --color-paper: #f0e6cd;
+  --color-ink: #131210;
+  --color-allowed: #6f8a4a;
 
-  --color-card: 20 20 20;
-  --color-card-foreground: 250 250 250;
+  /* Semantic mappings (consumed by shadcn primitives) */
+  --color-background: #f0e6cd;
+  --color-foreground: #131210;
+  --color-card: #ede4cf;
+  --color-card-foreground: #131210;
+  --color-popover: #ede4cf;
+  --color-popover-foreground: #131210;
+  --color-primary: #c9472f;
+  --color-primary-foreground: #ede4cf;
+  --color-secondary: #4a5239;
+  --color-secondary-foreground: #ede4cf;
+  --color-muted: #d8cca8;
+  --color-muted-foreground: #4a4538;
+  --color-accent: #e8a93a;
+  --color-accent-foreground: #131210;
+  --color-destructive: #c9472f;
+  --color-destructive-foreground: #ede4cf;
+  --color-border: #131210;
+  --color-input: #c5b894;
+  --color-ring: #c9472f;
+  --color-chart-1: #4a5239;
+  --color-chart-2: #1f2516;
+  --color-chart-3: #c9472f;
+  --color-chart-4: #8a3a2a;
+  --color-chart-5: #e8a93a;
 
-  --color-popover: 20 20 20;
-  --color-popover-foreground: 250 250 250;
-
-  --color-primary: 107 114 76; /* Olive green */
-  --color-primary-foreground: 250 250 250;
-
-  --color-secondary: 60 60 60; /* Dark gray */
-  --color-secondary-foreground: 250 250 250;
-
-  --color-muted: 30 30 30;
-  --color-muted-foreground: 161 161 170;
-
-  --color-accent: 194 178 128; /* Sand/khaki */
-  --color-accent-foreground: 10 10 10;
-
-  --color-destructive: 185 28 28; /* Military red */
-  --color-destructive-foreground: 250 250 250;
-
-  --color-border: 39 39 42;
-  --color-input: 39 39 42;
-  --color-ring: 107 114 76;
-  --color-chart-1: #587073;
-  --color-chart-2: #0C0D0A;
-  --color-chart-3: #D9A78B;
-  --color-chart-4: #A65746;
-  --color-chart-5: #400101;
-
-  --radius: 0.5rem;
-}
-
-@utility font-notable {
-  font-family: var(--font-notable), system-ui, sans-serif;
+  --radius: 0.25rem;
 }
 
 @layer base {
   * {
-    border-color: rgb(var(--color-border));
+    border-color: var(--color-border);
   }
 
   body {
-    background-color: rgb(var(--color-background));
-    color: rgb(var(--color-foreground));
+    background-color: var(--color-paper);
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(74, 82, 57, 0.10) 0, transparent 35%),
+      radial-gradient(circle at 88% 78%, rgba(138, 58, 42, 0.08) 0, transparent 40%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='4'><circle cx='1' cy='1' r='0.4' fill='%234a5239' opacity='0.15'/></svg>");
+    color: var(--color-ink);
+    font-family: var(--font-sans);
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: 0.025em;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+}
+
+@layer components {
+  .pop-card {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    border: 3px solid var(--color-ink);
+    box-shadow: 6px 6px 0 var(--color-ink);
+    position: relative;
+  }
+
+  .pop-card-dark {
+    background: var(--color-olive-deep);
+    color: var(--color-cream);
+    border: 3px solid var(--color-ink);
+    box-shadow: 6px 6px 0 var(--color-ink);
+  }
+
+  .pop-card-amber {
+    background: var(--color-amber);
+    color: var(--color-ink);
+    border: 3px solid var(--color-ink);
+    box-shadow: 6px 6px 0 var(--color-ink);
+  }
+
+  .pop-card-rust {
+    background: var(--color-rust-bright);
+    color: var(--color-cream);
+    border: 3px solid var(--color-ink);
+    box-shadow: 6px 6px 0 var(--color-ink);
+  }
+
+  .stripes-warning {
+    background: repeating-linear-gradient(
+      45deg,
+      var(--color-amber) 0,
+      var(--color-amber) 14px,
+      var(--color-ink) 14px,
+      var(--color-ink) 28px
+    );
+  }
+
+  .ribbon {
+    position: relative;
+    display: inline-block;
+    background: var(--color-rust-bright);
+    color: var(--color-cream);
+    padding: 0.4rem 1.5rem;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    box-shadow: 4px 4px 0 var(--color-ink);
+    letter-spacing: 0.04em;
+  }
+
+  .stamp {
+    display: inline-block;
+    border: 4px double var(--color-rust-bright);
+    color: var(--color-rust-bright);
+    padding: 0.4rem 1.4rem;
+    font-family: var(--font-stamp);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    transform: rotate(-6deg);
+    opacity: 0.92;
+  }
+
+  .halftone-bg {
+    background-image:
+      radial-gradient(circle, var(--color-olive-deep) 1.2px, transparent 1.2px);
+    background-size: 8px 8px;
+  }
+
+  .panel-divider {
+    height: 14px;
+    background: var(--color-ink);
+    position: relative;
+  }
+  .panel-divider::before,
+  .panel-divider::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 18px;
+    background: var(--color-rust-bright);
+  }
+  .panel-divider::before { left: 0; }
+  .panel-divider::after  { right: 0; }
+
+  .scanlines { position: relative; }
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 3px,
+      rgba(0, 0, 0, 0.04) 3px,
+      rgba(0, 0, 0, 0.04) 4px
+    );
+    pointer-events: none;
+  }
+
+  .font-display       { font-family: var(--font-display); letter-spacing: 0.02em; text-transform: uppercase; }
+  .font-display-shade {
+    font-family: var(--font-display);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--color-cream);
+    text-shadow:
+      3px 3px 0 var(--color-rust-bright),
+      6px 6px 0 var(--color-ink);
+  }
+  .font-stamp   { font-family: var(--font-stamp); }
+  .font-mono-c  { font-family: var(--font-mono); }
+
+  .tag-line {
+    font-family: var(--font-stamp);
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-rust-bright);
+  }
+
+  .phase-number {
+    font-family: var(--font-display);
+    color: var(--color-olive);
+    font-size: clamp(4.5rem, 9vw, 7rem);
+    line-height: 0.85;
+    opacity: 0.85;
+    text-transform: uppercase;
   }
 }

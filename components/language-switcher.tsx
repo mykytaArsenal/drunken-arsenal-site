@@ -33,11 +33,14 @@ export function LanguageSwitcher() {
       value={locale}
       onValueChange={(value) => changeLocale(value as ILocale)}
     >
-      <SelectTrigger className="max-w-60 gap-2" aria-label="Select language">
+      <SelectTrigger
+        className="h-9 max-w-32 gap-2 border-2 border-cream/30 bg-transparent text-cream font-stamp text-xs uppercase tracking-wider data-[placeholder]:text-cream/60 media-hover:hover:border-amber"
+        aria-label="Select language"
+      >
         <SelectValue />
       </SelectTrigger>
 
-      <SelectContent className="bg-chart-2">
+      <SelectContent className="bg-cream text-ink border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] font-stamp">
         {locales.map((loc) => (
           <SelectItem key={loc} value={loc}>
             <span className="flex items-center gap-2">

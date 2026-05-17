@@ -1,127 +1,140 @@
-import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
+import { Link } from '@/i18n/navigation';
 
-export function Footer() {
+export async function Footer() {
+  const t = await getTranslations();
+
   return (
-    <footer className="border-t bg-muted/50">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="space-y-4">
-            <h3 className="font-bold text-lg">DRUNKEN ARSENAL</h3>
-            <p className="text-sm text-muted-foreground">
-              The tactical drinking game for party commanders.
+    <footer className="relative overflow-hidden bg-olive-deep text-cream mt-16">
+      <div className="panel-divider" />
+      <div className="halftone-bg absolute inset-0 opacity-20 pointer-events-none" />
+
+      <div className="relative container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+          <div className="space-y-4 md:col-span-1">
+            <div className="font-display-shade text-3xl leading-none">
+              Drunken
+              <br />
+              Arsenal
+            </div>
+            <p className="font-stamp text-sm text-cream-warm leading-relaxed">
+              {t('footer.tagline')}
             </p>
-            <p className="text-xs text-destructive font-bold">
-              18+ ONLY - DRINK RESPONSIBLY
-            </p>
+            <div className="inline-block stamp text-xs">18+ Only</div>
           </div>
 
-          {/* Shop */}
-          <div className="space-y-4">
-            <h4 className="font-semibold">Shop</h4>
-            <ul className="space-y-2 text-sm">
+          <div className="space-y-3">
+            <h4 className="font-display text-base text-amber tracking-wider">
+              {t('footer.shop')}
+            </h4>
+            <ul className="space-y-2 font-stamp text-sm">
               <li>
                 <Link
                   href="/#products"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-cream-warm hover:text-amber transition-colors"
                 >
-                  All Products
+                  · {t('footer.allProducts')}
                 </Link>
               </li>
               <li>
                 <Link
                   href="/#products"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-cream-warm hover:text-amber transition-colors"
                 >
-                  Bundles
+                  · {t('footer.bundles')}
                 </Link>
               </li>
               <li>
                 <Link
                   href="/#products"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-cream-warm hover:text-amber transition-colors"
                 >
-                  Accessories
+                  · {t('footer.accessories')}
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Support */}
-          <div className="space-y-4">
-            <h4 className="font-semibold">Support</h4>
-            <ul className="space-y-2 text-sm">
+          <div className="space-y-3">
+            <h4 className="font-display text-base text-amber tracking-wider">
+              {t('footer.support')}
+            </h4>
+            <ul className="space-y-2 font-stamp text-sm">
               <li>
                 <Link
                   href="/how-to-play"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-cream-warm hover:text-amber transition-colors"
                 >
-                  How to Play
+                  · {t('nav.howToPlay')}
                 </Link>
               </li>
               <li>
                 <Link
                   href="/faq"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-cream-warm hover:text-amber transition-colors"
                 >
-                  FAQ
+                  · {t('footer.faq')}
                 </Link>
               </li>
               <li>
                 <Link
                   href="/contact"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-cream-warm hover:text-amber transition-colors"
                 >
-                  Contact Us
+                  · {t('footer.contact')}
                 </Link>
               </li>
               <li>
                 <Link
                   href="/shipping"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-cream-warm hover:text-amber transition-colors"
                 >
-                  Shipping Info
+                  · {t('footer.shipping')}
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Legal */}
-          <div className="space-y-4">
-            <h4 className="font-semibold">Legal</h4>
-            <ul className="space-y-2 text-sm">
+          <div className="space-y-3">
+            <h4 className="font-display text-base text-amber tracking-wider">
+              {t('footer.legal')}
+            </h4>
+            <ul className="space-y-2 font-stamp text-sm">
               <li>
                 <Link
                   href="/privacy"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-cream-warm hover:text-amber transition-colors"
                 >
-                  Privacy Policy
+                  · {t('footer.privacy')}
                 </Link>
               </li>
               <li>
                 <Link
                   href="/terms"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-cream-warm hover:text-amber transition-colors"
                 >
-                  Terms of Service
+                  · {t('footer.terms')}
                 </Link>
               </li>
               <li>
                 <Link
                   href="/returns"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-cream-warm hover:text-amber transition-colors"
                 >
-                  Returns & Refunds
+                  · {t('footer.returns')}
                 </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>
-            &copy; {new Date().getFullYear()} Drunken Arsenal. All rights
-            reserved.
+        <div className="mt-10 pt-6 border-t-2 border-amber/30 flex flex-col sm:flex-row justify-between gap-4 font-stamp text-xs text-cream-warm/70">
+          <p className="tracking-wider">
+            &copy; {new Date().getFullYear()} Drunken Arsenal.{' '}
+            {t('footer.rights')}
+          </p>
+          <p className="tracking-[0.2em] text-amber">
+            // EXPLOSIVE FUN! · v0.1 · 2026
           </p>
         </div>
       </div>

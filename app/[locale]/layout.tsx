@@ -7,21 +7,43 @@ import { getCurrency } from '@/lib/currency/get-currency';
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
 import { Metadata } from 'next';
-import { Notable } from 'next/font/google';
+import { Russo_One, Oswald, PT_Mono, IBM_Plex_Mono } from 'next/font/google';
 
-const notable = Notable({
-  subsets: ['latin'],
+const russoOne = Russo_One({
+  subsets: ['latin', 'cyrillic'],
   weight: '400',
-  variable: '--font-notable',
+  variable: '--font-russo',
+  display: 'swap',
+});
+
+const oswald = Oswald({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-oswald',
+  display: 'swap',
+});
+
+const ptMono = PT_Mono({
+  subsets: ['latin', 'cyrillic'],
+  weight: '400',
+  variable: '--font-pt-mono',
+  display: 'swap',
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-ibm-plex-mono',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
   title: {
-    default: 'Drunken Arsenal',
+    default: 'Drunken Arsenal — Explosive Fun!',
     template: '%s | Drunken Arsenal',
   },
   description:
-    'Drunken Arsenal is a tactical drinking game and gift-ready bar experience for responsible adults.',
+    'Drunken Arsenal — military-themed novelty barware & party games. Premium gifting for tactical evenings.',
 };
 
 export function generateStaticParams() {
@@ -46,8 +68,10 @@ export default async function LocaleLayout({
   const messages = await getMessages();
   const currency = await getCurrency();
 
+  const fontVars = `${russoOne.variable} ${oswald.variable} ${ptMono.variable} ${ibmPlexMono.variable}`;
+
   return (
-    <html lang={locale} className={notable.variable}>
+    <html lang={locale} className={fontVars}>
       <body>
         <NextIntlClientProvider messages={messages} locale={locale}>
           <Navigation currency={currency} />

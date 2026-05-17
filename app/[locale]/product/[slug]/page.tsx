@@ -8,8 +8,10 @@ import {
   ShieldIcon,
   TruckIcon,
 } from '@/components/icons';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+import { getTranslations } from 'next-intl/server';
 import { getCurrency } from '@/lib/currency/get-currency';
+import { FREE_SHIPPING_THRESHOLD } from '@/lib/i18n/brand';
 
 export async function generateStaticParams() {
   const products = await getAllProducts();
@@ -28,12 +30,12 @@ export async function generateMetadata({
 
   if (!product) {
     return {
-      title: 'Product Not Found',
+      title: 'Item Not Found',
     };
   }
 
   return {
-    title: `${product.name} - Drunken Arsenal`,
+    title: `${product.name} | Drunken Arsenal`,
     description: product.description,
   };
 }
@@ -46,6 +48,7 @@ export default async function ProductPage({
   const { slug } = await params;
   const product = await getProductBySlug(slug);
   const currency = await getCurrency();
+  const t = await getTranslations();
 
   if (!product) {
     notFound();
@@ -56,21 +59,18 @@ export default async function ProductPage({
     .slice(0, 4);
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-8 md:py-12 bg-paper">
       <div className="container mx-auto px-4">
-        {/* Back Button */}
         <Button variant="ghost" asChild className="mb-6">
           <Link href="/">
             <ArrowLeftIcon className="mr-2 h-4 w-4" />
-            Back to Shop
+            {t('product.backToShop')}
           </Link>
         </Button>
 
-        {/* Product Details */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
-          {/* Image */}
           <div className="space-y-4">
-            <div className="aspect-square bg-muted rounded-lg overflow-hidden">
+            <div className="pop-card aspect-square overflow-hidden">
               <img
                 src={product.images[0] || '/placeholder.svg'}
                 alt={product.name}
@@ -78,11 +78,11 @@ export default async function ProductPage({
               />
             </div>
             {product.images.length > 1 && (
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-4 gap-3">
                 {product.images.slice(1, 5).map((image, index) => (
                   <div
                     key={index}
-                    className="aspect-square bg-muted rounded-lg overflow-hidden"
+                    className="pop-card aspect-square overflow-hidden"
                   >
                     <img
                       src={image || '/placeholder.svg'}
@@ -95,100 +95,108 @@ export default async function ProductPage({
             )}
           </div>
 
-          {/* Info */}
           <div className="space-y-6">
-            {/* Category Badge */}
-            <div className="flex items-center gap-2">
-              <span className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-md text-sm font-semibold text-primary uppercase tracking-wide">
-                {product.category}
-              </span>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="ribbon text-xs">{product.category}</span>
               {product.category === 'bundle' && (
-                <span className="px-3 py-1 bg-destructive/10 border border-destructive/20 rounded-md text-sm font-bold text-destructive">
-                  SAVE UP TO 20%
-                </span>
+                <span className="stamp text-xs">{t('product.saveUpTo')}</span>
               )}
             </div>
 
-            {/* Title & Price */}
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance">
+              <h1 className="font-display text-4xl md:text-5xl leading-tight text-ink mb-4 text-balance">
                 {product.name}
               </h1>
-              <p className="text-3xl font-bold text-primary">
+              <p className="font-display text-3xl text-rust-bright">
                 {formatPrice(product.price, currency)}
               </p>
             </div>
 
-            {/* Description */}
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="font-stamp text-base text-ink/80 leading-relaxed">
               {product.description}
             </p>
 
-            {/* Stock Status */}
-            <div className="flex items-center gap-2 text-sm">
+            <div className="flex items-center gap-2 font-mono-c text-sm uppercase tracking-wider">
               <PackageIcon className="h-4 w-4" />
               <span
                 className={
                   product.stock > 0
-                    ? 'text-green-600 font-medium'
-                    : 'text-destructive font-medium'
+                    ? 'text-allowed font-medium'
+                    : 'text-rust-bright font-medium'
                 }
               >
                 {product.stock > 0
-                  ? `${product.stock} in stock - Ready to ship`
-                  : 'Out of stock'}
+                  ? `${product.stock} ${t('product.readyToShip')}`
+                  : t('home.outOfStock')}
               </span>
             </div>
 
-            {/* Add to Cart */}
-            <div className="pt-4">
+            <div className="pt-2">
               <AddToCartButton product={product} />
             </div>
 
-            {/* Features */}
-            <div className="border-t pt-6 space-y-4">
+            <div className="pop-card-dark p-5 space-y-4">
+              <div className="font-stamp text-xs uppercase tracking-[0.15em] text-amber">
+                // standard issue
+              </div>
               <div className="flex items-start gap-3">
-                <TruckIcon className="h-5 w-5 text-primary mt-0.5" />
+                <TruckIcon className="h-5 w-5 text-amber mt-0.5" />
                 <div>
-                  <p className="font-semibold">Free Shipping</p>
-                  <p className="text-sm text-muted-foreground">
-                    On orders over $50
+                  <p className="font-display text-sm text-cream">
+                    {t('product.freeShipping')}
+                  </p>
+                  <p className="font-stamp text-xs text-cream-warm">
+                    {t('product.freeShippingDesc', {
+                      freeShippingThreshold: FREE_SHIPPING_THRESHOLD,
+                    })}
                   </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <ShieldIcon className="h-5 w-5 text-primary mt-0.5" />
+                <ShieldIcon className="h-5 w-5 text-amber mt-0.5" />
                 <div>
-                  <p className="font-semibold">Quality Guaranteed</p>
-                  <p className="text-sm text-muted-foreground">
-                    Premium tactical-grade materials
+                  <p className="font-display text-sm text-cream">
+                    {t('product.quality')}
+                  </p>
+                  <p className="font-stamp text-xs text-cream-warm">
+                    {t('product.qualityDesc')}
                   </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <PackageIcon className="h-5 w-5 text-primary mt-0.5" />
+                <PackageIcon className="h-5 w-5 text-amber mt-0.5" />
                 <div>
-                  <p className="font-semibold">30-Day Returns</p>
-                  <p className="text-sm text-muted-foreground">
-                    Not satisfied? Full refund guaranteed
+                  <p className="font-display text-sm text-cream">
+                    {t('product.returns')}
+                  </p>
+                  <p className="font-stamp text-xs text-cream-warm">
+                    {t('product.returnsDesc')}
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Age Warning */}
-            <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4">
-              <p className="text-sm font-bold text-destructive text-center">
-                18+ ONLY - DRINK RESPONSIBLY - NOT FOR SALE TO MINORS
-              </p>
+            <div className="stripes-warning p-1">
+              <div className="bg-ink p-4 text-center">
+                <p className="font-display text-sm text-amber tracking-wider">
+                  {t('product.ageWarningFull')}
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Related Products */}
         {relatedProducts.length > 0 && (
-          <section className="border-t pt-16">
-            <h2 className="text-3xl font-bold mb-8">You May Also Like</h2>
+          <section className="pt-12">
+            <div className="flex items-end gap-6 mb-8">
+              <div className="phase-number">04</div>
+              <div>
+                <div className="tag-line">// also recon</div>
+                <h2 className="font-display text-3xl text-ink leading-none">
+                  {t('product.youMayLike')}
+                </h2>
+              </div>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedProducts.map((relatedProduct) => (
                 <Link
@@ -196,8 +204,8 @@ export default async function ProductPage({
                   href={`/product/${relatedProduct.slug}`}
                   className="group block"
                 >
-                  <div className="bg-card border rounded-lg overflow-hidden hover:border-primary transition-colors">
-                    <div className="aspect-square bg-muted relative overflow-hidden">
+                  <article className="pop-card overflow-hidden transition-transform duration-150 group-hover:-translate-x-[2px] group-hover:-translate-y-[2px] group-hover:shadow-[8px_8px_0_var(--color-ink)]">
+                    <div className="aspect-square bg-cream-warm relative overflow-hidden border-b-[3px] border-ink">
                       <img
                         src={relatedProduct.images[0] || '/placeholder.svg'}
                         alt={relatedProduct.name}
@@ -206,18 +214,18 @@ export default async function ProductPage({
                     </div>
                     <div className="p-4 space-y-2">
                       <div className="flex items-start justify-between gap-2">
-                        <h3 className="font-semibold group-hover:text-primary transition-colors line-clamp-1">
+                        <h3 className="font-display text-base text-ink uppercase line-clamp-1">
                           {relatedProduct.name}
                         </h3>
-                        <p className="font-bold whitespace-nowrap">
+                        <p className="font-display text-base text-rust-bright whitespace-nowrap">
                           {formatPrice(relatedProduct.price, currency)}
                         </p>
                       </div>
-                      <p className="text-muted-foreground text-sm line-clamp-2">
+                      <p className="font-stamp text-xs text-ink/70 line-clamp-2">
                         {relatedProduct.description}
                       </p>
                     </div>
-                  </div>
+                  </article>
                 </Link>
               ))}
             </div>

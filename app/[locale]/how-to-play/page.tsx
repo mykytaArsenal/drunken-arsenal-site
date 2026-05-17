@@ -1,110 +1,103 @@
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { Target, Trophy, Users } from 'lucide-react';
+import { Link } from '@/i18n/navigation';
+import { UsersIcon, TargetIcon, TrophyIcon } from '@/components/icons';
+import { getTranslations } from 'next-intl/server';
+import { PRODUCT_NAME } from '@/lib/i18n/brand';
 
 export const metadata = {
-  title: 'How to Play - Drunken Arsenal',
-  description: 'Learn the rules of Shot Wave tactical drinking game',
+  title: 'How to Play',
+  description: 'Learn the rules of Shot Wave — the tactical party game',
 };
 
-export default function HowToPlayPage() {
+export default async function HowToPlayPage() {
+  const t = await getTranslations('howToPlay');
+
+  const steps = [
+    {
+      Icon: UsersIcon,
+      title: t('step1Title'),
+      desc: t('step1Desc'),
+      number: '01',
+    },
+    {
+      Icon: TargetIcon,
+      title: t('step2Title'),
+      desc: t('step2Desc'),
+      number: '02',
+    },
+    {
+      Icon: TrophyIcon,
+      title: t('step3Title'),
+      desc: t('step3Desc'),
+      number: '03',
+    },
+  ];
+
   return (
-    <div className="min-h-screen py-16">
+    <div className="min-h-screen py-12 md:py-16 bg-paper">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-5xl font-bold mb-4">How to Play Shot Wave</h1>
-            <p className="text-xl text-muted-foreground">
-              Master the tactical drinking battlefield in 3 easy steps
+          <div className="text-center mb-12 space-y-3">
+            <span className="tag-line">// operations manual</span>
+            <h1 className="font-display text-4xl md:text-6xl text-ink leading-tight">
+              {t('title', { productName: PRODUCT_NAME })}
+            </h1>
+            <p className="font-stamp text-base md:text-lg text-ink/70 max-w-xl mx-auto">
+              {t('subtitle')}
             </p>
           </div>
 
-          <div className="space-y-12">
-            {/* Step 1 */}
-            <div className="bg-card border rounded-lg p-8">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full flex-shrink-0">
-                  <Users className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold mb-2">
-                    1. Deploy Your Forces
-                  </h2>
-                  <p className="text-muted-foreground">
-                    Set up your artillery shells (shot glasses) in formation on
-                    the battlefield. Each player positions their tactical mines
-                    strategically to create obstacles.
+          <div className="space-y-8">
+            {steps.map(({ Icon, title, desc, number }) => (
+              <div
+                key={number}
+                className="pop-card p-6 md:p-8 flex gap-5 items-start"
+              >
+                <div className="phase-number flex-shrink-0">{number}</div>
+                <div className="space-y-3 flex-1">
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center w-10 h-10 bg-rust-bright border-2 border-ink">
+                      <Icon className="h-5 w-5 text-cream" />
+                    </div>
+                    <h2 className="font-display text-xl md:text-2xl text-ink uppercase leading-tight">
+                      {title}
+                    </h2>
+                  </div>
+                  <p className="font-stamp text-base text-ink/80 leading-relaxed">
+                    {desc}
                   </p>
                 </div>
               </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="bg-card border rounded-lg p-8">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full flex-shrink-0">
-                  <Target className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold mb-2">
-                    2. Engage the Enemy
-                  </h2>
-                  <p className="text-muted-foreground">
-                    Take turns launching your shots. When you hit an opponent's
-                    shell, they drink. Hit a mine? The whole squad takes a shot.
-                    Strategy is key to victory.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="bg-card border rounded-lg p-8">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full flex-shrink-0">
-                  <Trophy className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold mb-2">3. Claim Victory</h2>
-                  <p className="text-muted-foreground">
-                    Last player standing wins the battle. The defeated must
-                    salute the victor and accept their fate as the party's
-                    designated drink mixer.
-                  </p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
 
-          {/* Important Rules */}
-          <div className="mt-12 bg-muted rounded-lg p-8">
-            <h2 className="text-2xl font-bold mb-6">Important Rules</h2>
-            <ul className="space-y-3 text-muted-foreground">
+          <div className="mt-12 pop-card-dark p-6 md:p-8">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="ribbon text-sm">{t('importantRules')}</span>
+            </div>
+            <ul className="space-y-3 font-stamp text-base text-cream-warm">
               <li className="flex items-start gap-3">
-                <span className="text-destructive font-bold">•</span>
-                <span>Players must be 18+ to participate</span>
+                <span className="text-amber font-display">·</span>
+                <span>{t('rule1')}</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-destructive font-bold">•</span>
-                <span>Always drink responsibly and know your limits</span>
+                <span className="text-amber font-display">·</span>
+                <span>{t('rule2')}</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-destructive font-bold">•</span>
-                <span>Designate a sober driver before the mission begins</span>
+                <span className="text-amber font-display">·</span>
+                <span>{t('rule3')}</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-destructive font-bold">•</span>
-                <span>
-                  Stop playing if anyone feels uncomfortable or unwell
-                </span>
+                <span className="text-amber font-display">·</span>
+                <span>{t('rule4')}</span>
               </li>
             </ul>
           </div>
 
-          {/* CTA */}
           <div className="mt-12 text-center">
-            <Button size="lg" asChild>
-              <Link href="/#products">Get Your Arsenal</Link>
+            <Button size="xl" variant="primary" asChild>
+              <Link href="/#products">{t('getArsenal')}</Link>
             </Button>
           </div>
         </div>
