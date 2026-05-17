@@ -9,7 +9,7 @@
   },
   "home": {
     "ageWarning": "Spiel hart, trink mit Verstand, erinnere dich an alles",
-    "title": "BETRUNKENES ARSENAL",
+    "title": "{brand}",
     "subtitle": "Einsetzen. Trinken. Dominieren. Das taktische Trinkspiel, das jede Party zum Schlachtfeld macht.",
     "browseArsenal": "Arsenal durchsuchen",
     "howToPlay": "Spielanleitung",
@@ -17,15 +17,15 @@
     "featuredSubtitle": "Premium taktische Trinkausrüstung für maximale Party-Wirkung",
     "completeArsenal": "Komplettes Arsenal",
     "ctaTitle": "Bereit für den Kampf?",
-    "ctaSubtitle": "Schließe dich Tausenden von Party-Kommandanten an. Kostenloser Versand ab $50.",
+    "ctaSubtitle": "Schließe dich Tausenden von Party-Kommandanten an, die {productName} bei ihren Treffen eingesetzt haben. Kostenloser Versand ab {freeShippingThreshold}.",
     "startShopping": "Jetzt einkaufen",
     "bundle": "PAKET",
     "inStock": "auf Lager",
     "outOfStock": "Ausverkauft",
 
-    "aboutUs1": "Drunken Arsenal ist eine Party-Marke für Erwachsene, die ihren Spaß gerne eine Spur übertrieben mögen. Wir entwickeln Trinkspiele und Bar-Accessoires im taktischen Look, die aussehen, als kämen sie aus einem Arsenal, aber ausschließlich für Unterhaltung, Lacher und unvergessliche Abende mit Freunden gedacht sind. Keine echten Waffen, keine Gewalt – nur eine spielerische Parodie in hochwertigem, geschenkfertigem Design.",
+    "aboutUs1": "{brand} ist eine Party-Marke für Erwachsene, die ihren Spaß gerne eine Spur übertrieben mögen. Wir entwickeln Trinkspiele und Bar-Accessoires im taktischen Look, die aussehen, als kämen sie aus einem Arsenal, aber ausschließlich für Unterhaltung, Lacher und unvergessliche Abende mit Freunden gedacht sind. Keine echten Waffen, keine Gewalt – nur eine spielerische Parodie in hochwertigem, geschenkfertigem Design.",
     "aboutUs2": "Wir wollen etwas Neues in die Partywelt bringen: nicht nur ein weiteres Trinkspiel, sondern ein komplettes Erlebnis mit einem eigenen Universum – Kommandanten, Missionen, Einsatzregeln und Traditionen, die Teil der Geschichte deiner Gruppe werden. Unsere Produkte sind zum Verschenken gemacht – für Freunde, Kollegen und die eine Person, die schon alles hat, außer einer eigenen taktischen Bar-Ausrüstung.",
-    "aboutUs3": "Im Kern folgt Drunken Arsenal einer einfachen Philosophie: verantwortungsvoll trinken, smart spielen und sich selbst nicht zu ernst nehmen. Wir stehen für Spaß, der Spaß bleibt – mit Respekt vor Grenzen, einem vorher festgelegten Fahrer und Erinnerungen, an die du dich am nächsten Tag gern erinnerst.",
+    "aboutUs3": "Im Kern folgt {brand} einer einfachen Philosophie: verantwortungsvoll trinken, smart spielen und sich selbst nicht zu ernst nehmen. Wir stehen für Spaß, der Spaß bleibt – mit Respekt vor Grenzen, einem vorher festgelegten Fahrer und Erinnerungen, an die du dich am nächsten Tag gern erinnerst.",
 
     "whoWeAreTitle": "WER SIND WIR?",
     "missionTitle": "MISSION",
@@ -35,7 +35,7 @@
     "ourPromiseTitle": "UNSER VERSPRECHEN",
     "ourPromiseText": "Spaß, der Spaß bleibt: klare Grenzen, verantwortungsvolles Trinken und ein Debrief am nächsten Tag, an den du dich wirklich erinnerst.",
     "readyForSomeFun": "BEREIT FÜR EINEN EINSATZ?",
-    "yesCommander": "JAWOHL, COMMANDER!",
+    "yesCommander": "JAWOHL, KOMMANDANT!",
     "designatedDriverNote": "Starte die Mission nur mit nüchternem Fahrer und deiner besten Einheit."
   },
   "product": {
@@ -46,18 +46,18 @@
     "addToCart": "In den Warenkorb",
     "adding": "Wird hinzugefügt...",
     "freeShipping": "Kostenloser Versand",
-    "freeShippingDesc": "Bei Bestellungen über $50",
+    "freeShippingDesc": "Bei Bestellungen ab {freeShippingThreshold}",
     "quality": "Qualitätsgarantie",
-    "qualityDesc": "Premium taktische Materialien",
-    "returns": "30-Tage Rückgabe",
+    "qualityDesc": "Hochwertige Materialien in taktischer Qualität",
+    "returns": "30-Tage-Rückgabe",
     "returnsDesc": "Nicht zufrieden? Volle Rückerstattung garantiert",
-    "ageWarningFull": "NUR 18+ - TRINKE VERANTWORTUNGSVOLL - NICHT FÜR MINDERJÄHRIGE",
-    "youMayLike": "Das könnte dir gefallen"
+    "ageWarningFull": "NUR AB 18 – TRINKE VERANTWORTUNGSVOLL – NICHT FÜR MINDERJÄHRIGE",
+    "youMayLike": "Das könnte dir auch gefallen"
   },
   "cart": {
     "title": "Warenkorb",
     "empty": "Dein Arsenal ist leer",
-    "emptyDesc": "Zeit, sich mit taktischer Trinkausrüstung einzudecken.",
+    "emptyDesc": "Zeit, dich für deine nächste Mission mit taktischer Trinkausrüstung einzudecken.",
     "continueShopping": "Weiter einkaufen",
     "orderSummary": "Bestellübersicht",
     "subtotal": "Zwischensumme",
@@ -70,21 +70,21 @@
   },
   "checkout": {
     "title": "Kasse",
-    "ageConfirm": "Durch Fortfahren bestätigst du, dass du 18+ bist und verantwortungsvoll trinkst"
+    "ageConfirm": "Mit dem Fortfahren bestätigst du, dass du 18 oder älter bist und verantwortungsvoll trinkst"
   },
   "order": {
     "missionAccomplished": "Mission erfüllt!",
-    "confirmed": "Deine Bestellung wurde bestätigt und wird vorbereitet.",
+    "confirmed": "Deine Bestellung wurde bestätigt und wird für den Einsatz vorbereitet.",
     "orderDetails": "Bestelldetails",
     "orderId": "Bestell-ID:",
     "email": "E-Mail:",
     "total": "Gesamt:",
     "whatNext": "Was passiert als Nächstes?",
     "step1": "Du erhältst eine Bestätigungs-E-Mail an {email}",
-    "step2": "Deine taktische Ausrüstung wird vorbereitet",
-    "step3": "Wir senden dir Tracking-Informationen nach Versand",
-    "step4": "Geschätzte Lieferung: 3-5 Werktage",
-    "questions": "Fragen zu deiner Bestellung? Kontaktiere uns unter support@drunkenarsenal.com"
+    "step2": "Deine taktische Ausrüstung wird vorbereitet und verpackt",
+    "step3": "Nach dem Versand erhältst du die Sendungsverfolgung",
+    "step4": "Voraussichtliche Lieferung: 3-5 Werktage",
+    "questions": "Fragen zu deiner Bestellung? Kontaktiere uns unter {supportEmail}"
   },
   "auth": {
     "welcomeBack": "Willkommen zurück",
@@ -96,8 +96,8 @@
     "noAccount": "Noch kein Konto?",
     "signUp": "Registrieren",
     "joinArsenal": "Tritt dem Arsenal bei",
-    "signUpDesc": "Erstelle ein Konto, um Bestellungen zu verfolgen",
-    "mustBe18": "Du musst 18+ sein, um ein Konto zu erstellen",
+    "signUpDesc": "Erstelle ein Konto, um Bestellungen zu verfolgen und mehr",
+    "mustBe18": "Du musst 18 oder älter sein, um ein Konto zu erstellen",
     "name": "Name (Optional)",
     "passwordRequirement": "Mindestens 8 Zeichen",
     "createAccount": "Konto erstellen",
@@ -111,25 +111,25 @@
     "profileDesc": "Deine Kontoinformationen",
     "orders": "Bestellungen",
     "ordersDesc": "Bestellverlauf anzeigen",
-    "ordersInfo": "Verfolge deine Lieferungen und siehe frühere Bestellungen.",
+    "ordersInfo": "Verfolge die Lieferungen deiner taktischen Ausrüstung und sieh frühere Bestellungen ein.",
     "viewOrders": "Bestellungen anzeigen (Demnächst)",
     "notSet": "Nicht festgelegt"
   },
   "howToPlay": {
-    "title": "Wie man Shot Wave spielt",
-    "subtitle": "Meistere das taktische Schlachtfeld in 3 Schritten",
+    "title": "So spielst du {productName}",
+    "subtitle": "Beherrsche das taktische Trink-Schlachtfeld in 3 einfachen Schritten",
     "step1Title": "1. Setze deine Truppen ein",
-    "step1Desc": "Stelle deine Artilleriegranaten (Schnapsgläser) in Formation auf. Jeder Spieler positioniert seine taktischen Minen strategisch.",
+    "step1Desc": "Stelle deine Artilleriegranaten (Schnapsgläser) in Formation auf dem Schlachtfeld auf. Jeder Spieler positioniert seine taktischen Minen strategisch, um Hindernisse zu errichten.",
     "step2Title": "2. Bekämpfe den Feind",
-    "step2Desc": "Abwechselnd Schüsse abgeben. Wenn du die Granate eines Gegners triffst, trinkt er. Eine Mine getroffen? Das ganze Team trinkt.",
-    "step3Title": "3. Sieg erringen",
-    "step3Desc": "Der letzte stehende Spieler gewinnt. Die Besiegten müssen dem Sieger salutieren.",
+    "step2Desc": "Schießt der Reihe nach. Wenn du die Granate eines Gegners triffst, muss er trinken. Eine Mine getroffen? Der ganze Trupp nimmt einen Shot. Strategie ist der Schlüssel zum Sieg.",
+    "step3Title": "3. Erringe den Sieg",
+    "step3Desc": "Der letzte stehende Spieler gewinnt die Schlacht. Die Besiegten müssen dem Sieger salutieren und ihr Schicksal als offizieller Cocktail-Mixer der Party annehmen.",
     "importantRules": "Wichtige Regeln",
-    "rule1": "Spieler müssen 18+ sein",
-    "rule2": "Trinke immer verantwortungsvoll",
-    "rule3": "Bestimme einen nüchternen Fahrer",
-    "rule4": "Höre auf, wenn sich jemand unwohl fühlt",
-    "getArsenal": "Hole dein Arsenal"
+    "rule1": "Spieler müssen 18 oder älter sein, um teilzunehmen",
+    "rule2": "Trinke immer verantwortungsvoll und kenne deine Grenzen",
+    "rule3": "Bestimmt einen nüchternen Fahrer, bevor die Mission beginnt",
+    "rule4": "Hört auf zu spielen, wenn sich jemand unwohl oder unpässlich fühlt",
+    "getArsenal": "Hol dir dein Arsenal"
   },
   "notFound": {
     "title": "404",
