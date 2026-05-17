@@ -79,7 +79,7 @@ export function CartItemComponent({ item, currency }: CartItemComponentProps) {
     <div className="bg-card border rounded-lg p-4 flex gap-4">
       {/* Product Image */}
       <Link
-        href={`/app/%5Blocale%5D/product/${item.product.slug}`}
+        href={`/product/${item.product.slug}`}
         className="flex-shrink-0 w-24 h-24 bg-muted rounded-lg overflow-hidden"
       >
         <img
@@ -93,7 +93,7 @@ export function CartItemComponent({ item, currency }: CartItemComponentProps) {
       <div className="flex-1 flex flex-col justify-between">
         <div>
           <Link
-            href={`/app/%5Blocale%5D/product/${item.product.slug}`}
+            href={`/product/${item.product.slug}`}
             className="hover:text-primary transition-colors"
           >
             <h3 className="font-semibold text-lg">{item.product.name}</h3>

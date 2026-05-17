@@ -87,7 +87,7 @@ export function Products({ products, currency }: IProductsProps) {
             .map((product) => (
               <Link
                 key={product.id}
-                href={`//product/${product.slug}`}
+                href={`/product/${product.slug}`}
                 className="group block"
               >
                 <div className="bg-card border rounded-lg overflow-hidden hover:border-primary transition-colors">

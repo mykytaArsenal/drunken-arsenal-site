@@ -193,7 +193,7 @@ export default async function ProductPage({
               {relatedProducts.map((relatedProduct) => (
                 <Link
                   key={relatedProduct.id}
-                  href={`/app/%5Blocale%5D/product/${relatedProduct.slug}`}
+                  href={`/product/${relatedProduct.slug}`}
                   className="group block"
                 >
                   <div className="bg-card border rounded-lg overflow-hidden hover:border-primary transition-colors">
