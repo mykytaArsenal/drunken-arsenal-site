@@ -1,10 +1,11 @@
 'use server';
 
 import { stripe } from '@/lib/stripe';
-import { getCart, clearCart } from '@/lib/cart';
+import { clearCart, getCart } from '@/lib/cart';
 import { sql } from '@/lib/db';
 
 function generateId(): string {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const crypto = require('crypto');
   return crypto.randomBytes(16).toString('hex');
 }
@@ -17,6 +18,8 @@ export async function createCheckoutSession() {
   if (!cart || cart.items.length === 0) {
     throw new Error('Cart is empty');
   }
+
+  let clientSecret: string | null = null;
 
   try {
     // Create line items from cart
@@ -52,7 +55,7 @@ export async function createCheckoutSession() {
 
     // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
-      ui_mode: 'embedded',
+      ui_mode: 'embedded_page',
       redirect_on_completion: 'never',
       line_items: lineItems,
       mode: 'payment',
@@ -80,19 +83,23 @@ export async function createCheckoutSession() {
 
     console.log('[v0] Order created:', orderId);
 
-    return session.client_secret;
-  } catch (error: any) {
+    clientSecret = session.client_secret;
+  } catch (error: unknown) {
     console.error('[v0] Checkout error:', error);
-    if (
-      error?.message?.includes('relation') &&
-      error?.message?.includes('does not exist')
-    ) {
+    const message = error instanceof Error ? error.message : undefined;
+    if (message?.includes('relation') && message.includes('does not exist')) {
       throw new Error(
         'Database not initialized. Please run SQL scripts first.'
       );
     }
     throw error;
   }
+
+  if (!clientSecret) {
+    throw new Error('Stripe did not return a client secret for the session');
+  }
+
+  return clientSecret;
 }
 
 export async function checkPaymentStatus(sessionId: string) {

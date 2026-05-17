@@ -1,9 +1,9 @@
 import {
   formatPrice as formatPriceWithCurrency,
-  type Currency,
+  type ICurrency,
 } from './currency/config';
 
-export interface Product {
+export interface IProduct {
   id: string;
   name: string;
   slug: string;
@@ -17,7 +17,7 @@ export interface Product {
   updatedAt: Date;
 }
 
-const MOCK_PRODUCTS: Product[] = [
+const MOCK_PRODUCTS: IProduct[] = [
   {
     id: 'shot-wave-game', // Updated to match database ID
     name: 'Shot Wave',
@@ -104,26 +104,26 @@ const MOCK_PRODUCTS: Product[] = [
   },
 ];
 
-export async function getAllProducts(): Promise<Product[]> {
+export async function getAllProducts(): Promise<IProduct[]> {
   // Return mock data
   return MOCK_PRODUCTS;
 }
 
-export async function getFeaturedProducts(): Promise<Product[]> {
+export async function getFeaturedProducts(): Promise<IProduct[]> {
   return MOCK_PRODUCTS.filter((p) => p.featured);
 }
 
-export async function getProductBySlug(slug: string): Promise<Product | null> {
+export async function getProductBySlug(slug: string): Promise<IProduct | null> {
   return MOCK_PRODUCTS.find((p) => p.slug === slug) || null;
 }
 
-export async function getProductById(id: string): Promise<Product | null> {
+export async function getProductById(id: string): Promise<IProduct | null> {
   return MOCK_PRODUCTS.find((p) => p.id === id) || null;
 }
 
 export function formatPrice(
   priceInCents: number,
-  currency: Currency = 'USD'
+  currency: ICurrency = 'USD'
 ): string {
   const priceInDollars = priceInCents / 100;
   return formatPriceWithCurrency(priceInDollars, currency);

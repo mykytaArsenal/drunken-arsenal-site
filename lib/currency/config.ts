@@ -1,29 +1,29 @@
 export const currencies = ['USD', 'EUR'] as const;
-export type Currency = (typeof currencies)[number];
+export type ICurrency = (typeof currencies)[number];
 
-export const defaultCurrency: Currency = 'USD';
+export const defaultCurrency: ICurrency = 'USD';
 
-export const currencySymbols: Record<Currency, string> = {
+export const currencySymbols: Record<ICurrency, string> = {
   USD: '$',
   EUR: '€',
 };
 
-export const currencyNames: Record<Currency, string> = {
+export const currencyNames: Record<ICurrency, string> = {
   USD: 'US Dollar',
   EUR: 'Euro',
 };
 
 // Conversion rates (in production, these would come from an API)
-export const conversionRates: Record<Currency, number> = {
+export const conversionRates: Record<ICurrency, number> = {
   USD: 1,
   EUR: 0.92, // 1 USD = 0.92 EUR (approximate)
 };
 
-export function convertPrice(priceInUSD: number, currency: Currency): number {
+export function convertPrice(priceInUSD: number, currency: ICurrency): number {
   return priceInUSD * conversionRates[currency];
 }
 
-export function formatPrice(priceInUSD: number, currency: Currency): string {
+export function formatPrice(priceInUSD: number, currency: ICurrency): string {
   const convertedPrice = convertPrice(priceInUSD, currency);
   const symbol = currencySymbols[currency];
 

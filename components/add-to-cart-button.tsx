@@ -4,13 +4,13 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ShoppingCartIcon, MinusIcon, PlusIcon } from './icons';
 import { useRouter } from 'next/navigation';
-import type { Product } from '@/lib/products';
+import type { IProduct } from '@/lib/products';
 
-interface AddToCartButtonProps {
-  product: Product;
+interface IAddToCartButtonProps {
+  product: IProduct;
 }
 
-export function AddToCartButton({ product }: AddToCartButtonProps) {
+export function AddToCartButton({ product }: IAddToCartButtonProps) {
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
   const router = useRouter();

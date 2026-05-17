@@ -1,13 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { formatPrice, Product } from '@/lib/products';
+import { formatPrice, type IProduct } from '@/lib/products';
 import { useTranslations } from 'next-intl';
-import type { Currency } from '@/lib/currency/config';
+import type { ICurrency } from '@/lib/currency/config';
 
 type IProductsProps = {
-  products: Product[];
-  currency: Currency;
+  products: IProduct[];
+  currency: ICurrency;
 };
 
 export function Products({ products, currency }: IProductsProps) {

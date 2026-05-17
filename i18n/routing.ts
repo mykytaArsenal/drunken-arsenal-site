@@ -1,10 +1,13 @@
-// i18n/routing.ts
-import {defineRouting} from 'next-intl/routing';
+import { defineRouting } from 'next-intl/routing';
 
 export const routing = defineRouting({
-    locales: ['en', 'es', 'de', 'fr'] as const,
-    defaultLocale: 'en',
-    localePrefix: 'never',
+  locales: ['en', 'es', 'de', 'fr'] as const,
+  defaultLocale: 'en',
+  localePrefix: 'never',
 });
 
-export type Locale = (typeof routing.locales)[number];
+export type ILocale = (typeof routing.locales)[number];
+
+export function isLocale(value: string): value is ILocale {
+  return routing.locales.some((l) => l === value);
+}

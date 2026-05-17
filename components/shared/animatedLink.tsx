@@ -3,13 +3,17 @@
 import type { ReactNode } from 'react';
 import { Link } from '@/i18n/navigation';
 
-type AnimatedLinkProps = {
+type IAnimatedLinkProps = {
   href: string;
   children: ReactNode;
   className?: string;
 };
 
-export function AnimatedLink({ href, children, className }: AnimatedLinkProps) {
+export function AnimatedLink({
+  href,
+  children,
+  className,
+}: IAnimatedLinkProps) {
   return (
     <Link
       href={href}

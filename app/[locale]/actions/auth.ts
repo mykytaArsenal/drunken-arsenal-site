@@ -26,7 +26,29 @@ function generateId(): string {
 const SESSION_COOKIE_NAME = 'auth_session';
 const SESSION_DURATION = 60 * 60 * 24 * 7; // 7 days
 
-export async function signUpAction(prevState: any, formData: FormData) {
+type IAuthActionState = { error: string } | undefined;
+
+function getErrorMessage(error: unknown): string | undefined {
+  if (error instanceof Error) return error.message;
+  if (typeof error === 'object' && error !== null && 'message' in error) {
+    const message = (error as { message: unknown }).message;
+    if (typeof message === 'string') return message;
+  }
+  return undefined;
+}
+
+function getErrorCode(error: unknown): string | undefined {
+  if (typeof error === 'object' && error !== null && 'code' in error) {
+    const code = (error as { code: unknown }).code;
+    if (typeof code === 'string') return code;
+  }
+  return undefined;
+}
+
+export async function signUpAction(
+  prevState: IAuthActionState,
+  formData: FormData
+): Promise<IAuthActionState> {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
   const name = formData.get('name') as string;
@@ -67,24 +89,26 @@ export async function signUpAction(prevState: any, formData: FormData) {
     });
 
     redirect('/account');
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[v0] Sign up error:', error);
-    if (error?.message?.includes('duplicate') || error?.code === '23505') {
+    const message = getErrorMessage(error);
+    const code = getErrorCode(error);
+    if (message?.includes('duplicate') || code === '23505') {
       return { error: 'Email already exists' };
     }
-    if (
-      error?.message?.includes('relation') &&
-      error?.message?.includes('does not exist')
-    ) {
+    if (message?.includes('relation') && message.includes('does not exist')) {
       return {
         error: 'Database not initialized. Please run SQL scripts first.',
       };
     }
-    return { error: error.message || 'Failed to create account' };
+    return { error: message || 'Failed to create account' };
   }
 }
 
-export async function signInAction(prevState: any, formData: FormData) {
+export async function signInAction(
+  prevState: IAuthActionState,
+  formData: FormData
+): Promise<IAuthActionState> {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
 
@@ -133,17 +157,15 @@ export async function signInAction(prevState: any, formData: FormData) {
     });
 
     redirect('/account');
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[v0] Sign in error:', error);
-    if (
-      error?.message?.includes('relation') &&
-      error?.message?.includes('does not exist')
-    ) {
+    const message = getErrorMessage(error);
+    if (message?.includes('relation') && message.includes('does not exist')) {
       return {
         error: 'Database not initialized. Please run SQL scripts first.',
       };
     }
-    return { error: error.message || 'Failed to sign in' };
+    return { error: message || 'Failed to sign in' };
   }
 }
 

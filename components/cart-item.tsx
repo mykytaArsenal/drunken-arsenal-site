@@ -4,17 +4,17 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { MinusIcon, PlusIcon, XIcon } from './icons';
 import { formatPrice } from '@/lib/products';
-import type { CartItem } from '@/lib/cart';
-import type { Currency } from '@/lib/currency/config';
+import type { ICartItem } from '@/lib/cart';
+import type { ICurrency } from '@/lib/currency/config';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-interface CartItemComponentProps {
-  item: CartItem;
-  currency: Currency;
+interface ICartItemComponentProps {
+  item: ICartItem;
+  currency: ICurrency;
 }
 
-export function CartItemComponent({ item, currency }: CartItemComponentProps) {
+export function CartItemComponent({ item, currency }: ICartItemComponentProps) {
   const [quantity, setQuantity] = useState(item.quantity);
   const [isUpdating, setIsUpdating] = useState(false);
   const router = useRouter();

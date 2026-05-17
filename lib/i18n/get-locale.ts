@@ -1,9 +1,9 @@
 import { cookies } from 'next/headers';
-import { defaultLocale, locales, type Locale } from './config';
+import { defaultLocale, locales, type ILocale } from './config';
 
-export async function getLocale(): Promise<Locale> {
+export async function getLocale(): Promise<ILocale> {
   const cookieStore = await cookies();
-  const localeCookie = cookieStore.get('locale')?.value as Locale | undefined;
+  const localeCookie = cookieStore.get('locale')?.value as ILocale | undefined;
 
   if (localeCookie && locales.includes(localeCookie)) {
     return localeCookie;

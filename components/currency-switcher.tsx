@@ -9,16 +9,16 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { DollarSignIcon } from './icons';
-import { currencies, type Currency } from '@/lib/currency/config';
+import { currencies, type ICurrency } from '@/lib/currency/config';
 
 export function CurrencySwitcher({
   currentCurrency,
 }: {
-  currentCurrency: Currency;
+  currentCurrency: ICurrency;
 }) {
   const router = useRouter();
 
-  const changeCurrency = (newCurrency: Currency) => {
+  const changeCurrency = (newCurrency: ICurrency) => {
     document.cookie = `currency=${newCurrency}; path=/; max-age=31536000`;
     router.refresh();
   };
@@ -26,7 +26,7 @@ export function CurrencySwitcher({
   return (
     <Select
       value={currentCurrency}
-      onValueChange={(value) => changeCurrency(value as Currency)}
+      onValueChange={(value) => changeCurrency(value as ICurrency)}
     >
       <SelectTrigger className="max-w-30 gap-2">
         <DollarSignIcon className="h-4 w-4" />

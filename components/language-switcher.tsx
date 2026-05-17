@@ -10,18 +10,18 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import {
-  type Locale,
+  type ILocale,
   localeFlags,
   localeNames,
   locales,
 } from '@/lib/i18n/config';
 
 export function LanguageSwitcher() {
-  const locale = useLocale() as Locale;
+  const locale = useLocale() as ILocale;
   const router = useRouter();
   const pathname = usePathname();
 
-  const changeLocale = (newLocale: Locale) => {
+  const changeLocale = (newLocale: ILocale) => {
     if (newLocale === locale) return;
 
     router.replace(pathname, { locale: newLocale });
@@ -31,7 +31,7 @@ export function LanguageSwitcher() {
   return (
     <Select
       value={locale}
-      onValueChange={(value) => changeLocale(value as Locale)}
+      onValueChange={(value) => changeLocale(value as ILocale)}
     >
       <SelectTrigger className="max-w-60 gap-2" aria-label="Select language">
         <SelectValue />

@@ -8,14 +8,14 @@ import { MenuIcon, ShoppingCartIcon, UserIcon, XIcon } from './icons';
 import { Button } from '@/components/ui/button';
 import { LanguageSwitcher } from './language-switcher';
 import { CurrencySwitcher } from './currency-switcher';
-import type { Currency } from '@/lib/currency/config';
+import type { ICurrency } from '@/lib/currency/config';
 import { AnimatedLink } from '@/components/shared/animatedLink';
 
-interface NavigationProps {
-  currency?: Currency;
+interface INavigationProps {
+  currency?: ICurrency;
 }
 
-export function Navigation({ currency = 'USD' }: NavigationProps) {
+export function Navigation({ currency = 'USD' }: INavigationProps) {
   const t = useTranslations();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
