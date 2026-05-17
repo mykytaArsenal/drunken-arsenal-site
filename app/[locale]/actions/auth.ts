@@ -1,30 +1,24 @@
 'use server';
 
 import { redirect } from 'next/navigation';
+import { randomBytes, pbkdf2Sync } from 'node:crypto';
 import { sql } from '@/lib/db';
 import { cookies } from 'next/headers';
 
 function hashPassword(password: string): string {
-  const crypto = require('crypto');
-  const salt = crypto.randomBytes(16).toString('hex');
-  const hash = crypto
-    .pbkdf2Sync(password, salt, 10000, 64, 'sha512')
-    .toString('hex');
+  const salt = randomBytes(16).toString('hex');
+  const hash = pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
   return `${salt}:${hash}`;
 }
 
 function verifyPassword(password: string, hashedPassword: string): boolean {
-  const crypto = require('crypto');
   const [salt, hash] = hashedPassword.split(':');
-  const verifyHash = crypto
-    .pbkdf2Sync(password, salt, 10000, 64, 'sha512')
-    .toString('hex');
+  const verifyHash = pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
   return hash === verifyHash;
 }
 
 function generateId(): string {
-  const crypto = require('crypto');
-  return crypto.randomBytes(16).toString('hex');
+  return randomBytes(16).toString('hex');
 }
 
 const SESSION_COOKIE_NAME = 'auth_session';
