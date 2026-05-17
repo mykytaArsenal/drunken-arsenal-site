@@ -81,7 +81,20 @@ export async function getCart(): Promise<Cart | null> {
     WHERE ci."cartId" = ${cart.id}
   `;
 
-  const cartItems: CartItem[] = items.map((item: any) => ({
+  interface CartItemRow {
+    id: string;
+    cartId: string;
+    productId: string;
+    quantity: number;
+    product_id: string;
+    product_name: string;
+    product_slug: string;
+    product_price: number;
+    product_images: string[] | null;
+    product_stock: number;
+  }
+
+  const cartItems: CartItem[] = (items as CartItemRow[]).map((item) => ({
     id: item.id,
     cartId: item.cartId,
     productId: item.productId,
