@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { formatPrice, Product } from '@/lib/products';
 import { useTranslations } from 'next-intl';
