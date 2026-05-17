@@ -178,28 +178,44 @@ export async function addToCart(
   `;
 }
 
+async function getCurrentCartId(): Promise<string | null> {
+  const sessionId = await getOrCreateSessionId();
+  const carts = await sql`
+    SELECT "id" FROM "Cart"
+    WHERE "sessionId" = ${sessionId}
+    LIMIT 1
+  `;
+  return carts.length > 0 ? (carts[0] as { id: string }).id : null;
+}
+
 export async function updateCartItemQuantity(
   itemId: string,
   quantity: number
 ): Promise<void> {
+  const cartId = await getCurrentCartId();
+  if (!cartId) return;
+
   if (quantity <= 0) {
     await sql`
       DELETE FROM "CartItem"
-      WHERE "id" = ${itemId}
+      WHERE "id" = ${itemId} AND "cartId" = ${cartId}
     `;
   } else {
     await sql`
       UPDATE "CartItem"
       SET "quantity" = ${quantity}, "updatedAt" = NOW()
-      WHERE "id" = ${itemId}
+      WHERE "id" = ${itemId} AND "cartId" = ${cartId}
     `;
   }
 }
 
 export async function removeFromCart(itemId: string): Promise<void> {
+  const cartId = await getCurrentCartId();
+  if (!cartId) return;
+
   await sql`
     DELETE FROM "CartItem"
-    WHERE "id" = ${itemId}
+    WHERE "id" = ${itemId} AND "cartId" = ${cartId}
   `;
 }
 
