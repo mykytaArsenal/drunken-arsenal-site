@@ -70,7 +70,10 @@
   },
   "checkout": {
     "title": "Pago",
-    "ageConfirm": "Al continuar, confirmas que tienes 18 años o más y beberás responsablemente"
+    "ageConfirm": "Al continuar, confirmas que tienes 18 años o más y beberás responsablemente",
+    "comingSoonTitle": "Pago Próximamente",
+    "comingSoonDesc": "Los pagos en línea aún no están activos — estamos trabajando en ello. Tu carrito seguirá aquí cuando se habilite.",
+    "backToCart": "Volver al Carrito"
   },
   "order": {
     "missionAccomplished": "¡Misión Cumplida!",

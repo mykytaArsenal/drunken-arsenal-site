@@ -70,7 +70,10 @@
   },
   "checkout": {
     "title": "Kasse",
-    "ageConfirm": "Mit dem Fortfahren bestätigst du, dass du 18 oder älter bist und verantwortungsvoll trinkst"
+    "ageConfirm": "Mit dem Fortfahren bestätigst du, dass du 18 oder älter bist und verantwortungsvoll trinkst",
+    "comingSoonTitle": "Bezahlung kommt bald",
+    "comingSoonDesc": "Online-Zahlungen sind noch nicht aktiviert — wir arbeiten daran. Dein Warenkorb bleibt erhalten, bis die Kasse geöffnet wird.",
+    "backToCart": "Zurück zum Warenkorb"
   },
   "order": {
     "missionAccomplished": "Mission erfüllt!",

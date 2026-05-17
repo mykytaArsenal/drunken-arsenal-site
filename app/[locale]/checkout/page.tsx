@@ -1,6 +1,7 @@
-import { getCart } from '@/lib/cart';
-import { redirect } from 'next/navigation';
-import { CheckoutForm } from '@/components/checkout-form';
+import { Button } from '@/components/ui/button';
+import { Link } from '@/i18n/navigation';
+import { getTranslations } from 'next-intl/server';
+import { ArrowLeftIcon } from '@/components/icons';
 
 export const metadata = {
   title: 'Checkout - Drunken Arsenal',
@@ -8,25 +9,22 @@ export const metadata = {
 };
 
 export default async function CheckoutPage() {
-  const cart = await getCart();
-
-  if (!cart || cart.items.length === 0) {
-    redirect('/cart');
-  }
+  const t = await getTranslations('checkout');
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-16">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold mb-8">Checkout</h1>
-
-          <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4 mb-8">
-            <p className="text-sm font-bold text-destructive text-center">
-              By proceeding, you confirm you are 18+ and will drink responsibly
-            </p>
-          </div>
-
-          <CheckoutForm />
+        <div className="max-w-2xl mx-auto text-center space-y-6">
+          <h1 className="text-3xl font-bold">{t('comingSoonTitle')}</h1>
+          <p className="text-lg text-muted-foreground">
+            {t('comingSoonDesc')}
+          </p>
+          <Button size="lg" asChild>
+            <Link href="/cart">
+              <ArrowLeftIcon className="mr-2 h-4 w-4" />
+              {t('backToCart')}
+            </Link>
+          </Button>
         </div>
       </div>
     </div>

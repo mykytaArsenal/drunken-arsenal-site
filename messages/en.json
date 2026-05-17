@@ -70,7 +70,10 @@
   },
   "checkout": {
     "title": "Checkout",
-    "ageConfirm": "By proceeding, you confirm you are 18+ and will drink responsibly"
+    "ageConfirm": "By proceeding, you confirm you are 18+ and will drink responsibly",
+    "comingSoonTitle": "Checkout Coming Soon",
+    "comingSoonDesc": "Online payments aren't enabled yet — we're working on it. Your cart will still be here when checkout opens.",
+    "backToCart": "Back to Cart"
   },
   "order": {
     "missionAccomplished": "Mission Accomplished!",
