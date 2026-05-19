@@ -24,6 +24,8 @@
     "bundle": "PACK",
     "inStock": "en stock",
     "outOfStock": "Rupture de stock",
+    "comingSoon": "Bientôt 2026",
+    "earlyBirdOffer": "Lève-tôt — 10% de réduction",
 
     "aboutUs1": "{brand} est une marque de soirée pour adultes qui aiment quand le fun va un peu trop loin. Nous concevons des jeux de soirée et des accessoires de bar novelty au style tactique qui semblent sortis d'un arsenal, mais existent uniquement pour les rires, les histoires tardives et les soirées inoubliables. Aucun vrai accessoire, aucune violence — juste une parodie ludique enveloppée dans un design premium prêt à offrir.",
     "aboutUs2": "Nous construisons un univers de fête complet — commandants, missions, règles d'engagement et traditions qui deviennent une partie de l'histoire de votre escouade. Chaque produit est fait pour être offert : à des amis, des collègues et à cette personne qui a déjà tout, sauf son propre arsenal de bar tactique.",
@@ -160,6 +162,20 @@
     "missionFailed": "Mission Avortée",
     "description": "La cible que vous cherchez a disparu ou n'a jamais existé.",
     "returnToBase": "Retour à la Base"
+  },
+  "notify": {
+    "tag": "Liste pré-lancement",
+    "title": "Rejoins la liste",
+    "titleProduct": "Réserve {product}",
+    "description": "Laisse ton email — au lancement on te ping avec une réduction lève-tôt de 10% et le Recipe Manual en PDF.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "toi@poste.de.commande",
+    "submit": "Inscris-moi",
+    "submitting": "Envoi...",
+    "success": "Tu es sur la liste, commandant.",
+    "error": "Ça a coincé. On retente ?",
+    "invalidEmail": "Cet email semble incorrect.",
+    "privacyNote": "Pas de spam. Désinscription à tout moment."
   },
   "footer": {
     "tagline": "Le jeu de soirée tactique pour commandants de fête.",

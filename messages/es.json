@@ -24,6 +24,8 @@
     "bundle": "PAQUETE",
     "inStock": "en stock",
     "outOfStock": "Agotado",
+    "comingSoon": "Próximamente 2026",
+    "earlyBirdOffer": "Madrugadores — 10% off",
 
     "aboutUs1": "{brand} es una marca de fiesta para adultos a los que les gusta la diversión un poco exagerada. Diseñamos juegos de fiesta y accesorios de bar novelty de estilo táctico que parecen sacados de un arsenal, pero existen únicamente para hacer reír, generar historias y crear noches inolvidables. Sin atrezzo real, sin violencia: solo una parodia divertida envuelta en un diseño premium perfecto para regalar.",
     "aboutUs2": "Estamos construyendo un universo de fiesta completo: comandantes, misiones, reglas de enfrentamiento y tradiciones que se convierten en parte de la historia de tu escuadrón. Cada producto está pensado para regalar: a amigos, compañeros de trabajo y a esa persona que ya lo tiene todo, excepto su propio arsenal de bar táctico.",
@@ -160,6 +162,20 @@
     "missionFailed": "Misión Abortada",
     "description": "El objetivo que buscas se ha esfumado o nunca existió.",
     "returnToBase": "Volver a la Base"
+  },
+  "notify": {
+    "tag": "Lista pre-lanzamiento",
+    "title": "Únete a la lista",
+    "titleProduct": "Reserva {product}",
+    "description": "Deja tu email — te avisamos en el lanzamiento con un 10% de descuento madrugador y el Recipe Manual en PDF.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "tu@puesto.de.mando",
+    "submit": "Apúntame",
+    "submitting": "Enviando...",
+    "success": "Estás en la lista, comandante.",
+    "error": "Algo se atascó. ¿Intentas de nuevo?",
+    "invalidEmail": "Ese email no parece correcto.",
+    "privacyNote": "Sin spam. Cancela cuando quieras."
   },
   "footer": {
     "tagline": "El juego de fiesta táctico para comandantes de fiesta.",

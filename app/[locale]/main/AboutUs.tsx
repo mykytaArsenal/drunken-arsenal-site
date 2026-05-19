@@ -1,14 +1,12 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
 import { BRAND } from '@/lib/i18n/brand';
+import { NotifyMeDialog } from '@/components/NotifyMeDialog';
 
 export const AboutUs = () => {
   const t = useTranslations();
-  const [showImage, setShowImage] = useState(false);
 
   return (
     <section
@@ -79,32 +77,16 @@ export const AboutUs = () => {
               {t('home.readyForSomeFun')}
             </p>
 
-            <Button
-              size="lg"
-              variant="primary"
-              onClick={() => setShowImage((prev) => !prev)}
-            >
-              {t('home.yesCommander')}
-            </Button>
+            <NotifyMeDialog source="cta:ready-for-fun">
+              <Button size="lg" variant="primary">
+                {t('home.yesCommander')}
+              </Button>
+            </NotifyMeDialog>
 
             <p className="font-stamp text-xs text-ink/60 text-center max-w-xs">
               {t('home.designatedDriverNote')}
             </p>
           </div>
-        </div>
-
-        <div
-          className={`pointer-events-none flex justify-center transform transition-all duration-700 ease-out ${
-            showImage ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          }`}
-        >
-          <Image
-            src="/grenade-cheers.png"
-            alt="Cheers to a tactical evening"
-            width={160}
-            height={80}
-            className="max-w-24 md:max-w-full"
-          />
         </div>
       </div>
     </section>

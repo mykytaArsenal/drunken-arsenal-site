@@ -1,16 +1,14 @@
 'use client';
 
-import Link from 'next/link';
-import { formatPrice, type IProduct } from '@/lib/products';
+import type { IProduct } from '@/lib/products';
 import { useTranslations } from 'next-intl';
-import type { ICurrency } from '@/lib/currency/config';
+import { NotifyMeDialog } from '@/components/NotifyMeDialog';
 
 type IProductsProps = {
   products: IProduct[];
-  currency: ICurrency;
 };
 
-export function Products({ products, currency }: IProductsProps) {
+export function Products({ products }: IProductsProps) {
   const t = useTranslations();
 
   const featured = products.filter((p) => p.featured);
@@ -36,12 +34,15 @@ export function Products({ products, currency }: IProductsProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
           {featured.map((product) => (
-            <Link
+            <NotifyMeDialog
               key={product.id}
-              href={`/product/${product.slug}`}
-              className="group block"
+              source={`product:${product.slug}`}
+              productName={product.name}
             >
-              <article className="pop-card overflow-hidden transition-transform duration-150 group-hover:-translate-x-[2px] group-hover:-translate-y-[2px] group-hover:shadow-[8px_8px_0_var(--color-ink)]">
+              <button
+                type="button"
+                className="group text-left pop-card overflow-hidden transition-transform duration-150 media-hover:hover:-translate-x-[2px] media-hover:hover:-translate-y-[2px] media-hover:hover:shadow-[8px_8px_0_var(--color-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rust-bright focus-visible:ring-offset-2"
+              >
                 <div className="aspect-square bg-cream-warm relative overflow-hidden border-b-[3px] border-ink">
                   <img
                     src={product.images[0] || '/placeholder.svg'}
@@ -59,8 +60,8 @@ export function Products({ products, currency }: IProductsProps) {
                     <h3 className="font-display text-xl text-ink uppercase leading-tight">
                       {product.name}
                     </h3>
-                    <p className="font-display text-xl text-rust-bright whitespace-nowrap">
-                      {formatPrice(product.price, currency)}
+                    <p className="font-display text-base text-rust-bright whitespace-nowrap uppercase tracking-wider">
+                      {t('home.comingSoon')}
                     </p>
                   </div>
                   <p className="font-stamp text-sm text-ink/70 line-clamp-2">
@@ -68,22 +69,16 @@ export function Products({ products, currency }: IProductsProps) {
                   </p>
                   <div className="flex items-center gap-2 font-mono-c text-xs uppercase tracking-wider">
                     <span
-                      className="inline-block w-2 h-2 bg-allowed"
+                      className="inline-block w-2 h-2 bg-amber"
                       aria-hidden
                     />
-                    <span
-                      className={
-                        product.stock > 0 ? 'text-allowed' : 'text-rust-bright'
-                      }
-                    >
-                      {product.stock > 0
-                        ? `${product.stock} ${t('home.inStock')}`
-                        : t('home.outOfStock')}
+                    <span className="text-amber-deep">
+                      {t('home.earlyBirdOffer')}
                     </span>
                   </div>
                 </div>
-              </article>
-            </Link>
+              </button>
+            </NotifyMeDialog>
           ))}
         </div>
 
@@ -101,12 +96,15 @@ export function Products({ products, currency }: IProductsProps) {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {rest.map((product) => (
-                <Link
+                <NotifyMeDialog
                   key={product.id}
-                  href={`/product/${product.slug}`}
-                  className="group block"
+                  source={`product:${product.slug}`}
+                  productName={product.name}
                 >
-                  <article className="pop-card overflow-hidden transition-transform duration-150 group-hover:-translate-x-[2px] group-hover:-translate-y-[2px] group-hover:shadow-[8px_8px_0_var(--color-ink)]">
+                  <button
+                    type="button"
+                    className="group text-left pop-card overflow-hidden transition-transform duration-150 media-hover:hover:-translate-x-[2px] media-hover:hover:-translate-y-[2px] media-hover:hover:shadow-[8px_8px_0_var(--color-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rust-bright focus-visible:ring-offset-2"
+                  >
                     <div className="aspect-square bg-cream-warm relative overflow-hidden border-b-[3px] border-ink">
                       <img
                         src={product.images[0] || '/placeholder.svg'}
@@ -119,16 +117,23 @@ export function Products({ products, currency }: IProductsProps) {
                         <h3 className="font-display text-base text-ink uppercase line-clamp-1">
                           {product.name}
                         </h3>
-                        <p className="font-display text-base text-rust-bright whitespace-nowrap">
-                          {formatPrice(product.price, currency)}
+                        <p className="font-display text-xs text-rust-bright whitespace-nowrap uppercase tracking-wider">
+                          {t('home.comingSoon')}
                         </p>
                       </div>
                       <p className="font-stamp text-xs text-ink/70 line-clamp-2">
                         {product.description}
                       </p>
+                      <div className="flex items-center gap-2 font-mono-c text-[0.65rem] uppercase tracking-wider text-amber-deep">
+                        <span
+                          className="inline-block w-1.5 h-1.5 bg-amber"
+                          aria-hidden
+                        />
+                        <span>{t('home.earlyBirdOffer')}</span>
+                      </div>
                     </div>
-                  </article>
-                </Link>
+                  </button>
+                </NotifyMeDialog>
               ))}
             </div>
           </>

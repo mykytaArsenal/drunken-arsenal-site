@@ -24,6 +24,8 @@
     "bundle": "PAKET",
     "inStock": "auf Lager",
     "outOfStock": "Ausverkauft",
+    "comingSoon": "Ab 2026",
+    "earlyBirdOffer": "Frühbucher — 10% Rabatt",
 
     "aboutUs1": "{brand} ist eine Party-Marke für Erwachsene, die ihren Spaß gerne eine Spur übertrieben mögen. Wir entwickeln Partyspiele und Novelty-Barzubehör im taktischen Stil, die aussehen, als kämen sie aus einem Arsenal, aber ausschließlich für Lacher, späte Geschichten und unvergessliche Abende existieren. Keine echten Requisiten, keine Gewalt – nur eine spielerische Parodie in hochwertigem, geschenkfertigem Design.",
     "aboutUs2": "Wir bauen ein komplettes Party-Universum auf – Kommandanten, Missionen, Einsatzregeln und Traditionen, die Teil der Geschichte deiner Crew werden. Jedes Produkt ist zum Verschenken gemacht – für Freunde, Kollegen und die eine Person, die schon alles hat, außer eigener taktischer Bar-Ausrüstung.",
@@ -160,6 +162,20 @@
     "missionFailed": "Mission abgebrochen",
     "description": "Das gesuchte Ziel ist abgetaucht oder hat nie existiert.",
     "returnToBase": "Zurück zur Basis"
+  },
+  "notify": {
+    "tag": "Pre-Launch Roster",
+    "title": "Auf die Liste",
+    "titleProduct": "Sichere dir {product}",
+    "description": "Hinterlasse deine E-Mail — zum Launch melden wir uns mit 10% Frühbucher-Rabatt und dem Rezept-Manual als PDF.",
+    "emailLabel": "E-Mail",
+    "emailPlaceholder": "du@kommandoposten",
+    "submit": "Eintragen",
+    "submitting": "Wird gesendet...",
+    "success": "Du stehst auf der Liste, Kommandant.",
+    "error": "Da hat etwas geklemmt. Nochmal versuchen?",
+    "invalidEmail": "Diese E-Mail sieht nicht richtig aus.",
+    "privacyNote": "Kein Spam. Jederzeit abbestellbar."
   },
   "footer": {
     "tagline": "Das taktische Partyspiel für Party-Kommandanten.",

@@ -6,6 +6,7 @@ import { isLocale, routing } from '@/i18n/routing';
 import { getCurrency } from '@/lib/currency/get-currency';
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
+import { Toaster } from '@/components/ui/sonner';
 import { Metadata } from 'next';
 import { Russo_One, Oswald, PT_Mono, IBM_Plex_Mono } from 'next/font/google';
 
@@ -77,6 +78,7 @@ export default async function LocaleLayout({
           <Navigation currency={currency} />
           {children}
           <Footer />
+          <Toaster />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -24,6 +24,8 @@
     "bundle": "BUNDLE",
     "inStock": "in stock",
     "outOfStock": "Out of stock",
+    "comingSoon": "Coming 2026",
+    "earlyBirdOffer": "Early birds — 10% off",
 
     "aboutUs1": "{brand} is a party brand for grown-ups who like their fun a little over the top. We design tactical-style party games and novelty barware that look pulled from an armory, but exist purely for laughs, late-night stories and unforgettable evenings. No real props, no violence — just a playful parody wrapped in premium, gift-ready design.",
     "aboutUs2": "We're building a full party universe — commanders, missions, rules of engagement and traditions that become part of your squad's story. Every product is built to be gifted: to friends, colleagues and that one person who has everything except their own tactical bar setup.",
@@ -160,6 +162,20 @@
     "missionFailed": "Mission Aborted",
     "description": "The target you're looking for has gone dark or never existed.",
     "returnToBase": "Return to Base"
+  },
+  "notify": {
+    "tag": "Pre-launch roster",
+    "title": "Get on the list",
+    "titleProduct": "Lock in {product}",
+    "description": "Drop your email — we'll ping you at launch with an early-bird 10% off and the Recipe Manual PDF.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@command.post",
+    "submit": "Lock me in",
+    "submitting": "Sending...",
+    "success": "You're on the list, commander.",
+    "error": "Something jammed. Try again?",
+    "invalidEmail": "That email looks off.",
+    "privacyNote": "No spam. Unsubscribe any time."
   },
   "footer": {
     "tagline": "The tactical party game for party commanders.",

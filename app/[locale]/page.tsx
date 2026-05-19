@@ -6,20 +6,17 @@ import { HeroSection } from '@/app/[locale]/main/HeroSection';
 import { Products } from '@/app/[locale]/main/Products';
 import { AboutUs } from '@/app/[locale]/main/AboutUs';
 import { getAllProducts } from '@/lib/products';
-import { getCurrency } from '@/lib/currency/get-currency';
 import { FREE_SHIPPING_THRESHOLD, PRODUCT_NAME } from '@/lib/i18n/brand';
 
 export default async function HomePage() {
   const products = await getAllProducts();
-  const currency = await getCurrency();
   const t = await getTranslations('home');
 
   return (
     <main className="min-h-screen w-full">
       <HeroSection />
       <AboutUs />
-      <Products products={products} currency={currency} />
-
+      <Products products={products} />
       <section className="relative">
         <div className="panel-divider" />
         <div className="bg-olive-deep text-cream py-16 md:py-24 relative overflow-hidden">
