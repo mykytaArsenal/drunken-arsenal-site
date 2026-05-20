@@ -1,37 +1,32 @@
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
-import { UsersIcon, TargetIcon, TrophyIcon } from '@/components/icons';
 import { getTranslations } from 'next-intl/server';
 import { PRODUCT_NAME } from '@/lib/i18n/brand';
 
 export const metadata = {
   title: 'How to Play',
-  description: 'Learn the rules of Shot Wave — the tactical party game',
+  description: 'Learn the rules of Shotwave — the tactical party game',
 };
+
+const manuals = [
+  {
+    code: 'EN',
+    title: 'Field Manual',
+    subtitle: 'SHOTWAVE Rules',
+    cta: 'Open',
+    href: '/rules/ShotWave_Rules_EN.html',
+  },
+  {
+    code: 'RU',
+    title: 'Полевой устав',
+    subtitle: 'Правила SHOTWAVE',
+    cta: 'Открыть',
+    href: '/rules/ShotWave_Rules_RU.html',
+  },
+] as const;
 
 export default async function HowToPlayPage() {
   const t = await getTranslations('howToPlay');
-
-  const steps = [
-    {
-      Icon: UsersIcon,
-      title: t('step1Title'),
-      desc: t('step1Desc'),
-      number: '01',
-    },
-    {
-      Icon: TargetIcon,
-      title: t('step2Title'),
-      desc: t('step2Desc'),
-      number: '02',
-    },
-    {
-      Icon: TrophyIcon,
-      title: t('step3Title'),
-      desc: t('step3Desc'),
-      number: '03',
-    },
-  ];
 
   return (
     <div className="min-h-screen py-12 md:py-16 bg-paper">
@@ -42,57 +37,45 @@ export default async function HowToPlayPage() {
             <h1 className="font-display text-4xl md:text-6xl text-ink leading-tight">
               {t('title', { productName: PRODUCT_NAME })}
             </h1>
-            <p className="font-stamp text-base md:text-lg text-ink/70 max-w-xl mx-auto">
-              {t('subtitle')}
-            </p>
           </div>
 
-          <div className="space-y-8">
-            {steps.map(({ Icon, title, desc, number }) => (
-              <div
-                key={number}
-                className="pop-card p-6 md:p-8 flex gap-5 items-start"
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+            {manuals.map(({ code, title, subtitle, cta, href }) => (
+              <a
+                key={code}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pop-card aspect-square p-6 md:p-8 flex flex-col justify-between transition-transform media-hover:hover:-translate-y-1 media-hover:hover:-translate-x-1 focus-visible:outline-2 focus-visible:outline-rust-bright focus-visible:outline-offset-2"
               >
-                <div className="phase-number flex-shrink-0">{number}</div>
-                <div className="space-y-3 flex-1">
-                  <div className="flex items-center gap-3">
-                    <div className="flex items-center justify-center w-10 h-10 bg-rust-bright border-2 border-ink">
-                      <Icon className="h-5 w-5 text-cream" />
-                    </div>
-                    <h2 className="font-display text-xl md:text-2xl text-ink uppercase leading-tight">
-                      {title}
-                    </h2>
-                  </div>
-                  <p className="font-stamp text-base text-ink/80 leading-relaxed">
-                    {desc}
+                <div className="flex items-start justify-end">
+                  <span className="font-display text-4xl md:text-5xl text-ink">
+                    {code}
+                  </span>
+                </div>
+
+                <div className="space-y-2">
+                  <h2 className="font-display text-2xl md:text-3xl text-ink uppercase leading-tight">
+                    {title}
+                  </h2>
+                  <p className="font-stamp text-sm md:text-base text-ink/70">
+                    {subtitle}
                   </p>
                 </div>
-              </div>
-            ))}
-          </div>
 
-          <div className="mt-12 pop-card-dark p-6 md:p-8">
-            <div className="flex items-center gap-3 mb-5">
-              <span className="ribbon text-sm">{t('importantRules')}</span>
-            </div>
-            <ul className="space-y-3 font-stamp text-base text-cream-warm">
-              <li className="flex items-start gap-3">
-                <span className="text-amber font-display">·</span>
-                <span>{t('rule1')}</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-amber font-display">·</span>
-                <span>{t('rule2')}</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-amber font-display">·</span>
-                <span>{t('rule3')}</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-amber font-display">·</span>
-                <span>{t('rule4')}</span>
-              </li>
-            </ul>
+                <div className="flex items-center justify-between border-t-2 border-ink pt-4">
+                  <span className="font-stamp text-sm uppercase tracking-[0.15em] text-ink">
+                    {cta}
+                  </span>
+                  <span
+                    aria-hidden
+                    className="font-display text-2xl text-rust-bright"
+                  >
+                    →
+                  </span>
+                </div>
+              </a>
+            ))}
           </div>
 
           <div className="mt-12 text-center">

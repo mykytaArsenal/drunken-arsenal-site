@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHOTWAVE — Field Manual</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Inline&family=Bungee+Shade&family=Special+Elite&family=Oswald:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --olive: #4a5239;
+    --olive-dark: #353c28;
+    --olive-deep: #1f2516;
+    --olive-light: #6b7449;
+    --rust: #8a3a2a;
+    --rust-bright: #c9472f;
+    --amber: #e8a93a;
+    --amber-deep: #c08020;
+    --cream: #ede4cf;
+    --cream-warm: #d8cca8;
+    --black: #131210;
+    --paper: #f0e6cd;
+  }
+
+  body {
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(74, 82, 57, 0.10) 0, transparent 35%),
+      radial-gradient(circle at 88% 78%, rgba(138, 58, 42, 0.08) 0, transparent 40%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='4'><circle cx='1' cy='1' r='0.4' fill='%234a5239' opacity='0.15'/></svg>");
+    color: var(--black);
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .font-display { font-family: 'Bungee', cursive; letter-spacing: 0.02em; }
+  .font-display-shade { font-family: 'Bungee Shade', cursive; letter-spacing: 0.02em; }
+  .font-display-inline { font-family: 'Bungee Inline', cursive; letter-spacing: 0.02em; }
+  .font-stamp { font-family: 'Special Elite', monospace; }
+  .font-mono-c { font-family: 'IBM Plex Mono', monospace; }
+  .font-body { font-family: 'Oswald', sans-serif; }
+
+  .burst {
+    position: relative;
+    display: inline-block;
+    background: var(--amber);
+    color: var(--black);
+    padding: 0.4em 0.9em;
+    font-family: 'Bungee', cursive;
+    text-transform: uppercase;
+    border: 3px solid var(--black);
+    box-shadow: 4px 4px 0 var(--black);
+  }
+  .burst::before {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    background: var(--amber);
+    z-index: -1;
+    clip-path: polygon(
+      0% 30%, 12% 24%, 18% 0%, 28% 22%, 42% 8%, 50% 28%,
+      62% 12%, 70% 30%, 86% 22%, 88% 38%, 100% 42%, 88% 56%,
+      100% 70%, 84% 72%, 82% 88%, 70% 78%, 62% 96%, 52% 80%,
+      40% 96%, 32% 78%, 18% 92%, 16% 74%, 0% 70%, 14% 56%
+    );
+  }
+
+  .halftone-bg {
+    background-image:
+      radial-gradient(circle, var(--olive-deep) 1.2px, transparent 1.2px);
+    background-size: 8px 8px;
+    background-position: 0 0;
+  }
+
+  .stripes-warning {
+    background: repeating-linear-gradient(
+      45deg,
+      var(--amber) 0,
+      var(--amber) 14px,
+      var(--black) 14px,
+      var(--black) 28px
+    );
+  }
+
+  .stamp {
+    display: inline-block;
+    border: 4px double var(--rust-bright);
+    color: var(--rust-bright);
+    padding: 0.4rem 1.4rem;
+    font-family: 'Special Elite', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    transform: rotate(-6deg);
+    opacity: 0.92;
+  }
+
+  .pop-card {
+    background: var(--cream);
+    border: 3px solid var(--black);
+    box-shadow: 6px 6px 0 var(--black);
+    position: relative;
+  }
+  .pop-card-olive {
+    background: var(--olive);
+    color: var(--cream);
+    border: 3px solid var(--black);
+    box-shadow: 6px 6px 0 var(--black);
+  }
+  .pop-card-rust {
+    background: var(--rust);
+    color: var(--cream);
+    border: 3px solid var(--black);
+    box-shadow: 6px 6px 0 var(--black);
+  }
+  .pop-card-dark {
+    background: var(--olive-deep);
+    color: var(--cream);
+    border: 3px solid var(--black);
+    box-shadow: 6px 6px 0 var(--black);
+  }
+
+  .effect-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.7rem;
+    font-family: 'Bungee', cursive;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    border: 2px solid var(--black);
+    box-shadow: 2px 2px 0 var(--black);
+    letter-spacing: 0.05em;
+  }
+  .e-positive { background: #6f8a4a; color: var(--cream); }
+  .e-selfharm { background: var(--rust-bright); color: var(--cream); }
+  .e-attack   { background: var(--rust); color: var(--cream); }
+  .e-neutral  { background: var(--cream-warm); color: var(--black); }
+  .e-alcohol  { background: var(--amber); color: var(--black); }
+
+  .rank-stars {
+    display: inline-flex;
+    gap: 2px;
+    align-items: center;
+    color: var(--amber);
+    font-size: 0.95rem;
+    line-height: 1;
+  }
+
+  .section-header { position: relative; overflow: visible; }
+  .phase-number {
+    font-family: 'Bungee Shade', cursive;
+    font-size: 9rem;
+    color: var(--olive);
+    line-height: 0.85;
+    opacity: 0.85;
+  }
+
+  .deco-star { color: var(--rust-bright); font-family: 'Bungee', cursive; }
+
+  .panel-divider {
+    height: 14px;
+    background: var(--black);
+    position: relative;
+  }
+  .panel-divider::before, .panel-divider::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 18px;
+    background: var(--rust-bright);
+  }
+  .panel-divider::before { left: 0; }
+  .panel-divider::after { right: 0; }
+
+  .ribbon {
+    position: relative;
+    display: inline-block;
+    background: var(--rust-bright);
+    color: var(--cream);
+    padding: 0.4rem 1.5rem;
+    font-family: 'Bungee', cursive;
+    text-transform: uppercase;
+    box-shadow: 4px 4px 0 var(--black);
+  }
+
+  .mil-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    border: 3px solid var(--black);
+    background: var(--cream);
+  }
+  .mil-table th {
+    background: var(--olive-deep);
+    color: var(--cream);
+    font-family: 'Bungee', cursive;
+    font-size: 0.75rem;
+    padding: 0.7rem 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-right: 2px solid var(--olive-light);
+  }
+  .mil-table th:last-child { border-right: none; }
+  .mil-table td {
+    padding: 0.55rem 0.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.83rem;
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+    border-right: 1px solid rgba(0,0,0,0.08);
+  }
+  .mil-table td:last-child { border-right: none; }
+  .mil-table tr:nth-child(even) td { background: rgba(74, 82, 57, 0.06); }
+  .mil-table tr:last-child td { border-bottom: none; }
+  .mil-table .total-row td {
+    background: var(--olive) !important;
+    color: var(--cream);
+    font-family: 'Bungee', cursive;
+    font-size: 0.85rem;
+  }
+
+  .card-def {
+    border: 3px solid var(--black);
+    background: var(--cream);
+    padding: 1rem;
+    position: relative;
+    box-shadow: 4px 4px 0 var(--black);
+  }
+  .card-def-title {
+    font-family: 'Bungee', cursive;
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+    line-height: 1;
+  }
+
+  @media print {
+    body { background: white; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+  }
+
+  .body-text {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    line-height: 1.55;
+    font-size: 1rem;
+  }
+
+  .scanlines { position: relative; }
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 3px,
+      rgba(0,0,0,0.04) 3px,
+      rgba(0,0,0,0.04) 4px
+    );
+    pointer-events: none;
+  }
+
+  .icon-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background: var(--black);
+    color: var(--amber);
+    font-family: 'Bungee', cursive;
+    font-size: 0.9rem;
+    border: 2px solid var(--amber);
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== HERO / TITLE PAGE ============== -->
+<header class="relative overflow-hidden scanlines" style="background: var(--olive-deep); color: var(--cream);">
+  <div class="halftone-bg absolute inset-0 opacity-25"></div>
+
+  <div class="absolute top-6 left-10 deco-star text-5xl rotate-12 opacity-70">★</div>
+  <div class="absolute top-12 right-16 deco-star text-7xl -rotate-12 opacity-50">★</div>
+  <div class="absolute bottom-10 left-1/4 deco-star text-4xl rotate-45 opacity-40">★</div>
+
+  <div class="relative max-w-5xl mx-auto px-8 py-20">
+    <div class="mb-6">
+      <span class="font-stamp text-sm tracking-widest" style="color: var(--amber);">// FIELD MANUAL · CLASSIFIED · NO. 001</span>
+    </div>
+
+    <h1 class="font-display-shade leading-none" style="font-size: clamp(4rem, 12vw, 11rem); color: var(--cream);">
+      SHOTWAVE
+    </h1>
+
+    <div class="mt-4 flex flex-wrap items-center gap-4">
+      <span class="ribbon text-xl">Explosive Fun!</span>
+      <span class="font-stamp text-lg" style="color: var(--amber);">// Drunken Arsenal · 2026</span>
+    </div>
+
+    <p class="mt-10 max-w-2xl text-xl font-stamp leading-relaxed" style="color: var(--cream-warm);">
+      Roll the dice. Dump your cards. Sabotage your friends — and don't let the resupply trucks catch up.
+    </p>
+
+    <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div class="pop-card-olive p-4">
+        <div class="font-stamp text-xs uppercase opacity-70">Players</div>
+        <div class="font-display text-3xl mt-1">2–8</div>
+      </div>
+      <div class="pop-card-olive p-4">
+        <div class="font-stamp text-xs uppercase opacity-70">Time</div>
+        <div class="font-display text-3xl mt-1">15–30'</div>
+      </div>
+      <div class="pop-card-olive p-4">
+        <div class="font-stamp text-xs uppercase opacity-70">Age</div>
+        <div class="font-display text-3xl mt-1">18+</div>
+      </div>
+      <div class="pop-card-olive p-4">
+        <div class="font-stamp text-xs uppercase opacity-70">Difficulty</div>
+        <div class="font-display text-3xl mt-1">★★☆</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-divider"></div>
+</header>
+
+
+<!-- ============== EQUIPMENT ============== -->
+<section class="max-w-5xl mx-auto px-8 py-16">
+  <div class="flex items-end gap-6 mb-10">
+    <div class="phase-number">01</div>
+    <div>
+      <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// briefing</div>
+      <h2 class="font-display text-5xl leading-none">Equipment</h2>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-5">
+    <div class="pop-card p-6">
+      <div class="font-display text-3xl" style="color: var(--rust-bright);">96</div>
+      <div class="font-stamp text-xs uppercase mt-2 opacity-60">Rounds in the belt</div>
+      <h3 class="font-display text-xl mt-3">Numbered cards</h3>
+      <p class="body-text mt-2">Values 1–12, eight copies each. Your main ammo — these are how you dump cards each turn.</p>
+    </div>
+
+    <div class="pop-card p-6">
+      <div class="font-display text-3xl" style="color: var(--rust-bright);">64</div>
+      <div class="font-stamp text-xs uppercase mt-2 opacity-60">Tactical</div>
+      <h3 class="font-display text-xl mt-3">Tactic cards</h3>
+      <p class="body-text mt-2">Events, attacks, maneuvers. Each marked with a rank (★) and an effect icon.</p>
+    </div>
+
+    <div class="pop-card p-6">
+      <div class="font-display text-3xl" style="color: var(--rust-bright);">d12</div>
+      <div class="font-stamp text-xs uppercase mt-2 opacity-60">Decides fate</div>
+      <h3 class="font-display text-xl mt-3">The die</h3>
+      <p class="body-text mt-2">Numbers 1–12. Roll it at the start of your turn — it sets how many cards you can ditch.</p>
+    </div>
+  </div>
+
+  <div class="mt-6 stripes-warning p-1">
+    <div class="bg-black p-4 flex items-center gap-4 flex-wrap" style="color: var(--cream);">
+      <span class="font-display text-xl" style="color: var(--amber);">Optional:</span>
+      <span class="font-stamp">shot glasses and coasters — only needed for alcohol cards. Not drinking? Just remove the yellow cards before the game.</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============== CARD MARKINGS ============== -->
+<section class="max-w-5xl mx-auto px-8 py-16">
+  <div class="flex items-end gap-6 mb-10">
+    <div class="phase-number">02</div>
+    <div>
+      <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// recon</div>
+      <h2 class="font-display text-5xl leading-none">Card markings</h2>
+    </div>
+  </div>
+
+  <p class="body-text text-lg mb-8 max-w-3xl">
+    Each tactic card has two marks: a <strong>rank</strong> (minimum players to use it) and an <strong>effect icon</strong> (what the card does).
+  </p>
+
+  <div class="mb-12">
+    <div class="ribbon mb-5">Rank · minimum players</div>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="pop-card p-5">
+        <div class="rank-stars text-3xl mb-2">★</div>
+        <div class="font-display text-xl">Private</div>
+        <div class="font-stamp text-sm opacity-70 mt-1">2–8 players</div>
+        <p class="body-text text-sm mt-3">Core deck. These cards stay in every game.</p>
+      </div>
+      <div class="pop-card p-5">
+        <div class="rank-stars text-3xl mb-2">★ ★</div>
+        <div class="font-display text-xl">Sergeant</div>
+        <div class="font-stamp text-sm opacity-70 mt-1">4+ players</div>
+        <p class="body-text text-sm mt-3">Added for medium and large parties.</p>
+      </div>
+      <div class="pop-card p-5">
+        <div class="rank-stars text-3xl mb-2">★ ★ ★</div>
+        <div class="font-display text-xl">Captain</div>
+        <div class="font-stamp text-sm opacity-70 mt-1">7+ players</div>
+        <p class="body-text text-sm mt-3">Full deck. Big parties only.</p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="ribbon mb-5">Effect type · icon</div>
+
+    <div class="grid md:grid-cols-5 gap-4">
+      <div class="pop-card p-4 text-center">
+        <div class="effect-badge e-positive mx-auto mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg> +</div>
+        <div class="font-display text-base">Buff</div>
+        <p class="font-mono-c text-xs mt-2 opacity-75">helps yourself</p>
+      </div>
+      <div class="pop-card p-4 text-center">
+        <div class="effect-badge e-selfharm mx-auto mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M8 20v2h8v-2"/><path d="M12.5 17l-.5-1-.5 1h1z"/><path d="M16 20a2 2 0 0 0 1.56-3.25 8 8 0 1 0-11.12 0A2 2 0 0 0 8 20"/></svg> self</div>
+        <div class="font-display text-base">Self-harm</div>
+        <p class="font-mono-c text-xs mt-2 opacity-75">hits the player who got it</p>
+      </div>
+      <div class="pop-card p-4 text-center">
+        <div class="effect-badge e-attack mx-auto mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg> atk</div>
+        <div class="font-display text-base">Attack</div>
+        <p class="font-mono-c text-xs mt-2 opacity-75">aimed at a target</p>
+      </div>
+      <div class="pop-card p-4 text-center">
+        <div class="effect-badge e-neutral mx-auto mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg> /</div>
+        <div class="font-display text-base">Neutral</div>
+        <p class="font-mono-c text-xs mt-2 opacity-75">shifts the field for all</p>
+      </div>
+      <div class="pop-card p-4 text-center">
+        <div class="effect-badge e-alcohol mx-auto mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M15.2 22H8.8a2 2 0 0 1-2-1.79L5 3h14l-1.81 17.21A2 2 0 0 1 15.2 22Z"/><path d="M6 12a5 5 0 0 1 6 0 5 5 0 0 0 6 0"/></svg> ABV</div>
+        <div class="font-display text-base">Booze</div>
+        <p class="font-mono-c text-xs mt-2 opacity-75">shots for drinkers</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="panel-divider"></div>
+
+
+<!-- ============== SETUP ============== -->
+<section class="max-w-5xl mx-auto px-8 py-16">
+  <div class="flex items-end gap-6 mb-10">
+    <div class="phase-number">03</div>
+    <div>
+      <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// deploy</div>
+      <h2 class="font-display text-5xl leading-none">Setup</h2>
+    </div>
+  </div>
+
+  <ol class="space-y-4">
+    <li class="pop-card p-5 flex gap-5 items-start">
+      <span class="icon-circle flex-shrink-0">1</span>
+      <div>
+        <div class="font-display text-lg">Draw deck</div>
+        <p class="body-text mt-1">Shuffle all 96 numbered cards into one deck. Place face down in the middle of the table.</p>
+      </div>
+    </li>
+    <li class="pop-card p-5 flex gap-5 items-start">
+      <span class="icon-circle flex-shrink-0">2</span>
+      <div>
+        <div class="font-display text-lg">Tactic deck</div>
+        <p class="body-text mt-1">Shuffle the tactic cards into a second deck. <strong>Before the game, remove cards by rank</strong> based on how many players you have (see deck composition below).</p>
+      </div>
+    </li>
+    <li class="pop-card p-5 flex gap-5 items-start">
+      <span class="icon-circle flex-shrink-0">3</span>
+      <div>
+        <div class="font-display text-lg">Deal</div>
+        <p class="body-text mt-1">Each player gets <strong>6 cards in hand</strong> (visible to you, hidden from others) and <strong>6 cards in reserve</strong> (face down in front of you, hidden from everyone — including you).</p>
+      </div>
+    </li>
+    <li class="pop-card p-5 flex gap-5 items-start">
+      <span class="icon-circle flex-shrink-0">4</span>
+      <div>
+        <div class="font-display text-lg">The die</div>
+        <p class="body-text mt-1">Place the d12 next to the decks.</p>
+      </div>
+    </li>
+  </ol>
+
+  <div class="mt-8 stripes-warning p-1">
+    <div class="bg-black p-5" style="color: var(--cream);">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="font-display text-2xl" style="color: var(--amber);"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px;display:inline-block"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg> HARD CAP</span>
+      </div>
+      <p class="font-stamp text-base">No player can ever hold more than <strong style="color: var(--amber); font-family: 'Bungee', cursive;">12 cards</strong> total (hand + reserve combined).</p>
+    </div>
+  </div>
+
+  <div class="mt-10">
+    <div class="ribbon mb-5">Who goes first</div>
+    <div class="pop-card-dark p-6">
+      <ol class="space-y-3 font-stamp text-lg">
+        <li class="flex gap-3"><span class="font-display" style="color: var(--amber);">1.</span> Highest rank in Counter-Strike, Call of Duty or Battlefield</li>
+        <li class="flex gap-3"><span class="font-display" style="color: var(--amber);">2.</span> Anyone who served in the military</li>
+        <li class="flex gap-3"><span class="font-display" style="color: var(--amber);">3.</span> Youngest player at the table</li>
+        <li class="flex gap-3"><span class="font-display" style="color: var(--amber);">4.</span> Random — roll the die, highest goes first</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+
+<div class="panel-divider"></div>
+
+
+<!-- ============== ROUND STRUCTURE ============== -->
+<section class="max-w-5xl mx-auto px-8 py-16">
+  <div class="flex items-end gap-6 mb-10">
+    <div class="phase-number">04</div>
+    <div>
+      <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// engagement</div>
+      <h2 class="font-display text-5xl leading-none">Round structure</h2>
+    </div>
+  </div>
+
+  <p class="body-text text-lg mb-10 max-w-3xl">
+    Each round has <strong>5 phases</strong>. Players participate in turn or simultaneously, depending on the phase.
+  </p>
+
+  <div class="space-y-6">
+    <!-- Phase 1 -->
+    <div class="pop-card p-6">
+      <div class="flex items-start gap-5">
+        <div class="font-display-shade text-7xl leading-none" style="color: var(--rust-bright);">1</div>
+        <div class="flex-1">
+          <h3 class="font-display text-2xl">Tactic draw</h3>
+          <p class="body-text mt-2">Going clockwise from the first player, each player draws <strong>1 tactic card</strong>.</p>
+          <div class="mt-4 stripes-warning p-1">
+            <div class="bg-black p-3 text-sm font-stamp" style="color: var(--cream);">
+              <strong style="color: var(--amber);">Trap exception:</strong> if you draw a Trap, it triggers instantly — show it to everyone, send it to the discard pile, and draw 1 numbered card into your hand. Trap never enters your hand.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="pop-card p-6">
+      <div class="flex items-start gap-5">
+        <div class="font-display-shade text-7xl leading-none" style="color: var(--rust-bright);">2</div>
+        <div class="flex-1">
+          <h3 class="font-display text-2xl">Pre-round · forced plays</h3>
+          <p class="body-text mt-2">Players holding <strong>Around the World</strong> or <strong>Mine</strong> must play them now. These cards are mandatory — if not played, they burn at the end of the round with no effect.</p>
+          <p class="body-text mt-2 font-stamp italic">Conflict rule: whoever calls it out loud first goes first.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="pop-card p-6">
+      <div class="flex items-start gap-5">
+        <div class="font-display-shade text-7xl leading-none" style="color: var(--rust-bright);">3</div>
+        <div class="flex-1">
+          <h3 class="font-display text-2xl">Attack declarations</h3>
+          <p class="body-text mt-2">Players may declare attack tactics on others:</p>
+          <ul class="mt-3 grid md:grid-cols-3 gap-3">
+            <li class="bg-black px-3 py-2 font-mono-c text-xs" style="color: var(--cream);"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;display:inline-block"><path d="m9 18 6-6-6-6"/></svg> Timeout</li>
+            <li class="bg-black px-3 py-2 font-mono-c text-xs" style="color: var(--cream);"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;display:inline-block"><path d="m9 18 6-6-6-6"/></svg> Left/Right Hook</li>
+            <li class="bg-black px-3 py-2 font-mono-c text-xs" style="color: var(--cream);"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;display:inline-block"><path d="m9 18 6-6-6-6"/></svg> Deserter / Scouting</li>
+          </ul>
+          <div class="mt-4 stripes-warning p-1">
+            <div class="bg-black p-3 text-sm font-stamp" style="color: var(--cream);">
+              <strong style="color: var(--amber);">Deadline:</strong> declarations must happen <strong>before the first die roll of the round</strong>. After that, the card stays in your hand and burns at round's end.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 4 -->
+    <div class="pop-card-olive p-6">
+      <div class="flex items-start gap-5">
+        <div class="font-display-shade text-7xl leading-none" style="color: var(--amber);">4</div>
+        <div class="flex-1">
+          <h3 class="font-display text-2xl">Turns · roll &amp; discard</h3>
+          <p class="font-stamp text-base mt-2 opacity-90">Going clockwise, each player takes their turn:</p>
+          <ol class="mt-4 space-y-2 font-stamp">
+            <li><span class="font-display" style="color: var(--amber);">a.</span> Roll the die (1–12)</li>
+            <li><span class="font-display" style="color: var(--amber);">b.</span> Optionally play ±1 / ±2 / ±3 (only on your own roll)</li>
+            <li><span class="font-display" style="color: var(--amber);">c.</span> Discard cards summing to your rolled value</li>
+            <li><span class="font-display" style="color: var(--amber);">d.</span> Optionally play reactive tactics (Ballast, Deserter, Scouting, Duel, Gamble, Roulette, Headshot, Ratatat)</li>
+            <li><span class="font-display" style="color: var(--amber);">e.</span> Refill from reserve up to 6 cards in hand</li>
+          </ol>
+          <p class="font-stamp text-sm mt-4 opacity-80"><strong>Discard:</strong> one card matching the rolled value, OR a combo of numbered cards that sum to it (3+4=7, 2+2+3=7).</p>
+          <p class="font-stamp text-sm mt-2 opacity-80"><strong>Can't play?</strong> Skip your turn. You still refill from reserve as usual.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 5 -->
+    <div class="pop-card-rust p-6">
+      <div class="flex items-start gap-5">
+        <div class="font-display-shade text-7xl leading-none" style="color: var(--cream);">5</div>
+        <div class="flex-1">
+          <h3 class="font-display text-2xl">End of round</h3>
+          <p class="font-stamp text-base mt-2">All <strong>unplayed tactic cards</strong> in players' hands burn — sent to the discard pile. Round over, next one begins.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="panel-divider"></div>
+
+
+<!-- ============== SNIPER'S NEST ============== -->
+<section class="max-w-5xl mx-auto px-8 py-16">
+  <div class="flex items-end gap-6 mb-10">
+    <div class="phase-number">05</div>
+    <div>
+      <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// reward</div>
+      <h2 class="font-display text-5xl leading-none">Sniper's Nest</h2>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-8 items-start">
+    <div class="md:col-span-2">
+      <p class="body-text text-lg">
+        When a player draws the <strong>last</strong> card from their reserve, they earn a <strong>Sniper's Nest token</strong> — a one-shot ability.
+      </p>
+
+      <div class="mt-6 pop-card p-6 relative">
+        <div class="absolute -top-3 -right-3 stamp">CLASSIFIED</div>
+        <div class="font-display text-2xl mb-3" style="color: var(--rust-bright);">Effect</div>
+        <p class="body-text">
+          Once per game, you may <strong>change your die roll to any value from 1 to 12</strong>. Declared after rolling. Once used, return the token to the box.
+        </p>
+        <div class="mt-4 panel-divider" style="height: 4px;"></div>
+        <div class="mt-4 font-stamp text-sm">
+          <div class="font-display text-base mt-2 mb-1" style="color: var(--olive-dark);">When to use it</div>
+          <ul class="space-y-1 list-disc list-inside opacity-80">
+            <li>Save yourself on a brutal Gamble roll</li>
+            <li>Force the die to match a card combo you have</li>
+            <li>Pull the trigger on victory in the endgame</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="pop-card-dark p-6">
+      <div class="font-stamp text-xs uppercase tracking-widest opacity-70">Note</div>
+      <p class="font-stamp text-base mt-3 leading-relaxed">
+        The token <strong style="color: var(--amber);">does not depend</strong> on your reserve. If your reserve refills via Gamble, you keep the token — until you use it.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============== VICTORY ============== -->
+<section class="max-w-5xl mx-auto px-8 py-16">
+  <div class="flex items-end gap-6 mb-10">
+    <div class="phase-number">06</div>
+    <div>
+      <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// victory</div>
+      <h2 class="font-display text-5xl leading-none">Victory</h2>
+    </div>
+  </div>
+
+  <div class="pop-card-rust p-10 text-center relative overflow-hidden">
+    <div class="halftone-bg absolute inset-0 opacity-20"></div>
+    <div class="relative">
+      <div class="burst text-2xl mb-6">VICTORY</div>
+      <p class="font-display text-3xl leading-tight max-w-2xl mx-auto">
+        First player with <span style="color: var(--amber);">zero</span> cards in hand <strong>AND</strong> <span style="color: var(--amber);">zero</span> in reserve — wins instantly.
+      </p>
+      <p class="font-stamp text-base mt-6 opacity-90">The game ends right there, even mid-round.</p>
+    </div>
+  </div>
+
+  <div class="mt-8 pop-card p-5 flex items-start gap-4">
+    <span class="icon-circle flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px;display:inline-block"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></span>
+    <div>
+      <div class="font-display text-lg">Draw deck ran out?</div>
+      <p class="body-text text-sm mt-1">Shuffle the discard pile and use it as the new draw deck. Rare in big games — they usually end before the deck runs dry.</p>
+    </div>
+  </div>
+</section>
+
+
+<div class="panel-divider"></div>
+
+
+<!-- ============== CARD REFERENCE ============== -->
+<section class="max-w-5xl mx-auto px-8 py-16 page-break">
+  <div class="flex items-end gap-6 mb-10">
+    <div class="phase-number">07</div>
+    <div>
+      <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// arsenal</div>
+      <h2 class="font-display text-5xl leading-none">Card reference</h2>
+    </div>
+  </div>
+
+  <!-- BUFF -->
+  <div class="mb-10">
+    <div class="flex items-center gap-3 mb-5">
+      <span class="effect-badge e-positive"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg> Buff</span>
+      <div class="flex-1 h-px bg-black"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">BALLAST</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Discard one card from your hand. No effect, no penalty. Just shedding dead weight.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SELF-HARM -->
+  <div class="mb-10">
+    <div class="flex items-center gap-3 mb-5">
+      <span class="effect-badge e-selfharm"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M8 20v2h8v-2"/><path d="M12.5 17l-.5-1-.5 1h1z"/><path d="M16 20a2 2 0 0 0 1.56-3.25 8 8 0 1 0-11.12 0A2 2 0 0 0 8 20"/></svg> Self-harm</span>
+      <div class="flex-1 h-px bg-black"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">TRAP</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Triggers instantly when drawn from the tactic deck. Doesn't enter your hand. You draw 1 numbered card into your hand instead.</p>
+      </div>
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">MINE</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Mime an explosion (any pantomime, 5–10 seconds) and skip 1 turn.</p>
+        <div class="mt-3 stripes-warning p-1">
+          <div class="bg-black p-2 text-xs font-stamp" style="color: var(--cream);">
+            <strong style="color: var(--amber);">Refused?</strong> Reveal every card currently in your hand, leaving them face-up in front of you. They stay open until played, or until the game ends. Cards drawn after this stay hidden as normal.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEUTRAL -->
+  <div class="mb-10">
+    <div class="flex items-center gap-3 mb-5">
+      <span class="effect-badge e-neutral"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg> Neutral</span>
+      <div class="flex-1 h-px bg-black"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">±1 / ±2 / ±3</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Add or subtract from <strong>your own</strong> roll. Yours only — can't touch others' rolls. Played after the die hits the table.</p>
+      </div>
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">AROUND THE WORLD</div>
+          <span class="rank-stars text-xl">★ ★</span>
+        </div>
+        <p class="body-text text-sm">Every player passes <strong>2 cards</strong> from their hand to the player on their left. If someone has only 1, they pass 1. If 0, they pass nothing. Receivers take whatever they're given.</p>
+      </div>
+      <div class="card-def md:col-span-2">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">GAMBLE</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Every player at the table is <strong>required</strong> to draw 3 cards. Each player can individually refuse and gamble instead:</p>
+        <div class="mt-3 grid md:grid-cols-2 gap-3">
+          <div class="bg-black p-3 font-stamp text-sm" style="color: var(--cream);">
+            <span style="color: var(--amber);">Roll &lt; 6</span> → draw 1 card
+          </div>
+          <div class="bg-black p-3 font-stamp text-sm" style="color: var(--cream);">
+            <span style="color: var(--amber);">Roll ≥ 6</span> → draw 5 cards
+          </div>
+        </div>
+        <p class="body-text text-sm mt-3 opacity-75 italic">Cards exceeding the hand limit go into reserve (if your shot glass was upside down, flip it back). The player who played Gamble is also affected.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ATTACK -->
+  <div class="mb-10">
+    <div class="flex items-center gap-3 mb-5">
+      <span class="effect-badge e-attack"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg> Attack</span>
+      <div class="flex-1 h-px bg-black"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">TIMEOUT</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Pick a player — they skip their next turn.</p>
+        <p class="body-text text-sm mt-2"><strong>To dodge:</strong> the target hands you one card from their hand (your choice).</p>
+        <p class="font-stamp text-xs mt-3 opacity-75">Declared before the first die roll of the round.</p>
+      </div>
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">LEFT HOOK</div>
+          <span class="rank-stars text-xl">★ ★</span>
+        </div>
+        <p class="body-text text-sm">Player on your left skips their next turn.</p>
+        <p class="font-stamp text-xs mt-2 italic opacity-75">Optional in person: gentle shoulder tap.</p>
+        <p class="font-stamp text-xs mt-2 opacity-75">Declared before the first die roll of the round.</p>
+      </div>
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">RIGHT HOOK</div>
+          <span class="rank-stars text-xl">★ ★</span>
+        </div>
+        <p class="body-text text-sm">Player on your right skips their next turn.</p>
+        <p class="font-stamp text-xs mt-2 italic opacity-75">Optional in person: gentle shoulder tap.</p>
+        <p class="font-stamp text-xs mt-2 opacity-75">Declared before the first die roll of the round.</p>
+      </div>
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">DESERTER</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Without looking, swap one of your cards with one of an opponent's cards.</p>
+      </div>
+      <div class="card-def md:col-span-2">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">SCOUTING</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Look at an opponent's hand. Take any one card from it; give them any one of yours in exchange.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOZE -->
+  <div>
+    <div class="flex items-center gap-3 mb-5">
+      <span class="effect-badge e-alcohol"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M15.2 22H8.8a2 2 0 0 1-2-1.79L5 3h14l-1.81 17.21A2 2 0 0 1 15.2 22Z"/><path d="M6 12a5 5 0 0 1 6 0 5 5 0 0 0 6 0"/></svg> Booze</span>
+      <div class="flex-1 h-px bg-black"></div>
+    </div>
+    <p class="font-stamp text-sm mb-4 italic opacity-75">If nobody at the table drinks — remove all booze cards before the game.</p>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">HEADSHOT</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Take one shot.</p>
+      </div>
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">RATATAT</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Take three shots in a row.</p>
+        <p class="body-text text-sm mt-2"><strong>Made it</strong> → discard 1 card. <strong>Tapped out</strong> → draw 1 card.</p>
+      </div>
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">DUEL</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Pick an opponent. Both of you roll the die. Lower roll takes a shot.</p>
+      </div>
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">ROULETTE</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Roll the die.</p>
+        <ul class="mt-2 space-y-1 font-stamp text-sm">
+          <li>• <strong>6 or 8:</strong> take a shot AND discard 1 card</li>
+          <li>• <strong>anything else:</strong> pass this card to the player on your left</li>
+        </ul>
+        <div class="mt-3 stripes-warning p-1">
+          <div class="bg-black p-2 text-xs font-stamp" style="color: var(--cream);">
+            <strong style="color: var(--amber);">Perk:</strong> while Roulette is in your hand, one other tactic of your choice does not burn at the end of the round.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="panel-divider"></div>
+
+
+<!-- ============== DECK COMPOSITION ============== -->
+<section class="max-w-5xl mx-auto px-8 py-16 page-break">
+  <div class="flex items-end gap-6 mb-10">
+    <div class="phase-number">08</div>
+    <div>
+      <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// inventory</div>
+      <h2 class="font-display text-5xl leading-none">Deck composition</h2>
+    </div>
+  </div>
+
+  <p class="body-text text-lg mb-6 max-w-3xl">
+    Full deck — <strong>64 tactic cards</strong>. Trim by rank to match your party size.
+  </p>
+
+  <table class="mil-table">
+    <thead>
+      <tr>
+        <th class="text-left">Card</th>
+        <th>★</th>
+        <th>★ ★</th>
+        <th>★ ★ ★</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Ballast</td><td class="text-center">4</td><td class="text-center">2</td><td class="text-center">2</td><td class="text-center">8</td></tr>
+      <tr><td>Trap</td><td class="text-center">4</td><td class="text-center">2</td><td class="text-center">2</td><td class="text-center">8</td></tr>
+      <tr><td>±1</td><td class="text-center">3</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">5</td></tr>
+      <tr><td>±2</td><td class="text-center">3</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">5</td></tr>
+      <tr><td>±3</td><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">4</td></tr>
+      <tr><td>Timeout</td><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">4</td></tr>
+      <tr><td>Around the World</td><td class="text-center">0</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">2</td></tr>
+      <tr><td>Deserter</td><td class="text-center">3</td><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">6</td></tr>
+      <tr><td>Scouting</td><td class="text-center">3</td><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">6</td></tr>
+      <tr><td>Left Hook</td><td class="text-center">0</td><td class="text-center">1</td><td class="text-center">0</td><td class="text-center">1</td></tr>
+      <tr><td>Right Hook</td><td class="text-center">0</td><td class="text-center">1</td><td class="text-center">0</td><td class="text-center">1</td></tr>
+      <tr><td>Mine</td><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">4</td></tr>
+      <tr><td>Headshot</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">0</td><td class="text-center">2</td></tr>
+      <tr><td>Ratatat</td><td class="text-center">1</td><td class="text-center">0</td><td class="text-center">1</td><td class="text-center">2</td></tr>
+      <tr><td>Duel</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">0</td><td class="text-center">2</td></tr>
+      <tr><td>Gamble</td><td class="text-center">1</td><td class="text-center">0</td><td class="text-center">1</td><td class="text-center">2</td></tr>
+      <tr><td>Roulette</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">0</td><td class="text-center">2</td></tr>
+      <tr class="total-row">
+        <td>Total</td>
+        <td class="text-center">31</td>
+        <td class="text-center">19</td>
+        <td class="text-center">14</td>
+        <td class="text-center">64</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="mt-8 grid md:grid-cols-3 gap-4">
+    <div class="pop-card p-5 text-center">
+      <div class="font-stamp text-sm uppercase opacity-70">2–3 players</div>
+      <div class="font-display text-4xl mt-2" style="color: var(--rust-bright);">31</div>
+      <div class="font-stamp text-xs mt-1 opacity-70">★ only</div>
+    </div>
+    <div class="pop-card p-5 text-center">
+      <div class="font-stamp text-sm uppercase opacity-70">4–6 players</div>
+      <div class="font-display text-4xl mt-2" style="color: var(--rust-bright);">50</div>
+      <div class="font-stamp text-xs mt-1 opacity-70">★ + ★★</div>
+    </div>
+    <div class="pop-card p-5 text-center">
+      <div class="font-stamp text-sm uppercase opacity-70">7–8 players</div>
+      <div class="font-display text-4xl mt-2" style="color: var(--rust-bright);">64</div>
+      <div class="font-stamp text-xs mt-1 opacity-70">all ranks</div>
+    </div>
+  </div>
+</section>
+
+
+<div class="panel-divider"></div>
+
+
+<!-- ============== FAQ ============== -->
+<section class="max-w-5xl mx-auto px-8 py-16">
+  <div class="flex items-end gap-6 mb-10">
+    <div class="phase-number">09</div>
+    <div>
+      <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// intel</div>
+      <h2 class="font-display text-5xl leading-none">Edge cases</h2>
+    </div>
+  </div>
+
+  <div class="space-y-4">
+    <details class="pop-card p-5 cursor-pointer" open>
+      <summary class="font-display text-lg cursor-pointer">What if I can't play any cards on my rolled value?</summary>
+      <p class="body-text mt-3">You skip your turn. You still refill from reserve up to 6 cards in hand.</p>
+    </details>
+    <details class="pop-card p-5 cursor-pointer">
+      <summary class="font-display text-lg cursor-pointer">My reserve was empty and Gamble shoved cards onto me — now what?</summary>
+      <p class="body-text mt-3">Cards exceeding the hand limit go back into your reserve. If your shot glass was flipped upside down (atmosphere prop), flip it back. Your Sniper's Nest token stays — it's one-shot, doesn't depend on reserve state.</p>
+    </details>
+    <details class="pop-card p-5 cursor-pointer">
+      <summary class="font-display text-lg cursor-pointer">Two players declared Timeout at the same time — who wins?</summary>
+      <p class="body-text mt-3">Whoever called it out loud first goes first. If it's a true tie, roll the die to decide. This is a <strong>feature</strong>, not a bug — the game is chaotic, reaction speed is part of the skill.</p>
+    </details>
+    <details class="pop-card p-5 cursor-pointer">
+      <summary class="font-display text-lg cursor-pointer">Multiple Around the World in the same round?</summary>
+      <p class="body-text mt-3">They resolve in sequence. Each = pass 2 cards to the left. Whoever called it first plays first.</p>
+    </details>
+    <details class="pop-card p-5 cursor-pointer">
+      <summary class="font-display text-lg cursor-pointer">I drew Mine — am I forced to play it this round?</summary>
+      <p class="body-text mt-3">Yes, in the Pre-round phase of the current round. Mine is mandatory. If you don't play it, it burns at round's end with no effect — but you also lose the social moment, and everyone knows you chickened out.</p>
+    </details>
+    <details class="pop-card p-5 cursor-pointer">
+      <summary class="font-display text-lg cursor-pointer">Can I play tactics on someone else's turn?</summary>
+      <p class="body-text mt-3">Only reactive tactics during your own turn (e.g., ±1/±2/±3 on your own roll, Roulette on your phase). Attacks (Timeout, Hook) — only in Phase 3, before the first roll. Pre-round (Mine, Around the World) — only in Phase 2.</p>
+    </details>
+  </div>
+</section>
+
+
+<!-- ============== FOOTER ============== -->
+<footer class="mt-20" style="background: var(--olive-deep); color: var(--cream);">
+  <div class="halftone-bg absolute inset-0 opacity-20"></div>
+  <div class="relative max-w-5xl mx-auto px-8 py-14">
+    <div class="flex flex-wrap items-center justify-between gap-6">
+      <div>
+        <div class="font-display-shade text-4xl">SHOTWAVE</div>
+        <div class="font-stamp text-sm mt-2 opacity-70">// Drunken Arsenal · Field Manual v0.1 · 2026</div>
+      </div>
+      <div class="text-right">
+        <div class="stamp">PLAYTEST</div>
+        <div class="font-stamp text-xs mt-3 opacity-70">Print · Cut · Play · Repeat</div>
+      </div>
+    </div>
+
+    <div class="mt-10 pt-8 border-t border-amber-700/40 font-stamp text-xs opacity-60 leading-relaxed">
+      Drink responsibly. ShotWave is a fictional novelty card game. The grenade is a friend. The mine is a metaphor.
+      Replace shots with water if any player isn't drinking. Have fun, don't drive.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

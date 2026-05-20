@@ -4,7 +4,7 @@ A military-themed tactical drinking game e-commerce platform built with Next.js 
 
 ## Features
 
-- **Product Catalog**: Browse Shot Wave games, artillery shells, tactical mines, and bundles
+- **Product Catalog**: Browse Shotwave games, artillery shells, tactical mines, and bundles
 - **Shopping Cart**: Session-based cart with quantity management
 - **Stripe Checkout**: Embedded checkout flow with order tracking
 - **Authentication**: Secure user accounts with password hashing

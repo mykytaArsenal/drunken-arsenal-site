@@ -20,7 +20,7 @@ export interface IProduct {
 const MOCK_PRODUCTS: IProduct[] = [
   {
     id: 'shot-wave-game', // Updated to match database ID
-    name: 'Shot Wave',
+    name: 'Shotwave',
     slug: 'shot-wave-game',
     description:
       'The ultimate tactical drinking game. Deploy your shots, dodge incoming fire, and outmaneuver your opponents in this military-inspired party game.',
@@ -65,7 +65,7 @@ const MOCK_PRODUCTS: IProduct[] = [
     name: 'Full Arsenal Bundle',
     slug: 'full-arsenal-bundle',
     description:
-      'Go all in. Shot Wave game + 12 Artillery Shells + 4 Tactical Mines. Complete tactical superiority. Save 20%.',
+      'Go all in. Shotwave game + 12 Artillery Shells + 4 Tactical Mines. Complete tactical superiority. Save 20%.',
     price: 7999,
     category: 'bundle',
     stock: 50,
@@ -93,7 +93,7 @@ const MOCK_PRODUCTS: IProduct[] = [
     name: 'Basic Deployment Bundle',
     slug: 'basic-deployment-bundle',
     description:
-      'Everything you need for your first mission: Shot Wave game + 6 Artillery Shells. Save 15% compared to buying separately.',
+      'Everything you need for your first mission: Shotwave game + 6 Artillery Shells. Save 15% compared to buying separately.',
     price: 5999,
     category: 'bundle',
     stock: 75,

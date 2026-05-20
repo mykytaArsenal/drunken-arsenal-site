@@ -34,7 +34,7 @@ export function LanguageSwitcher() {
       onValueChange={(value) => changeLocale(value as ILocale)}
     >
       <SelectTrigger
-        className="h-9 max-w-32 gap-2 border-2 border-cream/30 bg-transparent text-cream font-stamp text-xs uppercase tracking-wider data-[placeholder]:text-cream/60 media-hover:hover:border-amber"
+        className="h-9 max-w-36 gap-2 border-2 border-cream/30 bg-transparent text-cream font-stamp text-xs uppercase tracking-wider data-[placeholder]:text-cream/60 media-hover:hover:border-amber"
         aria-label="Select language"
       >
         <SelectValue />

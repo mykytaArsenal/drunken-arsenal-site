@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHOTWAVE — Правила игры</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Oswald:wght@400;500;600;700&family=PT+Mono&family=Cuprum:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;700&subset=cyrillic,cyrillic-ext,latin&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --olive: #4a5239;
+    --olive-dark: #353c28;
+    --olive-deep: #1f2516;
+    --olive-light: #6b7449;
+    --rust: #8a3a2a;
+    --rust-bright: #c9472f;
+    --amber: #e8a93a;
+    --amber-deep: #c08020;
+    --cream: #ede4cf;
+    --cream-warm: #d8cca8;
+    --black: #131210;
+    --paper: #f0e6cd;
+  }
+
+  body {
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(74, 82, 57, 0.10) 0, transparent 35%),
+      radial-gradient(circle at 88% 78%, rgba(138, 58, 42, 0.08) 0, transparent 40%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='4'><circle cx='1' cy='1' r='0.4' fill='%234a5239' opacity='0.15'/></svg>");
+    color: var(--black);
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .font-display { font-family: 'Russo One', sans-serif; letter-spacing: 0.02em; text-transform: uppercase; }
+  .font-display-shade {
+    font-family: 'Russo One', sans-serif;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-shadow:
+      3px 3px 0 var(--rust-bright),
+      6px 6px 0 var(--black);
+  }
+  .font-display-inline { font-family: 'Russo One', sans-serif; letter-spacing: 0.02em; text-transform: uppercase; }
+  .font-stamp { font-family: 'PT Mono', monospace; }
+  .font-mono-c { font-family: 'IBM Plex Mono', monospace; }
+  .font-body { font-family: 'Oswald', sans-serif; }
+
+  /* COMIC BURST — звёздочный взрыв (как на картах) */
+  .burst {
+    position: relative;
+    display: inline-block;
+    background: var(--amber);
+    color: var(--black);
+    padding: 0.4em 0.9em;
+    font-family: 'Russo One', sans-serif;
+    text-transform: uppercase;
+    border: 3px solid var(--black);
+    box-shadow: 4px 4px 0 var(--black);
+  }
+  .burst::before {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    background: var(--amber);
+    z-index: -1;
+    clip-path: polygon(
+      0% 30%, 12% 24%, 18% 0%, 28% 22%, 42% 8%, 50% 28%,
+      62% 12%, 70% 30%, 86% 22%, 88% 38%, 100% 42%, 88% 56%,
+      100% 70%, 84% 72%, 82% 88%, 70% 78%, 62% 96%, 52% 80%,
+      40% 96%, 32% 78%, 18% 92%, 16% 74%, 0% 70%, 14% 56%
+    );
+  }
+
+  /* Halftone (комиксовая полутоновая текстура) */
+  .halftone-bg {
+    background-image:
+      radial-gradient(circle, var(--olive-deep) 1.2px, transparent 1.2px);
+    background-size: 8px 8px;
+    background-position: 0 0;
+  }
+
+  /* Diagonal warning stripes — для важных штук */
+  .stripes-warning {
+    background: repeating-linear-gradient(
+      45deg,
+      var(--amber) 0,
+      var(--amber) 14px,
+      var(--black) 14px,
+      var(--black) 28px
+    );
+  }
+
+  /* Stamp / печать */
+  .stamp {
+    display: inline-block;
+    border: 4px double var(--rust-bright);
+    color: var(--rust-bright);
+    padding: 0.4rem 1.4rem;
+    font-family: 'PT Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    transform: rotate(-6deg);
+    opacity: 0.92;
+  }
+
+  /* Карточка с тенью */
+  .pop-card {
+    background: var(--cream);
+    border: 3px solid var(--black);
+    box-shadow: 6px 6px 0 var(--black);
+    position: relative;
+  }
+  .pop-card-olive {
+    background: var(--olive);
+    color: var(--cream);
+    border: 3px solid var(--black);
+    box-shadow: 6px 6px 0 var(--black);
+  }
+  .pop-card-rust {
+    background: var(--rust);
+    color: var(--cream);
+    border: 3px solid var(--black);
+    box-shadow: 6px 6px 0 var(--black);
+  }
+  .pop-card-dark {
+    background: var(--olive-deep);
+    color: var(--cream);
+    border: 3px solid var(--black);
+    box-shadow: 6px 6px 0 var(--black);
+  }
+
+  /* Бейдж эффекта */
+  .effect-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.7rem;
+    font-family: 'Russo One', sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    border: 2px solid var(--black);
+    box-shadow: 2px 2px 0 var(--black);
+    letter-spacing: 0.05em;
+  }
+  .e-positive { background: #6f8a4a; color: var(--cream); }
+  .e-selfharm { background: var(--rust-bright); color: var(--cream); }
+  .e-attack   { background: var(--rust); color: var(--cream); }
+  .e-neutral  { background: var(--cream-warm); color: var(--black); }
+  .e-alcohol  { background: var(--amber); color: var(--black); }
+
+  /* Звёздочка-звание */
+  .rank-stars {
+    display: inline-flex;
+    gap: 2px;
+    align-items: center;
+    color: var(--amber);
+    font-size: 0.95rem;
+    line-height: 1;
+  }
+
+  /* Section header — гигантский плакатный заголовок с цифрой */
+  .section-header {
+    position: relative;
+    overflow: visible;
+  }
+  .phase-number {
+    font-family: 'Russo One', sans-serif;
+    font-size: 9rem;
+    color: var(--olive);
+    line-height: 0.85;
+    opacity: 0.85;
+  }
+
+  /* Декоративные звезды */
+  .deco-star {
+    color: var(--rust-bright);
+    font-family: 'Russo One', sans-serif;
+  }
+
+  /* Скос угла как у штампов */
+  .skew-tag {
+    transform: skew(-6deg);
+    display: inline-block;
+  }
+  .skew-tag-content { transform: skew(6deg); display: inline-block; }
+
+  /* Comic panel divider */
+  .panel-divider {
+    height: 14px;
+    background: var(--black);
+    position: relative;
+  }
+  .panel-divider::before, .panel-divider::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 18px;
+    background: var(--rust-bright);
+  }
+  .panel-divider::before { left: 0; }
+  .panel-divider::after { right: 0; }
+
+  /* Action ribbon */
+  .ribbon {
+    position: relative;
+    display: inline-block;
+    background: var(--rust-bright);
+    color: var(--cream);
+    padding: 0.4rem 1.5rem;
+    font-family: 'Russo One', sans-serif;
+    text-transform: uppercase;
+    box-shadow: 4px 4px 0 var(--black);
+  }
+
+  /* Table styling */
+  .mil-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    border: 3px solid var(--black);
+    background: var(--cream);
+  }
+  .mil-table th {
+    background: var(--olive-deep);
+    color: var(--cream);
+    font-family: 'Russo One', sans-serif;
+    font-size: 0.75rem;
+    padding: 0.7rem 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-right: 2px solid var(--olive-light);
+  }
+  .mil-table th:last-child { border-right: none; }
+  .mil-table td {
+    padding: 0.55rem 0.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.83rem;
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+    border-right: 1px solid rgba(0,0,0,0.08);
+  }
+  .mil-table td:last-child { border-right: none; }
+  .mil-table tr:nth-child(even) td { background: rgba(74, 82, 57, 0.06); }
+  .mil-table tr:last-child td { border-bottom: none; }
+  .mil-table .total-row td {
+    background: var(--olive) !important;
+    color: var(--cream);
+    font-family: 'Russo One', sans-serif;
+    font-size: 0.85rem;
+  }
+
+  /* Card definition box */
+  .card-def {
+    border: 3px solid var(--black);
+    background: var(--cream);
+    padding: 1rem;
+    position: relative;
+    box-shadow: 4px 4px 0 var(--black);
+  }
+  .card-def-title {
+    font-family: 'Russo One', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+    line-height: 1;
+  }
+
+  /* Quote / pullquote */
+  .pull-quote {
+    font-family: 'PT Mono', monospace;
+    border-left: 6px solid var(--rust-bright);
+    padding-left: 1.5rem;
+    color: var(--olive-dark);
+  }
+
+  /* Page break helper для печати */
+  @media print {
+    body { background: white; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+  }
+
+  /* Параграф основной текст */
+  .body-text {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    line-height: 1.55;
+    font-size: 1rem;
+  }
+
+  /* Subtle scanline overlay для самых верхних блоков */
+  .scanlines {
+    position: relative;
+  }
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 3px,
+      rgba(0,0,0,0.04) 3px,
+      rgba(0,0,0,0.04) 4px
+    );
+    pointer-events: none;
+  }
+
+  /* Компас/значки */
+  .icon-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background: var(--black);
+    color: var(--amber);
+    font-family: 'Russo One', sans-serif;
+    font-size: 0.9rem;
+    border: 2px solid var(--amber);
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== HERO / TITLE PAGE ============== -->
+<header class="relative overflow-hidden scanlines" style="background: var(--olive-deep); color: var(--cream);">
+  <div class="halftone-bg absolute inset-0 opacity-25"></div>
+
+  <!-- декоративные звёзды -->
+  <div class="absolute top-6 left-10 deco-star text-5xl rotate-12 opacity-70">★</div>
+  <div class="absolute top-12 right-16 deco-star text-7xl -rotate-12 opacity-50">★</div>
+  <div class="absolute bottom-10 left-1/4 deco-star text-4xl rotate-45 opacity-40">★</div>
+
+  <div class="relative max-w-5xl mx-auto px-8 py-20">
+    <div class="mb-6">
+      <span class="font-stamp text-sm tracking-widest" style="color: var(--amber);">// FIELD MANUAL · CLASSIFIED · NO. 001</span>
+    </div>
+
+    <h1 class="font-display-shade leading-none" style="font-size: clamp(4rem, 12vw, 11rem); color: var(--cream);">
+      SHOTWAVE
+    </h1>
+
+    <div class="mt-4 flex flex-wrap items-center gap-4">
+      <span class="ribbon text-xl">Explosive Fun!</span>
+      <span class="font-stamp text-lg" style="color: var(--amber);">// Drunken Arsenal · 2026</span>
+    </div>
+
+    <p class="mt-10 max-w-2xl text-xl font-stamp leading-relaxed" style="color: var(--cream-warm);">
+      Бросай кубик. Скидывай карты. Подкладывай свинью соперникам — и не дай конвоям с подкреплением тебя догнать.
+    </p>
+
+    <!-- TL;DR строка -->
+    <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div class="pop-card-olive p-4">
+        <div class="font-stamp text-xs uppercase opacity-70">Игроков</div>
+        <div class="font-display text-3xl mt-1">2–8</div>
+      </div>
+      <div class="pop-card-olive p-4">
+        <div class="font-stamp text-xs uppercase opacity-70">Время</div>
+        <div class="font-display text-3xl mt-1">15–30'</div>
+      </div>
+      <div class="pop-card-olive p-4">
+        <div class="font-stamp text-xs uppercase opacity-70">Возраст</div>
+        <div class="font-display text-3xl mt-1">18+</div>
+      </div>
+      <div class="pop-card-olive p-4">
+        <div class="font-stamp text-xs uppercase opacity-70">Сложность</div>
+        <div class="font-display text-3xl mt-1">★★☆</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-divider"></div>
+</header>
+
+
+<!-- ============== СОСТАВ ============== -->
+<section class="max-w-5xl mx-auto px-8 py-16">
+  <div class="flex items-end gap-6 mb-10">
+    <div class="phase-number">01</div>
+    <div>
+      <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// briefing</div>
+      <h2 class="font-display text-5xl leading-none">Снаряжение</h2>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-5">
+    <div class="pop-card p-6">
+      <div class="font-display text-3xl" style="color: var(--rust-bright);">96</div>
+      <div class="font-stamp text-xs uppercase mt-2 opacity-60">Карт в патронташе</div>
+      <h3 class="font-display text-xl mt-3">Числовые</h3>
+      <p class="body-text mt-2">Значения 1–12, по 8 копий каждой. Это твой основной боезапас — ими ты сбрасываешь рюк­зак.</p>
+    </div>
+
+    <div class="pop-card p-6">
+      <div class="font-display text-3xl" style="color: var(--rust-bright);">64</div>
+      <div class="font-stamp text-xs uppercase mt-2 opacity-60">Тактических</div>
+      <h3 class="font-display text-xl mt-3">Тактики</h3>
+      <p class="body-text mt-2">События, атаки, манёвры. Каждая помечена званием (★) и иконкой эффекта.</p>
+    </div>
+
+    <div class="pop-card p-6">
+      <div class="font-display text-3xl" style="color: var(--rust-bright);">d12</div>
+      <div class="font-stamp text-xs uppercase mt-2 opacity-60">Решает судьбу</div>
+      <h3 class="font-display text-xl mt-3">Кубик</h3>
+      <p class="body-text mt-2">Числа от 1 до 12. Бросаешь в начале своего хода — определяет, на сколько ты избавишься от карт.</p>
+    </div>
+  </div>
+
+  <div class="mt-6 stripes-warning p-1">
+    <div class="bg-black p-4 flex items-center gap-4 flex-wrap" style="color: var(--cream);">
+      <span class="font-display text-xl" style="color: var(--amber);">Опционально:</span>
+      <span class="font-stamp">рюмки и подставки — нужны только для алкогольных карт. Без алкоголя? Просто убери жёлтые карты из колоды.</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============== МАРКИРОВКА ============== -->
+<section class="max-w-5xl mx-auto px-8 py-16">
+  <div class="flex items-end gap-6 mb-10">
+    <div class="phase-number">02</div>
+    <div>
+      <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// recon</div>
+      <h2 class="font-display text-5xl leading-none">Маркировка карт</h2>
+    </div>
+  </div>
+
+  <p class="body-text text-lg mb-8 max-w-3xl">
+    На каждой тактической карте — две метки: <strong>звание</strong> (минимум игроков для использования) и <strong>иконка эффекта</strong> (что карта делает).
+  </p>
+
+  <!-- ЗВАНИЯ -->
+  <div class="mb-12">
+    <div class="ribbon mb-5">Звание · минимум игроков</div>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="pop-card p-5">
+        <div class="rank-stars text-3xl mb-2">★</div>
+        <div class="font-display text-xl">Рядовой</div>
+        <div class="font-stamp text-sm opacity-70 mt-1">2–8 игроков</div>
+        <p class="body-text text-sm mt-3">Базовая колода. Эти карты остаются в любой партии.</p>
+      </div>
+      <div class="pop-card p-5">
+        <div class="rank-stars text-3xl mb-2">★ ★</div>
+        <div class="font-display text-xl">Сержант</div>
+        <div class="font-stamp text-sm opacity-70 mt-1">от 4 игроков</div>
+        <p class="body-text text-sm mt-3">Добавляются в среднюю и большую партию.</p>
+      </div>
+      <div class="pop-card p-5">
+        <div class="rank-stars text-3xl mb-2">★ ★ ★</div>
+        <div class="font-display text-xl">Капитан</div>
+        <div class="font-stamp text-sm opacity-70 mt-1">от 7 игроков</div>
+        <p class="body-text text-sm mt-3">Полный комплект. Только большая партия.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ЭФФЕКТЫ -->
+  <div>
+    <div class="ribbon mb-5">Тип эффекта · иконка</div>
+
+    <div class="grid md:grid-cols-5 gap-4">
+      <div class="pop-card p-4 text-center">
+        <div class="effect-badge e-positive mx-auto mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg> +</div>
+        <div class="font-display text-base">Положит.</div>
+        <p class="font-mono-c text-xs mt-2 opacity-75">помогает себе</p>
+      </div>
+      <div class="pop-card p-4 text-center">
+        <div class="effect-badge e-selfharm mx-auto mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M8 20v2h8v-2"/><path d="M12.5 17l-.5-1-.5 1h1z"/><path d="M16 20a2 2 0 0 0 1.56-3.25 8 8 0 1 0-11.12 0A2 2 0 0 0 8 20"/></svg> self</div>
+        <div class="font-display text-base">Self-harm</div>
+        <p class="font-mono-c text-xs mt-2 opacity-75">бьёт самого играющего</p>
+      </div>
+      <div class="pop-card p-4 text-center">
+        <div class="effect-badge e-attack mx-auto mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg> atk</div>
+        <div class="font-display text-base">Атака</div>
+        <p class="font-mono-c text-xs mt-2 opacity-75">нацелена на цель</p>
+      </div>
+      <div class="pop-card p-4 text-center">
+        <div class="effect-badge e-neutral mx-auto mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg> /</div>
+        <div class="font-display text-base">Нейтрал.</div>
+        <p class="font-mono-c text-xs mt-2 opacity-75">меняет ход для всех</p>
+      </div>
+      <div class="pop-card p-4 text-center">
+        <div class="effect-badge e-alcohol mx-auto mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M15.2 22H8.8a2 2 0 0 1-2-1.79L5 3h14l-1.81 17.21A2 2 0 0 1 15.2 22Z"/><path d="M6 12a5 5 0 0 1 6 0 5 5 0 0 0 6 0"/></svg> ABV</div>
+        <div class="font-display text-base">Алко</div>
+        <p class="font-mono-c text-xs mt-2 opacity-75">шоты для пьющих</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="panel-divider"></div>
+
+
+<!-- ============== ПОДГОТОВКА ============== -->
+<section class="max-w-5xl mx-auto px-8 py-16">
+  <div class="flex items-end gap-6 mb-10">
+    <div class="phase-number">03</div>
+    <div>
+      <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// deploy</div>
+      <h2 class="font-display text-5xl leading-none">Подготовка</h2>
+    </div>
+  </div>
+
+  <ol class="space-y-4">
+    <li class="pop-card p-5 flex gap-5 items-start">
+      <span class="icon-circle flex-shrink-0">1</span>
+      <div>
+        <div class="font-display text-lg">Колода добора</div>
+        <p class="body-text mt-1">Перемешай 96 числовых карт в одну колоду. Положи рубашкой вверх в центр стола.</p>
+      </div>
+    </li>
+    <li class="pop-card p-5 flex gap-5 items-start">
+      <span class="icon-circle flex-shrink-0">2</span>
+      <div>
+        <div class="font-display text-lg">Колода тактик</div>
+        <p class="body-text mt-1">Перемешай тактические карты во вторую колоду. <strong>Перед игрой убери лишние карты по званию</strong> (см. таблицу ниже).</p>
+      </div>
+    </li>
+    <li class="pop-card p-5 flex gap-5 items-start">
+      <span class="icon-circle flex-shrink-0">3</span>
+      <div>
+        <div class="font-display text-lg">Раздача</div>
+        <p class="body-text mt-1">Каждому игроку: <strong>6 карт в руку</strong> (видишь сам, остальные не видят) и <strong>6 карт в резерв</strong> (рубашкой вверх перед собой, никто не видит, включая тебя).</p>
+      </div>
+    </li>
+    <li class="pop-card p-5 flex gap-5 items-start">
+      <span class="icon-circle flex-shrink-0">4</span>
+      <div>
+        <div class="font-display text-lg">Кубик</div>
+        <p class="body-text mt-1">Положи d12 рядом с колодами.</p>
+      </div>
+    </li>
+  </ol>
+
+  <!-- LIMIT WARNING -->
+  <div class="mt-8 stripes-warning p-1">
+    <div class="bg-black p-5" style="color: var(--cream);">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="font-display text-2xl" style="color: var(--amber);"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px;display:inline-block"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg> ЛИМИТ</span>
+      </div>
+      <p class="font-stamp text-base">У игрока никогда не может быть больше <strong style="color: var(--amber); font-family: 'Russo One', sans-serif;">12 карт</strong> суммарно (рука + резерв).</p>
+    </div>
+  </div>
+
+  <!-- КТО ХОДИТ ПЕРВЫМ -->
+  <div class="mt-10">
+    <div class="ribbon mb-5">Кто ходит первым</div>
+    <div class="pop-card-dark p-6">
+      <ol class="space-y-3 font-stamp text-lg">
+        <li class="flex gap-3"><span class="font-display" style="color: var(--amber);">1.</span> У кого выше звание в Counter-Strike, Call of Duty или Battlefield</li>
+        <li class="flex gap-3"><span class="font-display" style="color: var(--amber);">2.</span> Кто служил в армии</li>
+        <li class="flex gap-3"><span class="font-display" style="color: var(--amber);">3.</span> Самый младший за столом</li>
+        <li class="flex gap-3"><span class="font-display" style="color: var(--amber);">4.</span> Случайный — подкинуть кубик, у кого больше</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+
+<div class="panel-divider"></div>
+
+
+<!-- ============== СТРУКТУРА РАУНДА ============== -->
+<section class="max-w-5xl mx-auto px-8 py-16">
+  <div class="flex items-end gap-6 mb-10">
+    <div class="phase-number">04</div>
+    <div>
+      <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// engagement</div>
+      <h2 class="font-display text-5xl leading-none">Структура раунда</h2>
+    </div>
+  </div>
+
+  <p class="body-text text-lg mb-10 max-w-3xl">
+    Каждый раунд состоит из <strong>5 фаз</strong>. Все игроки участвуют в каждой фазе по очереди / одновременно — в зависимости от фазы.
+  </p>
+
+  <div class="space-y-6">
+    <!-- Phase 1 -->
+    <div class="pop-card p-6">
+      <div class="flex items-start gap-5">
+        <div class="font-display-shade text-7xl leading-none" style="color: var(--rust-bright);">1</div>
+        <div class="flex-1">
+          <h3 class="font-display text-2xl">Добор тактики</h3>
+          <p class="body-text mt-2">По часовой стрелке от первого игрока, каждый добирает <strong>1 тактическую карту</strong>.</p>
+          <div class="mt-4 stripes-warning p-1">
+            <div class="bg-black p-3 text-sm font-stamp" style="color: var(--cream);">
+              <strong style="color: var(--amber);">Trap-исключение:</strong> если выпала Trap, она срабатывает мгновенно — показываешь её всем, отправляешь в сброс и добираешь 1 числовую карту в руку. В руку Trap не попадает.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="pop-card p-6">
+      <div class="flex items-start gap-5">
+        <div class="font-display-shade text-7xl leading-none" style="color: var(--rust-bright);">2</div>
+        <div class="flex-1">
+          <h3 class="font-display text-2xl">Pre-round · обязательные</h3>
+          <p class="body-text mt-2">Игроки, у которых на руках <strong>Around the World</strong> или <strong>Mine</strong>, играют их сейчас. Эти карты обязательны к розыгрышу — иначе они сгорят без эффекта в конце раунда.</p>
+          <p class="body-text mt-2 font-stamp italic">Принцип «кто первее объявил вслух — тот играет первым».</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="pop-card p-6">
+      <div class="flex items-start gap-5">
+        <div class="font-display-shade text-7xl leading-none" style="color: var(--rust-bright);">3</div>
+        <div class="flex-1">
+          <h3 class="font-display text-2xl">Объявления атак</h3>
+          <p class="body-text mt-2">Игроки могут объявить атакующие тактики на других:</p>
+          <ul class="mt-3 grid md:grid-cols-3 gap-3">
+            <li class="bg-black px-3 py-2 font-mono-c text-xs" style="color: var(--cream);"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;display:inline-block"><path d="m9 18 6-6-6-6"/></svg> Timeout</li>
+            <li class="bg-black px-3 py-2 font-mono-c text-xs" style="color: var(--cream);"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;display:inline-block"><path d="m9 18 6-6-6-6"/></svg> Left/Right Hook</li>
+            <li class="bg-black px-3 py-2 font-mono-c text-xs" style="color: var(--cream);"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;display:inline-block"><path d="m9 18 6-6-6-6"/></svg> Deserter / Scouting</li>
+          </ul>
+          <div class="mt-4 stripes-warning p-1">
+            <div class="bg-black p-3 text-sm font-stamp" style="color: var(--cream);">
+              <strong style="color: var(--amber);">Дедлайн:</strong> объявить нужно <strong>до того, как первый игрок раунда бросит кубик</strong>. После первого броска — поздно: карта остаётся в руке и сгорит в конце раунда.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 4 -->
+    <div class="pop-card-olive p-6">
+      <div class="flex items-start gap-5">
+        <div class="font-display-shade text-7xl leading-none" style="color: var(--amber);">4</div>
+        <div class="flex-1">
+          <h3 class="font-display text-2xl">Ходы · бросок и сброс</h3>
+          <p class="font-stamp text-base mt-2 opacity-90">Игроки по очереди, по часовой стрелке, делают свой ход:</p>
+          <ol class="mt-4 space-y-2 font-stamp">
+            <li><span class="font-display" style="color: var(--amber);">a.</span> Бросают кубик (1–12)</li>
+            <li><span class="font-display" style="color: var(--amber);">b.</span> Опционально играют ±1 / ±2 / ±3 (только на свой бросок)</li>
+            <li><span class="font-display" style="color: var(--amber);">c.</span> Сбрасывают карты на сумму выпавшего числа</li>
+            <li><span class="font-display" style="color: var(--amber);">d.</span> Опционально играют реактивные тактики (Ballast, Deserter, Scouting, Duel, Gamble, Roulette, Headshot, Ratatat)</li>
+            <li><span class="font-display" style="color: var(--amber);">e.</span> Добирают из резерва до 6 карт в руке</li>
+          </ol>
+          <p class="font-stamp text-sm mt-4 opacity-80"><strong>Сброс:</strong> одна карта с тем же номиналом, ИЛИ комбинация числовых, чьи значения дают в сумме выпавшее число (3+4=7, 2+2+3=7).</p>
+          <p class="font-stamp text-sm mt-2 opacity-80"><strong>Не можешь сыграть?</strong> Пропускаешь ход. Добор из резерва после пропуска работает как обычно.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 5 -->
+    <div class="pop-card-rust p-6">
+      <div class="flex items-start gap-5">
+        <div class="font-display-shade text-7xl leading-none" style="color: var(--cream);">5</div>
+        <div class="flex-1">
+          <h3 class="font-display text-2xl">Конец раунда</h3>
+          <p class="font-stamp text-base mt-2">Все <strong>несыгранные тактические карты</strong> в руках игроков сгорают — отправляются в сброс. Раунд закончен, начинается новый.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="panel-divider"></div>
+
+
+<!-- ============== СНАЙПЕРСКАЯ ПОЗИЦИЯ ============== -->
+<section class="max-w-5xl mx-auto px-8 py-16">
+  <div class="flex items-end gap-6 mb-10">
+    <div class="phase-number">05</div>
+    <div>
+      <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// reward</div>
+      <h2 class="font-display text-5xl leading-none">Снайперская позиция</h2>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-8 items-start">
+    <div class="md:col-span-2">
+      <p class="body-text text-lg">
+        Когда игрок берёт <strong>последнюю</strong> карту из своего резерва, он получает <strong>жетон Снайперской позиции</strong> — одноразовую способность.
+      </p>
+
+      <div class="mt-6 pop-card p-6 relative">
+        <div class="absolute -top-3 -right-3 stamp">CLASSIFIED</div>
+        <div class="font-display text-2xl mb-3" style="color: var(--rust-bright);">Эффект</div>
+        <p class="body-text">
+          Один раз за партию ты можешь <strong>изменить свой бросок кубика на любое число от 1 до 12</strong>. Объявляется после броска. После использования жетон возвращается в коробку.
+        </p>
+        <div class="mt-4 panel-divider" style="height: 4px;"></div>
+        <div class="mt-4 font-stamp text-sm">
+          <div class="font-display text-base mt-2 mb-1" style="color: var(--olive-dark);">Когда применить</div>
+          <ul class="space-y-1 list-disc list-inside opacity-80">
+            <li>Защититься на сложном Gamble</li>
+            <li>Подтасовать кубик под нужную карту в руке</li>
+            <li>В финале «дотянуться» до победы любой комбинацией</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="pop-card-dark p-6">
+      <div class="font-stamp text-xs uppercase tracking-widest opacity-70">Заметка</div>
+      <p class="font-stamp text-base mt-3 leading-relaxed">
+        Жетон <strong style="color: var(--amber);">не зависит</strong> от состояния резерва. Если резерв снова пополнится через Gamble, жетон у тебя остаётся — пока не использован.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============== ПОБЕДА ============== -->
+<section class="max-w-5xl mx-auto px-8 py-16">
+  <div class="flex items-end gap-6 mb-10">
+    <div class="phase-number">06</div>
+    <div>
+      <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// victory</div>
+      <h2 class="font-display text-5xl leading-none">Победа</h2>
+    </div>
+  </div>
+
+  <div class="pop-card-rust p-10 text-center relative overflow-hidden">
+    <div class="halftone-bg absolute inset-0 opacity-20"></div>
+    <div class="relative">
+      <div class="burst text-2xl mb-6">VICTORY</div>
+      <p class="font-display text-3xl leading-tight max-w-2xl mx-auto">
+        Первый игрок, у которого <span style="color: var(--amber);">ноль</span> карт в руке <strong>И</strong> <span style="color: var(--amber);">ноль</span> в резерве — побеждает мгновенно.
+      </p>
+      <p class="font-stamp text-base mt-6 opacity-90">Партия заканчивается, даже если раунд не сыгран до конца.</p>
+    </div>
+  </div>
+
+  <!-- Reshuffle note -->
+  <div class="mt-8 pop-card p-5 flex items-start gap-4">
+    <span class="icon-circle flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px;display:inline-block"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></span>
+    <div>
+      <div class="font-display text-lg">Колода добора закончилась?</div>
+      <p class="body-text text-sm mt-1">Перетасуй сброс и положи как новую колоду добора. Бывает редко — на 7–8 игроков партия часто заканчивается раньше, чем колода истощается.</p>
+    </div>
+  </div>
+</section>
+
+
+<div class="panel-divider"></div>
+
+
+<!-- ============== КАРТЫ — REFERENCE ============== -->
+<section class="max-w-5xl mx-auto px-8 py-16 page-break">
+  <div class="flex items-end gap-6 mb-10">
+    <div class="phase-number">07</div>
+    <div>
+      <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// arsenal</div>
+      <h2 class="font-display text-5xl leading-none">Карты — справочник</h2>
+    </div>
+  </div>
+
+  <!-- ПОЛОЖИТЕЛЬНЫЕ -->
+  <div class="mb-10">
+    <div class="flex items-center gap-3 mb-5">
+      <span class="effect-badge e-positive"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg> Положительные</span>
+      <div class="flex-1 h-px bg-black"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">BALLAST</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Сбрось одну карту из руки. Без эффекта, без штрафа. Просто избавление от ненужного.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SELF-HARM -->
+  <div class="mb-10">
+    <div class="flex items-center gap-3 mb-5">
+      <span class="effect-badge e-selfharm"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M8 20v2h8v-2"/><path d="M12.5 17l-.5-1-.5 1h1z"/><path d="M16 20a2 2 0 0 0 1.56-3.25 8 8 0 1 0-11.12 0A2 2 0 0 0 8 20"/></svg> Self-harm</span>
+      <div class="flex-1 h-px bg-black"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">TRAP</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Срабатывает мгновенно при добирании из колоды тактик. Не попадает в руку. Ты добираешь 1 числовую карту в руку.</p>
+      </div>
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">MINE</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Изобрази взрыв (любая пантомима, 5–10 секунд) и пропусти 1 ход.</p>
+        <div class="mt-3 stripes-warning p-1">
+          <div class="bg-black p-2 text-xs font-stamp" style="color: var(--cream);">
+            <strong style="color: var(--amber);">Зассал?</strong> Открываешь все карты, что сейчас в руке, рубашкой вверх перед собой. Они остаются открытыми до конца партии или пока не сыграешь. Карты, добранные после, скрытые.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- НЕЙТРАЛЬНЫЕ -->
+  <div class="mb-10">
+    <div class="flex items-center gap-3 mb-5">
+      <span class="effect-badge e-neutral"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg> Нейтральные</span>
+      <div class="flex-1 h-px bg-black"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">±1 / ±2 / ±3</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Прибавь или вычти от <strong>своего</strong> броска. Только на свой, не на чужой. Играется после броска кубика.</p>
+      </div>
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">AROUND THE WORLD</div>
+          <span class="rank-stars text-xl">★ ★</span>
+        </div>
+        <p class="body-text text-sm">Каждый игрок передаёт <strong>2 карты</strong> из руки соседу слева. Если осталась одна — отдаёт одну. Если ноль — не отдаёт ничего. Принимающий получает столько, сколько ему передали.</p>
+      </div>
+      <div class="card-def md:col-span-2">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">GAMBLE</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Каждый игрок за столом <strong>обязан</strong> взять 3 карты в руку. Каждый игрок индивидуально может отказаться и сыграть в лотерею:</p>
+        <div class="mt-3 grid md:grid-cols-2 gap-3">
+          <div class="bg-black p-3 font-stamp text-sm" style="color: var(--cream);">
+            <span style="color: var(--amber);">Кубик &lt; 6</span> → берёшь 1 карту
+          </div>
+          <div class="bg-black p-3 font-stamp text-sm" style="color: var(--cream);">
+            <span style="color: var(--amber);">Кубик ≥ 6</span> → берёшь 5 карт
+          </div>
+        </div>
+        <p class="body-text text-sm mt-3 opacity-75 italic">Лишние карты сверх лимита руки уходят в резерв (рюмка переворачивается обратно). Игрок, разыгравший Gamble, тоже подвержен эффекту.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- АТАКИ -->
+  <div class="mb-10">
+    <div class="flex items-center gap-3 mb-5">
+      <span class="effect-badge e-attack"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg> Атаки</span>
+      <div class="flex-1 h-px bg-black"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">TIMEOUT</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Выбери игрока — он пропускает следующий ход.</p>
+        <p class="body-text text-sm mt-2"><strong>Чтобы избежать:</strong> цель отдаёт одну карту из руки тебе на твой выбор.</p>
+        <p class="font-stamp text-xs mt-3 opacity-75">Объявляется до первого броска кубика в раунде.</p>
+      </div>
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">LEFT HOOK</div>
+          <span class="rank-stars text-xl">★ ★</span>
+        </div>
+        <p class="body-text text-sm">Игрок слева пропускает следующий ход.</p>
+        <p class="font-stamp text-xs mt-2 italic opacity-75">Опционально вживую: лёгкое похлопывание по плечу.</p>
+        <p class="font-stamp text-xs mt-2 opacity-75">Объявляется до первого броска кубика в раунде.</p>
+      </div>
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">RIGHT HOOK</div>
+          <span class="rank-stars text-xl">★ ★</span>
+        </div>
+        <p class="body-text text-sm">Игрок справа пропускает следующий ход.</p>
+        <p class="font-stamp text-xs mt-2 italic opacity-75">Опционально вживую: лёгкое похлопывание по плечу.</p>
+        <p class="font-stamp text-xs mt-2 opacity-75">Объявляется до первого броска кубика в раунде.</p>
+      </div>
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">DESERTER</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Не глядя, поменяй одну свою карту с одной картой соперника.</p>
+      </div>
+      <div class="card-def md:col-span-2">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">SCOUTING</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Посмотри руку соперника. Возьми любую одну карту из его руки, отдай взамен любую одну свою.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- АЛКОГОЛЬНЫЕ -->
+  <div>
+    <div class="flex items-center gap-3 mb-5">
+      <span class="effect-badge e-alcohol"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M15.2 22H8.8a2 2 0 0 1-2-1.79L5 3h14l-1.81 17.21A2 2 0 0 1 15.2 22Z"/><path d="M6 12a5 5 0 0 1 6 0 5 5 0 0 0 6 0"/></svg> Алкогольные</span>
+      <div class="flex-1 h-px bg-black"></div>
+    </div>
+    <p class="font-stamp text-sm mb-4 italic opacity-75">Если за столом не пьют — убирайте все алкогольные карты до игры.</p>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">HEADSHOT</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Ты пьёшь один шот.</p>
+      </div>
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">RATATAT</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Ты пьёшь три шота подряд.</p>
+        <p class="body-text text-sm mt-2"><strong>Осилил</strong> → сбрось 1 карту. <strong>Не осилил</strong> → возьми 1 карту.</p>
+      </div>
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">DUEL</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Выбери соперника. Оба бросаете кубик. У кого выпало меньше — пьёт шот.</p>
+      </div>
+      <div class="card-def">
+        <div class="flex items-center justify-between">
+          <div class="card-def-title">ROULETTE</div>
+          <span class="rank-stars text-xl">★</span>
+        </div>
+        <p class="body-text text-sm">Брось кубик.</p>
+        <ul class="mt-2 space-y-1 font-stamp text-sm">
+          <li>• <strong>6 или 8:</strong> пьёшь шот И сбрасываешь 1 карту</li>
+          <li>• <strong>другое:</strong> передай эту карту игроку слева</li>
+        </ul>
+        <div class="mt-3 stripes-warning p-1">
+          <div class="bg-black p-2 text-xs font-stamp" style="color: var(--cream);">
+            <strong style="color: var(--amber);">Особенность:</strong> если у тебя в руке Roulette, одна другая твоя тактика (на твой выбор) не сгорает в конце раунда.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="panel-divider"></div>
+
+
+<!-- ============== СОСТАВ КОЛОДЫ ============== -->
+<section class="max-w-5xl mx-auto px-8 py-16 page-break">
+  <div class="flex items-end gap-6 mb-10">
+    <div class="phase-number">08</div>
+    <div>
+      <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// inventory</div>
+      <h2 class="font-display text-5xl leading-none">Состав колоды</h2>
+    </div>
+  </div>
+
+  <p class="body-text text-lg mb-6 max-w-3xl">
+    Полная колода — <strong>64 тактические карты</strong>. Перед игрой убирай по званию, чтобы попасть в свой размер партии.
+  </p>
+
+  <table class="mil-table">
+    <thead>
+      <tr>
+        <th class="text-left">Карта</th>
+        <th>★</th>
+        <th>★ ★</th>
+        <th>★ ★ ★</th>
+        <th>Всего</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Ballast</td><td class="text-center">4</td><td class="text-center">2</td><td class="text-center">2</td><td class="text-center">8</td></tr>
+      <tr><td>Trap</td><td class="text-center">4</td><td class="text-center">2</td><td class="text-center">2</td><td class="text-center">8</td></tr>
+      <tr><td>±1</td><td class="text-center">3</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">5</td></tr>
+      <tr><td>±2</td><td class="text-center">3</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">5</td></tr>
+      <tr><td>±3</td><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">4</td></tr>
+      <tr><td>Timeout</td><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">4</td></tr>
+      <tr><td>Around the World</td><td class="text-center">0</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">2</td></tr>
+      <tr><td>Deserter</td><td class="text-center">3</td><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">6</td></tr>
+      <tr><td>Scouting</td><td class="text-center">3</td><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">6</td></tr>
+      <tr><td>Left Hook</td><td class="text-center">0</td><td class="text-center">1</td><td class="text-center">0</td><td class="text-center">1</td></tr>
+      <tr><td>Right Hook</td><td class="text-center">0</td><td class="text-center">1</td><td class="text-center">0</td><td class="text-center">1</td></tr>
+      <tr><td>Mine</td><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">4</td></tr>
+      <tr><td>Headshot</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">0</td><td class="text-center">2</td></tr>
+      <tr><td>Ratatat</td><td class="text-center">1</td><td class="text-center">0</td><td class="text-center">1</td><td class="text-center">2</td></tr>
+      <tr><td>Duel</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">0</td><td class="text-center">2</td></tr>
+      <tr><td>Gamble</td><td class="text-center">1</td><td class="text-center">0</td><td class="text-center">1</td><td class="text-center">2</td></tr>
+      <tr><td>Roulette</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">0</td><td class="text-center">2</td></tr>
+      <tr class="total-row">
+        <td>Итого</td>
+        <td class="text-center">31</td>
+        <td class="text-center">19</td>
+        <td class="text-center">14</td>
+        <td class="text-center">64</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Размер колоды -->
+  <div class="mt-8 grid md:grid-cols-3 gap-4">
+    <div class="pop-card p-5 text-center">
+      <div class="font-stamp text-sm uppercase opacity-70">2–3 игрока</div>
+      <div class="font-display text-4xl mt-2" style="color: var(--rust-bright);">31</div>
+      <div class="font-stamp text-xs mt-1 opacity-70">только ★</div>
+    </div>
+    <div class="pop-card p-5 text-center">
+      <div class="font-stamp text-sm uppercase opacity-70">4–6 игроков</div>
+      <div class="font-display text-4xl mt-2" style="color: var(--rust-bright);">50</div>
+      <div class="font-stamp text-xs mt-1 opacity-70">★ + ★★</div>
+    </div>
+    <div class="pop-card p-5 text-center">
+      <div class="font-stamp text-sm uppercase opacity-70">7–8 игроков</div>
+      <div class="font-display text-4xl mt-2" style="color: var(--rust-bright);">64</div>
+      <div class="font-stamp text-xs mt-1 opacity-70">все звания</div>
+    </div>
+  </div>
+</section>
+
+
+<div class="panel-divider"></div>
+
+
+<!-- ============== FAQ ============== -->
+<section class="max-w-5xl mx-auto px-8 py-16">
+  <div class="flex items-end gap-6 mb-10">
+    <div class="phase-number">09</div>
+    <div>
+      <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// intel</div>
+      <h2 class="font-display text-5xl leading-none">Спорные ситуации</h2>
+    </div>
+  </div>
+
+  <div class="space-y-4">
+    <details class="pop-card p-5 cursor-pointer" open>
+      <summary class="font-display text-lg cursor-pointer">Что если не могу сыграть карты на выпавшее число?</summary>
+      <p class="body-text mt-3">Пропускаешь ход. Добор из резерва после твоего пропуска работает как обычно — берёшь карты до 6 в руке.</p>
+    </details>
+    <details class="pop-card p-5 cursor-pointer">
+      <summary class="font-display text-lg cursor-pointer">Резерв пуст, и Gamble добавил мне карты — как быть?</summary>
+      <p class="body-text mt-3">Лишние карты сверх лимита руки идут в резерв. Если в резерве снова появилась карта — рюмка переворачивается обратно вверх дном (если ты ставил её рядом для атмосферы). Жетон Снайперской позиции остаётся у тебя — он одноразовый, не зависит от состояния резерва.</p>
+    </details>
+    <details class="pop-card p-5 cursor-pointer">
+      <summary class="font-display text-lg cursor-pointer">Два игрока одновременно объявили Timeout — кто играет?</summary>
+      <p class="body-text mt-3">Кто первый сказал вслух — тот играет. В сомнительных случаях — кубик решает. Это <strong>фича</strong>, а не баг: игра хаосная, скорость реакции = часть скилла.</p>
+    </details>
+    <details class="pop-card p-5 cursor-pointer">
+      <summary class="font-display text-lg cursor-pointer">Несколько Around the World в одном раунде?</summary>
+      <p class="body-text mt-3">Играются последовательно. Каждая = передача 2 карт налево. Кто первее объявил — играет первым.</p>
+    </details>
+    <details class="pop-card p-5 cursor-pointer">
+      <summary class="font-display text-lg cursor-pointer">Я добрал Mine — обязан играть в этом же раунде?</summary>
+      <p class="body-text mt-3">Да, в Pre-round фазе текущего раунда. Mine — обязательная к розыгрышу карта. Если не сыграл — она сгорит в конце раунда без эффекта (но это редко имеет смысл, так как соперники узнают, что ты «зассал» взрыв).</p>
+    </details>
+    <details class="pop-card p-5 cursor-pointer">
+      <summary class="font-display text-lg cursor-pointer">Можно играть тактику в чужой ход?</summary>
+      <p class="body-text mt-3">Только реактивные тактики (например, ±1/±2/±3 на свой бросок, или Roulette в свою фазу). Атаки (Timeout, Hook) — только в Фазу 3, до первого броска. Pre-round (Mine, Around the World) — только в Фазу 2.</p>
+    </details>
+  </div>
+</section>
+
+
+<!-- ============== FOOTER ============== -->
+<footer class="mt-20" style="background: var(--olive-deep); color: var(--cream);">
+  <div class="halftone-bg absolute inset-0 opacity-20"></div>
+  <div class="relative max-w-5xl mx-auto px-8 py-14">
+    <div class="flex flex-wrap items-center justify-between gap-6">
+      <div>
+        <div class="font-display-shade text-4xl">SHOTWAVE</div>
+        <div class="font-stamp text-sm mt-2 opacity-70">// Drunken Arsenal · Field Manual v0.1 · 2026</div>
+      </div>
+      <div class="text-right">
+        <div class="stamp">PLAYTEST</div>
+        <div class="font-stamp text-xs mt-3 opacity-70">Print · Cut · Play · Repeat</div>
+      </div>
+    </div>
+
+    <div class="mt-10 pt-8 border-t border-amber-700/40 font-stamp text-xs opacity-60 leading-relaxed">
+      Drink responsibly. ShotWave is a fictional novelty card game. The grenade is a friend. The mine is a metaphor.
+      Replace shots with water if any player isn't drinking. Have fun, don't drive.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
