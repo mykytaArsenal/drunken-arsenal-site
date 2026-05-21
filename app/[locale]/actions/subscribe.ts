@@ -66,19 +66,20 @@ export async function subscribe(
   const token = signUnsubscribeToken(email);
   const unsubscribeUrl = `${appUrl}/unsubscribe?token=${encodeURIComponent(token)}`;
   const oneClickUrl = `${appUrl}/api/unsubscribe?token=${encodeURIComponent(token)}`;
+  const recipeManualUrl = `${appUrl}/recipes/ShotWave_Recipe_Manual_EN.pdf`;
   const mailtoUnsubscribe = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(
     'Unsubscribe'
   )}`;
 
-  const { subject, html, text } = buildWelcomeEmail({ unsubscribeUrl });
+  const welcome = buildWelcomeEmail({ unsubscribeUrl, recipeManualUrl });
 
   try {
     const { data, error: sendError } = await resend.emails.send({
       from: EMAIL_FROM,
       to: email,
-      subject,
-      html,
-      text,
+      subject: welcome.subject,
+      html: welcome.html,
+      text: welcome.text,
       headers: {
         'List-Unsubscribe': `<${mailtoUnsubscribe}>, <${oneClickUrl}>`,
         'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',

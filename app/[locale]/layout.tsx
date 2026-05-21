@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
+import Script from 'next/script';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { isLocale, routing } from '@/i18n/routing';
@@ -80,6 +81,11 @@ export default async function LocaleLayout({
           <Footer />
           <Toaster />
         </NextIntlClientProvider>
+        <Script
+          id="iubenda-embed-loader"
+          src="https://cdn.iubenda.com/iubenda.js"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );

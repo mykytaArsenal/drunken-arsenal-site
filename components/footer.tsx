@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
+import { IubendaPolicyLink } from '@/components/iubenda-policy-link';
 
 export async function Footer() {
   const t = await getTranslations();
@@ -101,12 +102,22 @@ export async function Footer() {
             </h4>
             <ul className="space-y-2 font-stamp text-sm">
               <li>
-                <Link
-                  href="/privacy"
+                <IubendaPolicyLink
+                  href="https://www.iubenda.com/privacy-policy/20021284"
+                  title={t('footer.privacy')}
                   className="text-cream-warm hover:text-amber transition-colors"
                 >
                   · {t('footer.privacy')}
-                </Link>
+                </IubendaPolicyLink>
+              </li>
+              <li>
+                <IubendaPolicyLink
+                  href="https://www.iubenda.com/privacy-policy/20021284/cookie-policy"
+                  title={t('footer.cookies')}
+                  className="text-cream-warm hover:text-amber transition-colors"
+                >
+                  · {t('footer.cookies')}
+                </IubendaPolicyLink>
               </li>
               <li>
                 <Link

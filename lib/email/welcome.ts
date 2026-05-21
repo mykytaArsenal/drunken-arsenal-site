@@ -8,10 +8,12 @@ interface IWelcomeEmail {
 
 interface IBuildWelcomeEmailInput {
   unsubscribeUrl: string;
+  recipeManualUrl: string;
 }
 
 export function buildWelcomeEmail({
   unsubscribeUrl,
+  recipeManualUrl,
 }: IBuildWelcomeEmailInput): IWelcomeEmail {
   const subject = `You're on the list, commander. — ${BRAND}`;
 
@@ -24,6 +26,8 @@ export function buildWelcomeEmail({
     `  - Early-bird discount: 10% off your first order`,
     `  - Recipe Manual PDF — tactical drink recipes for your squad`,
     `  - First-wave access before the public launch`,
+    ``,
+    `Download the Recipe Manual: ${recipeManualUrl}`,
     ``,
     `Stay tactical. Stand by for orders.`,
     ``,
@@ -45,7 +49,7 @@ export function buildWelcomeEmail({
 </head>
 <body style="margin:0;padding:0;background-color:#1f2516;font-family:Arial,Helvetica,sans-serif;color:#131210;">
   <span style="display:none!important;visibility:hidden;opacity:0;color:transparent;height:0;width:0;overflow:hidden;">
-    Early-bird 10% off + Recipe Manual PDF — locked in.
+    Early-bird 10% off + Recipe Manual PDF inside — locked in.
   </span>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#1f2516;">
     <tr>
@@ -110,6 +114,22 @@ export function buildWelcomeEmail({
                   </td>
                 </tr>
               </table>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" style="padding:20px 28px 8px 28px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="background-color:#c9472f;border:3px solid #131210;box-shadow:4px 4px 0 #131210;">
+                    <a href="${escapeHtml(recipeManualUrl)}" style="display:inline-block;padding:14px 28px;font-family:Impact,'Arial Black',sans-serif;font-size:16px;letter-spacing:0.08em;color:#ede4cf;text-decoration:none;text-transform:uppercase;">
+                      Download Recipe Manual →
+                    </a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin:10px 0 0 0;font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.1em;color:#131210;opacity:0.7;text-transform:uppercase;">
+                PDF · ~1.4&nbsp;MB
+              </p>
             </td>
           </tr>
           <tr>
