@@ -1,15 +1,15 @@
 import { BRAND, PRODUCT_NAME, SUPPORT_EMAIL } from '@/lib/i18n/brand';
 
-interface IWelcomeEmail {
+type IWelcomeEmail = {
   subject: string;
   html: string;
   text: string;
-}
+};
 
-interface IBuildWelcomeEmailInput {
+type IBuildWelcomeEmailInput = {
   unsubscribeUrl: string;
   recipeManualUrl: string;
-}
+};
 
 export function buildWelcomeEmail({
   unsubscribeUrl,

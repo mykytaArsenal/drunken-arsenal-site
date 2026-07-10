@@ -91,7 +91,12 @@
     "step2": "Your tactical kit will be prepared and packaged",
     "step3": "We'll send you tracking information once shipped",
     "step4": "Estimated delivery: 3–5 business days",
-    "questions": "Questions about your order? Contact us at {supportEmail}"
+    "questions": "Questions about your order? Contact us at {supportEmail}",
+    "invalidLink": "Invalid order confirmation link",
+    "loadFailed": "Failed to load order details",
+    "statusCleared": "Status: Cleared",
+    "continueShopping": "Continue Shopping",
+    "learnHowToPlay": "Learn How to Play"
   },
   "auth": {
     "welcomeBack": "Welcome Back",
@@ -120,7 +125,9 @@
     "ordersDesc": "View your order history",
     "ordersInfo": "Track your tactical kit deliveries and view past orders.",
     "viewOrders": "View Orders (Coming Soon)",
-    "notSet": "Not set"
+    "notSet": "Not set",
+    "nameLabel": "Name",
+    "emailLabel": "Email"
   },
   "howToPlay": {
     "title": "How to Play {productName}",
@@ -193,5 +200,26 @@
     "terms": "Terms of Service",
     "returns": "Returns & Refunds",
     "rights": "All rights reserved."
+  },
+  "unsubscribe": {
+    "tagDone": "// stand-down confirmed",
+    "tagInvalid": "// invalid link",
+    "tagError": "// transmission failed",
+    "tagConfirm": "// stand down confirmation",
+    "doneTitle": "You're stood down.",
+    "doneWithEmail": "<hl>{email}</hl> has been removed from the {brand} roster. You won't receive further emails from us.",
+    "doneNoEmail": "You've been removed from the {brand} roster. You won't receive further emails from us.",
+    "doneChangedMind": "Changed your mind? You can sign up again on the homepage anytime.",
+    "invalidTitle": "Link looks off.",
+    "invalidDesc": "This unsubscribe link is missing, malformed, or expired. Open the most recent email from {brand} and click the link in the footer.",
+    "invalidStuck": "Still stuck? Reply to any email from us with the word <cmd>UNSUBSCRIBE</cmd> and we'll handle it manually.",
+    "errorTitle": "Couldn't process that.",
+    "errorDesc": "Something went sideways on our end. Try again in a moment — your link is still valid.",
+    "tryAgain": "Try again",
+    "confirmTitle": "Stand down?",
+    "confirmDesc": "You're about to unsubscribe <hl>{email}</hl> from all {brand} emails.",
+    "confirmWarning": "Heads up: you'll lose access to your early-bird discount and pre-launch perks. You can re-enlist anytime on the homepage.",
+    "confirmCta": "Confirm unsubscribe",
+    "backToHome": "Back to homepage"
   }
 }

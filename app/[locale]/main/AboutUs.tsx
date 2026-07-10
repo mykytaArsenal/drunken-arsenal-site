@@ -1,12 +1,10 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { Button } from '@/components/ui/button';
 import { BRAND } from '@/lib/i18n/brand';
 import { NotifyMeDialog } from '@/components/NotifyMeDialog';
 
-export const AboutUs = () => {
-  const t = useTranslations();
+export const AboutUs = async () => {
+  const t = await getTranslations();
 
   return (
     <section

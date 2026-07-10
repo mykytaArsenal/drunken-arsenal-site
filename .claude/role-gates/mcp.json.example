@@ -1,0 +1,40 @@
+{
+  "mcpServers": {
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": { "Authorization": "Bearer ${GITHUB_TOKEN}" }
+    },
+    "atlassian": {
+      "type": "http",
+      "url": "https://mcp.atlassian.com/v1/mcp"
+    },
+    "figma": {
+      "command": "npx",
+      "args": ["-y", "figma-developer-mcp", "--stdio"],
+      "env": { "FIGMA_API_KEY": "${FIGMA_API_KEY}" }
+    },
+    "db-prelive": {
+      "command": "npx",
+      "args": ["-y", "@bytebase/dbhub", "--dsn", "${DB_PRELIVE_DSN}"]
+    },
+    "db-staging": {
+      "command": "npx",
+      "args": ["-y", "@bytebase/dbhub", "--dsn", "${DB_STAGING_DSN}"]
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["chrome-devtools-mcp@latest", "--isolated"]
+    },
+    "context7": { "type": "http", "url": "https://mcp.context7.com/mcp" },
+    "reelly-knowledge": {
+      "type": "http",
+      "url": "https://reelly-brain-mcp.up.railway.app/mcp/",
+      "headers": { "Authorization": "Bearer ${REELLY_KNOWLEDGE_TOKEN}" }
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest", "--caps=devtools", "--output-dir=${HOME}/playwright-out"]
+    }
+  }
+}

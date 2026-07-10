@@ -1,8 +1,9 @@
 import { getCurrentUser, signOutAction } from '@/app/[locale]/actions/auth';
 import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { UserIcon, PackageIcon, LogOutIcon } from '@/components/icons';
+import { UserIcon, PackageIcon, LogOutIcon } from '@/components/Icons';
 import { getTranslations } from 'next-intl/server';
+import { SectionHeader } from '@/components/SectionHeader';
 
 export const metadata = {
   title: 'My Account',
@@ -16,22 +17,22 @@ export default async function AccountPage() {
     redirect('/sign-in');
   }
 
-  const t = await getTranslations('account');
-  const tAuth = await getTranslations('auth');
+  const [t, tAuth] = await Promise.all([
+    getTranslations('account'),
+    getTranslations('auth'),
+  ]);
 
   return (
     <div className="min-h-screen py-12 md:py-16 bg-paper">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="flex items-end gap-6 mb-10">
-            <div className="phase-number">HQ</div>
-            <div>
-              <div className="tag-line">// commander profile</div>
-              <h1 className="font-display text-3xl md:text-4xl text-ink leading-none">
-                {t('title')}
-              </h1>
-            </div>
-          </div>
+          <SectionHeader
+            as="h1"
+            phase="HQ"
+            tag="// commander profile"
+            title={t('title')}
+            className="mb-10"
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="pop-card p-6 space-y-5">
@@ -52,7 +53,7 @@ export default async function AccountPage() {
               <div className="space-y-3 font-mono-c text-sm">
                 <div>
                   <p className="font-stamp text-xs text-ink/60 uppercase tracking-[0.15em]">
-                    Name
+                    {t('nameLabel')}
                   </p>
                   <p className="font-display text-base text-ink">
                     {user.name || t('notSet')}
@@ -60,7 +61,7 @@ export default async function AccountPage() {
                 </div>
                 <div>
                   <p className="font-stamp text-xs text-ink/60 uppercase tracking-[0.15em]">
-                    Email
+                    {t('emailLabel')}
                   </p>
                   <p className="font-display text-base text-ink break-all">
                     {user.email}

@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import { pbkdf2Sync, randomBytes } from 'node:crypto';
 import { sql } from '@/lib/db';
 import { cookies } from 'next/headers';
+import { generateId } from '@/lib/id';
 
 function hashPassword(password: string): string {
   const salt = randomBytes(16).toString('hex');
@@ -19,14 +20,25 @@ function verifyPassword(password: string, hashedPassword: string): boolean {
   return hash === verifyHash;
 }
 
-function generateId(): string {
-  return randomBytes(16).toString('hex');
-}
-
 const SESSION_COOKIE_NAME = 'auth_session';
 const SESSION_DURATION = 60 * 60 * 24 * 7; // 7 days
 
 type IAuthActionState = { error: string } | undefined;
+
+/** Creates a session and writes the auth cookies for the given user. */
+async function createSession(userId: string): Promise<void> {
+  const sessionId = generateId();
+  const cookieStore = await cookies();
+  const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: SESSION_DURATION,
+  } as const;
+
+  cookieStore.set(SESSION_COOKIE_NAME, sessionId, cookieOptions);
+  cookieStore.set(`session_${sessionId}`, userId, cookieOptions);
+}
 
 function getErrorMessage(error: unknown): string | undefined {
   if (error instanceof Error) return error.message;
@@ -70,23 +82,7 @@ export async function signUpAction(
       VALUES (${userId}, ${email}, ${name || null}, ${hashedPassword}, NOW(), NOW())
     `;
 
-    // Create session
-    const sessionId = generateId();
-    const cookieStore = await cookies();
-
-    cookieStore.set(SESSION_COOKIE_NAME, sessionId, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: SESSION_DURATION,
-    });
-
-    cookieStore.set(`session_${sessionId}`, userId, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: SESSION_DURATION,
-    });
+    await createSession(userId);
 
     redirect('/account');
   } catch (error: unknown) {
@@ -138,23 +134,7 @@ export async function signInAction(
       return { error: 'Invalid email or password' };
     }
 
-    // Create session
-    const sessionId = generateId();
-    const cookieStore = await cookies();
-
-    cookieStore.set(SESSION_COOKIE_NAME, sessionId, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: SESSION_DURATION,
-    });
-
-    cookieStore.set(`session_${sessionId}`, user.id, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: SESSION_DURATION,
-    });
+    await createSession(user.id);
 
     redirect('/account');
   } catch (error: unknown) {

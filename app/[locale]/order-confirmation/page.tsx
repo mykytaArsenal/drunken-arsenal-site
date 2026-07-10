@@ -1,6 +1,6 @@
 import { stripe } from '@/lib/stripe';
 import { Button } from '@/components/ui/button';
-import { CheckCircleIcon, PackageIcon } from '@/components/icons';
+import { CheckCircleIcon, PackageIcon } from '@/components/Icons';
 import { Link } from '@/i18n/navigation';
 import { formatPrice } from '@/lib/products';
 import { getTranslations } from 'next-intl/server';
@@ -21,17 +21,7 @@ export default async function OrderConfirmationPage({
   const t = await getTranslations('order');
 
   if (!sessionId) {
-    return (
-      <div className="min-h-screen py-16 bg-paper">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto pop-card p-8 text-center">
-            <p className="font-display text-rust-bright">
-              Invalid order confirmation link
-            </p>
-          </div>
-        </div>
-      </div>
-    );
+    return <ErrorCard message={t('invalidLink')} />;
   }
 
   let session;
@@ -39,18 +29,15 @@ export default async function OrderConfirmationPage({
     session = await stripe.checkout.sessions.retrieve(sessionId);
   } catch (error) {
     console.error('[v0] Error retrieving session:', error);
-    return (
-      <div className="min-h-screen py-16 bg-paper">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto pop-card p-8 text-center">
-            <p className="font-display text-rust-bright">
-              Failed to load order details
-            </p>
-          </div>
-        </div>
-      </div>
-    );
+    return <ErrorCard message={t('loadFailed')} />;
   }
+
+  const nextSteps = [
+    t('step1', { email: session.customer_details?.email ?? '' }),
+    t('step2'),
+    t('step3'),
+    t('step4'),
+  ];
 
   return (
     <div className="min-h-screen py-12 md:py-16 bg-paper">
@@ -60,7 +47,9 @@ export default async function OrderConfirmationPage({
             <div className="inline-flex items-center justify-center w-20 h-20 bg-allowed border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)]">
               <CheckCircleIcon className="h-10 w-10 text-cream" />
             </div>
-            <span className="block stamp text-sm mx-auto">Status: Cleared</span>
+            <span className="block stamp text-sm mx-auto">
+              {t('statusCleared')}
+            </span>
             <h1 className="font-display text-3xl md:text-5xl text-ink leading-tight">
               {t('missionAccomplished')}
             </h1>
@@ -104,42 +93,42 @@ export default async function OrderConfirmationPage({
                 {t('whatNext')}
               </h3>
               <ul className="space-y-2 font-stamp text-sm text-ink/80">
-                <li className="flex items-start gap-3">
-                  <span className="font-display text-rust-bright">01</span>
-                  <span>
-                    {t('step1', {
-                      email: session.customer_details?.email ?? '',
-                    })}
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="font-display text-rust-bright">02</span>
-                  <span>{t('step2')}</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="font-display text-rust-bright">03</span>
-                  <span>{t('step3')}</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="font-display text-rust-bright">04</span>
-                  <span>{t('step4')}</span>
-                </li>
+                {nextSteps.map((step, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <span className="font-display text-rust-bright">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span>{step}</span>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
             <Button size="lg" variant="primary" asChild className="flex-1">
-              <Link href="/">Continue Shopping</Link>
+              <Link href="/">{t('continueShopping')}</Link>
             </Button>
             <Button size="lg" variant="outline" asChild className="flex-1">
-              <Link href="/how-to-play">Learn How to Play</Link>
+              <Link href="/how-to-play">{t('learnHowToPlay')}</Link>
             </Button>
           </div>
 
           <p className="mt-8 text-center font-stamp text-sm text-ink/60">
             {t('questions', { supportEmail: SUPPORT_EMAIL })}
           </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ErrorCard({ message }: { message: string }) {
+  return (
+    <div className="min-h-screen py-16 bg-paper">
+      <div className="container mx-auto px-4">
+        <div className="max-w-2xl mx-auto pop-card p-8 text-center">
+          <p className="font-display text-rust-bright">{message}</p>
         </div>
       </div>
     </div>

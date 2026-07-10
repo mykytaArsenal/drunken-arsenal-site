@@ -91,7 +91,12 @@
     "step2": "Dein taktisches Kit wird vorbereitet und verpackt",
     "step3": "Nach dem Versand erhältst du die Sendungsverfolgung",
     "step4": "Voraussichtliche Lieferung: 3–5 Werktage",
-    "questions": "Fragen zu deiner Bestellung? Kontaktiere uns unter {supportEmail}"
+    "questions": "Fragen zu deiner Bestellung? Kontaktiere uns unter {supportEmail}",
+    "invalidLink": "Ungültiger Bestellbestätigungs-Link",
+    "loadFailed": "Bestelldetails konnten nicht geladen werden",
+    "statusCleared": "Status: Freigegeben",
+    "continueShopping": "Weiter einkaufen",
+    "learnHowToPlay": "Spielanleitung entdecken"
   },
   "auth": {
     "welcomeBack": "Willkommen zurück",
@@ -120,7 +125,9 @@
     "ordersDesc": "Bestellverlauf anzeigen",
     "ordersInfo": "Verfolge die Lieferungen deines taktischen Kits und sieh frühere Bestellungen ein.",
     "viewOrders": "Bestellungen anzeigen (Demnächst)",
-    "notSet": "Nicht festgelegt"
+    "notSet": "Nicht festgelegt",
+    "nameLabel": "Name",
+    "emailLabel": "E-Mail"
   },
   "howToPlay": {
     "title": "So spielst du {productName}",
@@ -193,5 +200,26 @@
     "terms": "Nutzungsbedingungen",
     "returns": "Rückgabe & Rückerstattung",
     "rights": "Alle Rechte vorbehalten."
+  },
+  "unsubscribe": {
+    "tagDone": "// Rückzug bestätigt",
+    "tagInvalid": "// ungültiger Link",
+    "tagError": "// Übertragung fehlgeschlagen",
+    "tagConfirm": "// Rückzugsbestätigung",
+    "doneTitle": "Du bist abgetreten.",
+    "doneWithEmail": "<hl>{email}</hl> wurde aus dem {brand}-Roster entfernt. Du erhältst keine weiteren E-Mails von uns.",
+    "doneNoEmail": "Du wurdest aus dem {brand}-Roster entfernt. Du erhältst keine weiteren E-Mails von uns.",
+    "doneChangedMind": "Anders überlegt? Du kannst dich jederzeit auf der Startseite erneut eintragen.",
+    "invalidTitle": "Der Link sieht nicht richtig aus.",
+    "invalidDesc": "Dieser Abmelde-Link fehlt, ist fehlerhaft oder abgelaufen. Öffne die neueste E-Mail von {brand} und klicke auf den Link in der Fußzeile.",
+    "invalidStuck": "Immer noch festgefahren? Antworte auf eine beliebige E-Mail von uns mit dem Wort <cmd>UNSUBSCRIBE</cmd> und wir erledigen es manuell.",
+    "errorTitle": "Das konnte nicht verarbeitet werden.",
+    "errorDesc": "Auf unserer Seite ist etwas schiefgelaufen. Versuche es gleich noch einmal — dein Link ist weiterhin gültig.",
+    "tryAgain": "Nochmal versuchen",
+    "confirmTitle": "Rückzug antreten?",
+    "confirmDesc": "Du bist dabei, <hl>{email}</hl> von allen {brand}-E-Mails abzumelden.",
+    "confirmWarning": "Achtung: Du verlierst den Zugang zu deinem Frühbucher-Rabatt und deinen Pre-Launch-Vorteilen. Du kannst dich jederzeit auf der Startseite erneut verpflichten.",
+    "confirmCta": "Abmeldung bestätigen",
+    "backToHome": "Zurück zur Startseite"
   }
 }

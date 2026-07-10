@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
-import { verifyUnsubscribeToken } from '@/lib/email/unsubscribe-token';
+import { verifyUnsubscribeToken } from '@/lib/email/unsubscribeToken';
 import { BRAND } from '@/lib/i18n/brand';
 import { confirmUnsubscribeAction } from './actions';
 
@@ -11,43 +12,37 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-interface IUnsubscribePageProps {
+type IUnsubscribePageProps = {
   searchParams: Promise<{
     token?: string;
     status?: string;
     e?: string;
   }>;
-}
+};
+
+const highlight = (chunks: React.ReactNode) => (
+  <span className="font-display text-rust-bright break-all">{chunks}</span>
+);
 
 export default async function UnsubscribePage({
   searchParams,
 }: IUnsubscribePageProps) {
   const { token, status, e } = await searchParams;
+  const t = await getTranslations('unsubscribe');
 
   if (status === 'done') {
     return (
-      <Shell tag="// stand-down confirmed">
+      <Shell tag={t('tagDone')}>
         <h1 className="font-display text-3xl md:text-5xl text-ink uppercase leading-tight">
-          You're stood&nbsp;down.
+          {t('doneTitle')}
         </h1>
         <p className="font-stamp text-base text-ink/80 leading-relaxed">
-          {e ? (
-            <>
-              <span className="font-display text-rust-bright break-all">
-                {e}
-              </span>{' '}
-              has been removed from the {BRAND} roster. You won't receive
-              further emails from us.
-            </>
-          ) : (
-            <>
-              You've been removed from the {BRAND} roster. You won't receive
-              further emails from us.
-            </>
-          )}
+          {e
+            ? t.rich('doneWithEmail', { email: e, brand: BRAND, hl: highlight })
+            : t('doneNoEmail', { brand: BRAND })}
         </p>
         <p className="font-stamp text-sm text-ink/60 leading-relaxed">
-          Changed your mind? You can sign up again on the homepage anytime.
+          {t('doneChangedMind')}
         </p>
         <HomeLink />
       </Shell>
@@ -55,71 +50,40 @@ export default async function UnsubscribePage({
   }
 
   if (status === 'invalid' || !token) {
-    return (
-      <Shell tag="// invalid link">
-        <h1 className="font-display text-3xl md:text-5xl text-ink uppercase leading-tight">
-          Link looks off.
-        </h1>
-        <p className="font-stamp text-base text-ink/80 leading-relaxed">
-          This unsubscribe link is missing, malformed, or expired. Open the most
-          recent email from {BRAND} and click the link in the footer.
-        </p>
-        <p className="font-stamp text-sm text-ink/60 leading-relaxed">
-          Still stuck? Reply to any email from us with the word{' '}
-          <span className="font-display">UNSUBSCRIBE</span> and we'll handle it
-          manually.
-        </p>
-        <HomeLink />
-      </Shell>
-    );
+    return <InvalidLink showStuckNote />;
   }
 
   if (status === 'error') {
     return (
-      <Shell tag="// transmission failed">
+      <Shell tag={t('tagError')}>
         <h1 className="font-display text-3xl md:text-5xl text-ink uppercase leading-tight">
-          Couldn't process that.
+          {t('errorTitle')}
         </h1>
         <p className="font-stamp text-base text-ink/80 leading-relaxed">
-          Something went sideways on our end. Try again in a moment — your link
-          is still valid.
+          {t('errorDesc')}
         </p>
-        <ConfirmForm token={token} ctaLabel="Try again" />
+        <ConfirmForm token={token} ctaLabel={t('tryAgain')} />
       </Shell>
     );
   }
 
   const email = verifyUnsubscribeToken(token);
   if (!email) {
-    return (
-      <Shell tag="// invalid link">
-        <h1 className="font-display text-3xl md:text-5xl text-ink uppercase leading-tight">
-          Link looks off.
-        </h1>
-        <p className="font-stamp text-base text-ink/80 leading-relaxed">
-          This unsubscribe link is missing, malformed, or expired. Open the most
-          recent email from {BRAND} and click the link in the footer.
-        </p>
-        <HomeLink />
-      </Shell>
-    );
+    return <InvalidLink />;
   }
 
   return (
-    <Shell tag="// stand down confirmation">
+    <Shell tag={t('tagConfirm')}>
       <h1 className="font-display text-3xl md:text-5xl text-ink uppercase leading-tight">
-        Stand down?
+        {t('confirmTitle')}
       </h1>
       <p className="font-stamp text-base text-ink/80 leading-relaxed">
-        You're about to unsubscribe{' '}
-        <span className="font-display text-rust-bright break-all">{email}</span>{' '}
-        from all {BRAND} emails.
+        {t.rich('confirmDesc', { email, brand: BRAND, hl: highlight })}
       </p>
       <p className="font-stamp text-sm text-ink/60 leading-relaxed">
-        Heads up: you'll lose access to your early-bird discount and pre-launch
-        perks. You can re-enlist anytime on the homepage.
+        {t('confirmWarning')}
       </p>
-      <ConfirmForm token={token} ctaLabel="Confirm unsubscribe" />
+      <ConfirmForm token={token} ctaLabel={t('confirmCta')} />
     </Shell>
   );
 }
@@ -150,12 +114,39 @@ function ConfirmForm({ token, ctaLabel }: { token: string; ctaLabel: string }) {
   );
 }
 
-function HomeLink() {
+async function HomeLink() {
+  const t = await getTranslations('unsubscribe');
   return (
     <div className="pt-2">
       <Button asChild variant="outline" size="lg">
-        <Link href="/">Back to homepage</Link>
+        <Link href="/">{t('backToHome')}</Link>
       </Button>
     </div>
+  );
+}
+
+async function InvalidLink({
+  showStuckNote = false,
+}: {
+  showStuckNote?: boolean;
+}) {
+  const t = await getTranslations('unsubscribe');
+  return (
+    <Shell tag={t('tagInvalid')}>
+      <h1 className="font-display text-3xl md:text-5xl text-ink uppercase leading-tight">
+        {t('invalidTitle')}
+      </h1>
+      <p className="font-stamp text-base text-ink/80 leading-relaxed">
+        {t('invalidDesc', { brand: BRAND })}
+      </p>
+      {showStuckNote && (
+        <p className="font-stamp text-sm text-ink/60 leading-relaxed">
+          {t.rich('invalidStuck', {
+            cmd: (chunks) => <span className="font-display">{chunks}</span>,
+          })}
+        </p>
+      )}
+      <HomeLink />
+    </Shell>
   );
 }

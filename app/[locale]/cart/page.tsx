@@ -1,11 +1,16 @@
 import { getCart } from '@/lib/cart';
 import { formatPrice } from '@/lib/products';
-import { CartItemComponent } from '@/components/cart-item';
+import { CartItemComponent } from '@/components/CartItem';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
-import { ArrowLeftIcon, ShoppingBagIcon } from '@/components/icons';
-import { getCurrency } from '@/lib/currency/get-currency';
+import { ArrowLeftIcon, ShoppingBagIcon } from '@/components/Icons';
+import { getCurrency } from '@/lib/currency/getCurrency';
 import { getTranslations } from 'next-intl/server';
+import {
+  FREE_SHIPPING_THRESHOLD_CENTS,
+  calcShippingCents,
+} from '@/lib/shipping';
+import { SectionHeader } from '@/components/SectionHeader';
 
 export const metadata = {
   title: 'Shopping Cart',
@@ -45,22 +50,20 @@ export default async function CartPage() {
   }
 
   const subtotal = cart.total;
-  const shipping = subtotal >= 5000 ? 0 : 500;
+  const shipping = calcShippingCents(subtotal);
   const total = subtotal + shipping;
 
   return (
     <div className="min-h-screen py-10 md:py-12 bg-paper">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-end gap-6 mb-10">
-            <div className="phase-number">CART</div>
-            <div>
-              <div className="tag-line">// supply manifest</div>
-              <h1 className="font-display text-3xl md:text-4xl text-ink leading-none">
-                {t('title')}
-              </h1>
-            </div>
-          </div>
+          <SectionHeader
+            as="h1"
+            phase="CART"
+            tag="// supply manifest"
+            title={t('title')}
+            className="mb-10"
+          />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-5">
@@ -103,10 +106,13 @@ export default async function CartPage() {
                       )}
                     </span>
                   </div>
-                  {subtotal < 5000 && (
+                  {subtotal < FREE_SHIPPING_THRESHOLD_CENTS && (
                     <p className="text-xs text-amber pt-1">
                       {t('addForFreeShipping', {
-                        amount: formatPrice(5000 - subtotal, currency),
+                        amount: formatPrice(
+                          FREE_SHIPPING_THRESHOLD_CENTS - subtotal,
+                          currency
+                        ),
                       })}
                     </p>
                   )}

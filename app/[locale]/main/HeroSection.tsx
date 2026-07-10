@@ -1,12 +1,10 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
 
-export const HeroSection = () => {
-  const t = useTranslations();
+export const HeroSection = async () => {
+  const t = await getTranslations();
 
   return (
     <section className="relative overflow-hidden scanlines bg-olive-deep text-cream">

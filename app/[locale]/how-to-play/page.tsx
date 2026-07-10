@@ -78,46 +78,6 @@ export default async function HowToPlayPage() {
             ))}
           </div>
 
-          {/*<div className="mt-10 md:mt-12 space-y-4">*/}
-          {/*  <div className="text-center space-y-2">*/}
-          {/*    <span className="tag-line">// recipes</span>*/}
-          {/*    <h2 className="font-display text-2xl md:text-3xl text-ink uppercase leading-tight">*/}
-          {/*      Tactical Drink Recipes*/}
-          {/*    </h2>*/}
-          {/*  </div>*/}
-          {/*  <a*/}
-          {/*    href="/recipes/ShotWave_Recipe_Manual_EN.pdf"*/}
-          {/*    target="_blank"*/}
-          {/*    rel="noopener noreferrer"*/}
-          {/*    className="pop-card-dark block p-6 md:p-8 transition-transform media-hover:hover:-translate-y-1 media-hover:hover:-translate-x-1 focus-visible:outline-2 focus-visible:outline-amber focus-visible:outline-offset-2"*/}
-          {/*  >*/}
-          {/*    <div className="flex items-center gap-5">*/}
-          {/*      <div className="flex-1 space-y-2">*/}
-          {/*        <p className="font-stamp text-[0.7rem] tracking-[0.2em] text-amber uppercase">*/}
-          {/*          // EN*/}
-          {/*        </p>*/}
-          {/*        <h3 className="font-display text-xl md:text-2xl text-cream uppercase leading-tight">*/}
-          {/*          Recipe Manual*/}
-          {/*        </h3>*/}
-          {/*        <p className="font-stamp text-sm md:text-base text-cream-warm">*/}
-          {/*          Mission-ready drink recipes for your squad*/}
-          {/*        </p>*/}
-          {/*      </div>*/}
-          {/*      <div className="flex items-center gap-3 border-l-2 border-cream pl-5">*/}
-          {/*        <span className="font-stamp text-sm uppercase tracking-[0.15em] text-cream">*/}
-          {/*          Open*/}
-          {/*        </span>*/}
-          {/*        <span*/}
-          {/*          aria-hidden*/}
-          {/*          className="font-display text-2xl text-amber"*/}
-          {/*        >*/}
-          {/*          →*/}
-          {/*        </span>*/}
-          {/*      </div>*/}
-          {/*    </div>*/}
-          {/*  </a>*/}
-          {/*</div>*/}
-
           <div className="mt-12 text-center">
             <Button size="xl" variant="primary" asChild>
               <Link href="/#products">{t('getArsenal')}</Link>

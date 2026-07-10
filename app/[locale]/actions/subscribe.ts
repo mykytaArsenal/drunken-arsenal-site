@@ -2,7 +2,7 @@
 
 import { z } from 'zod';
 import { EMAIL_FROM, RESEND_AUDIENCE_ID, getResend } from '@/lib/email/resend';
-import { signUnsubscribeToken } from '@/lib/email/unsubscribe-token';
+import { signUnsubscribeToken } from '@/lib/email/unsubscribeToken';
 import { buildWelcomeEmail } from '@/lib/email/welcome';
 import { SUPPORT_EMAIL } from '@/lib/i18n/brand';
 

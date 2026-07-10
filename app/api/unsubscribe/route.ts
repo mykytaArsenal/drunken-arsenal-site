@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import { verifyUnsubscribeToken } from '@/lib/email/unsubscribe-token';
+import { verifyUnsubscribeToken } from '@/lib/email/unsubscribeToken';
 import { markContactUnsubscribed } from '@/lib/email/unsubscribe';
 
 export async function POST(req: NextRequest) {

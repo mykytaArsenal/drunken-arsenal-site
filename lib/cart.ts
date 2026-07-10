@@ -5,7 +5,7 @@ function generateId(): string {
   return Date.now().toString(36) + Math.random().toString(36).substring(2);
 }
 
-export interface ICartItem {
+export type ICartItem = {
   id: string;
   cartId: string;
   productId: string;
@@ -18,14 +18,14 @@ export interface ICartItem {
     images: string[];
     stock: number;
   };
-}
+};
 
-export interface ICart {
+export type ICart = {
   id: string;
   sessionId: string;
   items: ICartItem[];
   total: number;
-}
+};
 
 async function getOrCreateSessionId(): Promise<string> {
   const cookieStore = await cookies();
@@ -81,7 +81,7 @@ export async function getCart(): Promise<ICart | null> {
     WHERE ci."cartId" = ${cart.id}
   `;
 
-  interface ICartItemRow {
+  type ICartItemRow = {
     id: string;
     cartId: string;
     productId: string;
@@ -92,7 +92,7 @@ export async function getCart(): Promise<ICart | null> {
     product_price: number;
     product_images: string[] | null;
     product_stock: number;
-  }
+  };
 
   const cartItems: ICartItem[] = (items as ICartItemRow[]).map((item) => ({
     id: item.id,

@@ -91,7 +91,12 @@
     "step2": "Votre kit tactique sera préparé et emballé",
     "step3": "Nous vous enverrons les informations de suivi dès l'expédition",
     "step4": "Livraison estimée : 3 à 5 jours ouvrables",
-    "questions": "Questions sur votre commande ? Contactez-nous à {supportEmail}"
+    "questions": "Questions sur votre commande ? Contactez-nous à {supportEmail}",
+    "invalidLink": "Lien de confirmation de commande invalide",
+    "loadFailed": "Échec du chargement des détails de la commande",
+    "statusCleared": "Statut : Validé",
+    "continueShopping": "Continuer les Achats",
+    "learnHowToPlay": "Apprendre à Jouer"
   },
   "auth": {
     "welcomeBack": "Bon retour parmi nous",
@@ -120,7 +125,9 @@
     "ordersDesc": "Voir l'historique des commandes",
     "ordersInfo": "Suivez les livraisons de votre kit tactique et consultez vos commandes précédentes.",
     "viewOrders": "Voir les Commandes (Prochainement)",
-    "notSet": "Non défini"
+    "notSet": "Non défini",
+    "nameLabel": "Nom",
+    "emailLabel": "Email"
   },
   "howToPlay": {
     "title": "Comment Jouer à {productName}",
@@ -193,5 +200,26 @@
     "terms": "Conditions d'Utilisation",
     "returns": "Retours et Remboursements",
     "rights": "Tous droits réservés."
+  },
+  "unsubscribe": {
+    "tagDone": "// repli confirmé",
+    "tagInvalid": "// lien invalide",
+    "tagError": "// transmission échouée",
+    "tagConfirm": "// confirmation de repli",
+    "doneTitle": "Vous êtes en repli.",
+    "doneWithEmail": "<hl>{email}</hl> a été retiré du registre {brand}. Vous ne recevrez plus d'emails de notre part.",
+    "doneNoEmail": "Vous avez été retiré du registre {brand}. Vous ne recevrez plus d'emails de notre part.",
+    "doneChangedMind": "Vous avez changé d'avis ? Vous pouvez vous réinscrire sur la page d'accueil à tout moment.",
+    "invalidTitle": "Ce lien semble incorrect.",
+    "invalidDesc": "Ce lien de désinscription est manquant, incorrect ou expiré. Ouvrez le dernier email de {brand} et cliquez sur le lien dans le pied de page.",
+    "invalidStuck": "Toujours bloqué ? Répondez à n'importe quel email de notre part avec le mot <cmd>UNSUBSCRIBE</cmd> et nous nous en occuperons manuellement.",
+    "errorTitle": "Impossible de traiter la demande.",
+    "errorDesc": "Un problème est survenu de notre côté. Réessayez dans un instant — votre lien est toujours valide.",
+    "tryAgain": "Réessayer",
+    "confirmTitle": "En repli ?",
+    "confirmDesc": "Vous êtes sur le point de désinscrire <hl>{email}</hl> de tous les emails {brand}.",
+    "confirmWarning": "Attention : vous perdrez l'accès à votre réduction lève-tôt et à vos avantages pré-lancement. Vous pouvez vous réengager à tout moment sur la page d'accueil.",
+    "confirmCta": "Confirmer la désinscription",
+    "backToHome": "Retour à la page d'accueil"
   }
 }

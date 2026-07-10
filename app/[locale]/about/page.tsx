@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
-import { HeartIcon, TargetIcon, UsersIcon } from '@/components/icons';
+import { HeartIcon, TargetIcon, UsersIcon } from '@/components/Icons';
 import { getTranslations } from 'next-intl/server';
 import { BRAND } from '@/lib/i18n/brand';
 

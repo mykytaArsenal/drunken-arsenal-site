@@ -1,4 +1,4 @@
-import { SignInForm } from '@/components/sign-in-form';
+import { SignInForm } from '@/components/SignInForm';
 import { getCurrentUser } from '@/app/[locale]/actions/auth';
 import { redirect } from 'next/navigation';
 import { Link } from '@/i18n/navigation';

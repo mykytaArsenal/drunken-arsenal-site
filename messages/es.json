@@ -91,7 +91,12 @@
     "step2": "Tu kit táctico será preparado y empaquetado",
     "step3": "Te enviaremos información de seguimiento una vez enviado",
     "step4": "Entrega estimada: 3–5 días hábiles",
-    "questions": "¿Preguntas sobre tu pedido? Contáctanos en {supportEmail}"
+    "questions": "¿Preguntas sobre tu pedido? Contáctanos en {supportEmail}",
+    "invalidLink": "Enlace de confirmación de pedido no válido",
+    "loadFailed": "No se pudieron cargar los detalles del pedido",
+    "statusCleared": "Estado: Autorizado",
+    "continueShopping": "Continuar Comprando",
+    "learnHowToPlay": "Aprende Cómo Jugar"
   },
   "auth": {
     "welcomeBack": "Bienvenido de Nuevo",
@@ -120,7 +125,9 @@
     "ordersDesc": "Ver historial de pedidos",
     "ordersInfo": "Sigue las entregas de tu kit táctico y consulta pedidos anteriores.",
     "viewOrders": "Ver Pedidos (Próximamente)",
-    "notSet": "Sin definir"
+    "notSet": "Sin definir",
+    "nameLabel": "Nombre",
+    "emailLabel": "Email"
   },
   "howToPlay": {
     "title": "Cómo Jugar a {productName}",
@@ -193,5 +200,26 @@
     "terms": "Términos de Servicio",
     "returns": "Devoluciones y Reembolsos",
     "rights": "Todos los derechos reservados."
+  },
+  "unsubscribe": {
+    "tagDone": "// retirada confirmada",
+    "tagInvalid": "// enlace no válido",
+    "tagError": "// transmisión fallida",
+    "tagConfirm": "// confirmación de retirada",
+    "doneTitle": "Estás fuera de servicio.",
+    "doneWithEmail": "<hl>{email}</hl> ha sido dado de baja de las filas de {brand}. No recibirás más emails de nuestra parte.",
+    "doneNoEmail": "Has sido dado de baja de las filas de {brand}. No recibirás más emails de nuestra parte.",
+    "doneChangedMind": "¿Cambiaste de opinión? Puedes volver a apuntarte en la página de inicio cuando quieras.",
+    "invalidTitle": "El enlace no cuadra.",
+    "invalidDesc": "Este enlace para darte de baja falta, está mal formado o ha caducado. Abre el email más reciente de {brand} y haz clic en el enlace del pie de página.",
+    "invalidStuck": "¿Sigues atascado? Responde a cualquier email nuestro con la palabra <cmd>UNSUBSCRIBE</cmd> y lo gestionaremos manualmente.",
+    "errorTitle": "No pudimos procesarlo.",
+    "errorDesc": "Algo se torció por nuestro lado. Inténtalo de nuevo en un momento — tu enlace sigue siendo válido.",
+    "tryAgain": "Inténtalo de nuevo",
+    "confirmTitle": "¿Retirada?",
+    "confirmDesc": "Estás a punto de dar de baja <hl>{email}</hl> de todos los emails de {brand}.",
+    "confirmWarning": "Atención: perderás el acceso a tu descuento madrugador y a las ventajas de pre-lanzamiento. Puedes volver a alistarte cuando quieras en la página de inicio.",
+    "confirmCta": "Confirmar baja",
+    "backToHome": "Volver a la página de inicio"
   }
 }

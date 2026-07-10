@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "listing",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["dev"],
+      "port": 3000,
+      "autoPort": true
+    },
+    {
+      "name": "listing-direct",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["next", "dev", "apps/listing"],
+      "port": 3100,
+      "autoPort": true
+    }
+  ]
+}

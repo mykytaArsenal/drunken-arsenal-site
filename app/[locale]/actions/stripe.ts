@@ -3,12 +3,8 @@
 import { stripe } from '@/lib/stripe';
 import { clearCart, getCart } from '@/lib/cart';
 import { sql } from '@/lib/db';
-
-function generateId(): string {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const crypto = require('crypto');
-  return crypto.randomBytes(16).toString('hex');
-}
+import { generateId } from '@/lib/id';
+import { calcShippingCents } from '@/lib/shipping';
 
 export async function createCheckoutSession() {
   console.log('[v0] Creating checkout session');
@@ -37,7 +33,8 @@ export async function createCheckoutSession() {
 
     // Add shipping if needed
     const subtotal = cart.total;
-    if (subtotal < 5000) {
+    const shippingFee = calcShippingCents(subtotal);
+    if (shippingFee > 0) {
       lineItems.push({
         price_data: {
           currency: 'usd',
@@ -45,7 +42,7 @@ export async function createCheckoutSession() {
             name: 'Shipping',
             description: 'Standard shipping',
           },
-          unit_amount: 500,
+          unit_amount: shippingFee,
         },
         quantity: 1,
       });
@@ -70,7 +67,7 @@ export async function createCheckoutSession() {
     const orderId = generateId();
     await sql`
       INSERT INTO "Order" ("id", "email", "total", "status", "stripeSessionId", "createdAt", "updatedAt")
-      VALUES (${orderId}, 'pending@checkout.com', ${cart.total + (subtotal < 5000 ? 500 : 0)}, 'pending', ${session.id}, NOW(), NOW())
+      VALUES (${orderId}, 'pending@checkout.com', ${cart.total + shippingFee}, 'pending', ${session.id}, NOW(), NOW())
     `;
 
     // Create order items

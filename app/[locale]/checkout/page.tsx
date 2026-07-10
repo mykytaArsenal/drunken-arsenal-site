@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
 import { getTranslations } from 'next-intl/server';
-import { ArrowLeftIcon } from '@/components/icons';
+import { ArrowLeftIcon } from '@/components/Icons';
 
 export const metadata = {
   title: 'Checkout',

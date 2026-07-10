@@ -4,9 +4,9 @@ import Script from 'next/script';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { isLocale, routing } from '@/i18n/routing';
-import { getCurrency } from '@/lib/currency/get-currency';
-import { Navigation } from '@/components/navigation';
-import { Footer } from '@/components/footer';
+import { getCurrency } from '@/lib/currency/getCurrency';
+import { Navigation } from '@/components/Navigation';
+import { Footer } from '@/components/Footer';
 import { Toaster } from '@/components/ui/sonner';
 import { Metadata } from 'next';
 import { Russo_One, Oswald, PT_Mono, IBM_Plex_Mono } from 'next/font/google';
@@ -67,8 +67,10 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
 
-  const messages = await getMessages();
-  const currency = await getCurrency();
+  const [messages, currency] = await Promise.all([
+    getMessages(),
+    getCurrency(),
+  ]);
 
   const fontVars = `${russoOne.variable} ${oswald.variable} ${ptMono.variable} ${ibmPlexMono.variable}`;
 

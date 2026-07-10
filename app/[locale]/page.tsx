@@ -1,22 +1,24 @@
 import { Button } from '@/components/ui/button';
-import { ShoppingCartIcon } from '@/components/icons';
+import { ShoppingCartIcon } from '@/components/Icons';
 import { Link } from '@/i18n/navigation';
 import { getTranslations } from 'next-intl/server';
 import { HeroSection } from '@/app/[locale]/main/HeroSection';
 import { Products } from '@/app/[locale]/main/Products';
 import { AboutUs } from '@/app/[locale]/main/AboutUs';
 import { getAllProducts } from '@/lib/products';
+import { getCurrency } from '@/lib/currency/getCurrency';
 import { FREE_SHIPPING_THRESHOLD, PRODUCT_NAME } from '@/lib/i18n/brand';
 
 export default async function HomePage() {
   const products = await getAllProducts();
+  const currency = await getCurrency();
   const t = await getTranslations('home');
 
   return (
     <main className="min-h-screen w-full">
       <HeroSection />
       <AboutUs />
-      <Products products={products} />
+      <Products products={products} currency={currency} />
       <section className="relative">
         <div className="panel-divider" />
         <div className="bg-olive-deep text-cream py-16 md:py-24 relative overflow-hidden">

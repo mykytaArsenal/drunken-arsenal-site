@@ -1,4 +1,9 @@
 @import 'tailwindcss';
+/* enter/leave animations for Radix/shadcn primitives (animate-in, fade-in, zoom-in, …) */
+@import 'tw-animate-css';
+
+/* hover styles only on devices that actually support hover (used as `media-hover:hover:*`) */
+@custom-variant media-hover (@media (hover: hover));
 
 @theme inline {
   /* Fonts wired via next/font in app/[locale]/layout.tsx */

@@ -3,7 +3,10 @@ import {
   type ICurrency,
 } from './currency/config';
 
-export interface IProduct {
+/** Fallback image used when a product has no image. */
+export const PLACEHOLDER_IMAGE = '/placeholder.svg';
+
+export type IProduct = {
   id: string;
   name: string;
   slug: string;
@@ -13,9 +16,11 @@ export interface IProduct {
   stock: number;
   images: string[];
   featured: boolean;
+  /** When true, the product is shoppable: its card links to the product page. Otherwise it shows "coming soon". */
+  available?: boolean;
   createdAt: Date;
   updatedAt: Date;
-}
+};
 
 const MOCK_PRODUCTS: IProduct[] = [
   {
@@ -27,8 +32,14 @@ const MOCK_PRODUCTS: IProduct[] = [
     price: 4999,
     category: 'game',
     stock: 100,
-    images: ['/tactical-drinking-game-board.jpg'],
+    images: [
+      '/images/shotwave/1.jpg',
+      '/images/shotwave/2.jpg',
+      '/images/shotwave/3.jpg',
+      '/images/shotwave/4.jpg',
+    ],
     featured: true,
+    available: true,
     createdAt: new Date(),
     updatedAt: new Date(),
   },

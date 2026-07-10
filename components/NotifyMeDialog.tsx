@@ -19,11 +19,11 @@ import { Input } from '@/components/ui/input';
 import { subscribe } from '@/app/[locale]/actions/subscribe';
 import { useDisclosure } from '@/hooks/useDisclosure';
 
-interface INotifyMeDialogProps {
+type INotifyMeDialogProps = {
   children: ReactNode;
   source: string;
   productName?: string;
-}
+};
 
 export function NotifyMeDialog({
   children,

@@ -1,7 +1,7 @@
 'use server';
 
 import { redirect } from 'next/navigation';
-import { verifyUnsubscribeToken } from '@/lib/email/unsubscribe-token';
+import { verifyUnsubscribeToken } from '@/lib/email/unsubscribeToken';
 import { markContactUnsubscribed } from '@/lib/email/unsubscribe';
 
 export async function confirmUnsubscribeAction(formData: FormData) {

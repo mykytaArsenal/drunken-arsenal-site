@@ -1,17 +1,26 @@
 import { notFound } from 'next/navigation';
-import { formatPrice, getAllProducts, getProductBySlug } from '@/lib/products';
-import { AddToCartButton } from '@/components/add-to-cart-button';
+import {
+  formatPrice,
+  getAllProducts,
+  getProductBySlug,
+  PLACEHOLDER_IMAGE,
+} from '@/lib/products';
+import { AddToCartButton } from '@/components/AddToCartButton';
+import { ProductGallery } from '@/components/ProductGallery';
 import { Button } from '@/components/ui/button';
 import {
   ArrowLeftIcon,
   PackageIcon,
   ShieldIcon,
   TruckIcon,
-} from '@/components/icons';
+} from '@/components/Icons';
 import { Link } from '@/i18n/navigation';
 import { getTranslations } from 'next-intl/server';
-import { getCurrency } from '@/lib/currency/get-currency';
+import { getCurrency } from '@/lib/currency/getCurrency';
 import { FREE_SHIPPING_THRESHOLD } from '@/lib/i18n/brand';
+import { cn } from '@/lib/utils';
+import { SectionHeader } from '@/components/SectionHeader';
+import Image from 'next/image';
 
 export async function generateStaticParams() {
   const products = await getAllProducts();
@@ -46,17 +55,40 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = await getProductBySlug(slug);
-  const currency = await getCurrency();
-  const t = await getTranslations();
+  const [product, currency, t, allProducts] = await Promise.all([
+    getProductBySlug(slug),
+    getCurrency(),
+    getTranslations(),
+    getAllProducts(),
+  ]);
 
   if (!product) {
     notFound();
   }
 
-  const relatedProducts = (await getAllProducts())
+  const relatedProducts = allProducts
     .filter((p) => p.id !== product.id && p.category === product.category)
     .slice(0, 4);
+
+  const standardIssue = [
+    {
+      icon: TruckIcon,
+      title: t('product.freeShipping'),
+      description: t('product.freeShippingDesc', {
+        freeShippingThreshold: FREE_SHIPPING_THRESHOLD,
+      }),
+    },
+    {
+      icon: ShieldIcon,
+      title: t('product.quality'),
+      description: t('product.qualityDesc'),
+    },
+    {
+      icon: PackageIcon,
+      title: t('product.returns'),
+      description: t('product.returnsDesc'),
+    },
+  ];
 
   return (
     <div className="min-h-screen py-8 md:py-12 bg-paper">
@@ -69,31 +101,7 @@ export default async function ProductPage({
         </Button>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
-          <div className="space-y-4">
-            <div className="pop-card aspect-square overflow-hidden">
-              <img
-                src={product.images[0] || '/placeholder.svg'}
-                alt={product.name}
-                className="object-cover w-full h-full"
-              />
-            </div>
-            {product.images.length > 1 && (
-              <div className="grid grid-cols-4 gap-3">
-                {product.images.slice(1, 5).map((image, index) => (
-                  <div
-                    key={index}
-                    className="pop-card aspect-square overflow-hidden"
-                  >
-                    <img
-                      src={image || '/placeholder.svg'}
-                      alt={`${product.name} ${index + 2}`}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          <ProductGallery images={product.images} name={product.name} />
 
           <div className="space-y-6">
             <div className="flex flex-wrap items-center gap-2">
@@ -119,11 +127,10 @@ export default async function ProductPage({
             <div className="flex items-center gap-2 font-mono-c text-sm uppercase tracking-wider">
               <PackageIcon className="h-4 w-4" />
               <span
-                className={
-                  product.stock > 0
-                    ? 'text-allowed font-medium'
-                    : 'text-rust-bright font-medium'
-                }
+                className={cn(
+                  'font-medium',
+                  product.stock > 0 ? 'text-allowed' : 'text-rust-bright'
+                )}
               >
                 {product.stock > 0
                   ? `${product.stock} ${t('product.readyToShip')}`
@@ -139,41 +146,17 @@ export default async function ProductPage({
               <div className="font-stamp text-xs uppercase tracking-[0.15em] text-amber">
                 // standard issue
               </div>
-              <div className="flex items-start gap-3">
-                <TruckIcon className="h-5 w-5 text-amber mt-0.5" />
-                <div>
-                  <p className="font-display text-sm text-cream">
-                    {t('product.freeShipping')}
-                  </p>
-                  <p className="font-stamp text-xs text-cream-warm">
-                    {t('product.freeShippingDesc', {
-                      freeShippingThreshold: FREE_SHIPPING_THRESHOLD,
-                    })}
-                  </p>
+              {standardIssue.map(({ icon: Icon, title, description }) => (
+                <div key={title} className="flex items-start gap-3">
+                  <Icon className="h-5 w-5 text-amber mt-0.5" />
+                  <div>
+                    <p className="font-display text-sm text-cream">{title}</p>
+                    <p className="font-stamp text-xs text-cream-warm">
+                      {description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <ShieldIcon className="h-5 w-5 text-amber mt-0.5" />
-                <div>
-                  <p className="font-display text-sm text-cream">
-                    {t('product.quality')}
-                  </p>
-                  <p className="font-stamp text-xs text-cream-warm">
-                    {t('product.qualityDesc')}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <PackageIcon className="h-5 w-5 text-amber mt-0.5" />
-                <div>
-                  <p className="font-display text-sm text-cream">
-                    {t('product.returns')}
-                  </p>
-                  <p className="font-stamp text-xs text-cream-warm">
-                    {t('product.returnsDesc')}
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
 
             <div className="stripes-warning p-1">
@@ -188,15 +171,13 @@ export default async function ProductPage({
 
         {relatedProducts.length > 0 && (
           <section className="pt-12">
-            <div className="flex items-end gap-6 mb-8">
-              <div className="phase-number">04</div>
-              <div>
-                <div className="tag-line">// also recon</div>
-                <h2 className="font-display text-3xl text-ink leading-none">
-                  {t('product.youMayLike')}
-                </h2>
-              </div>
-            </div>
+            <SectionHeader
+              phase="04"
+              tag="// also recon"
+              title={t('product.youMayLike')}
+              className="mb-8"
+              titleClassName="font-display text-3xl leading-none text-ink"
+            />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedProducts.map((relatedProduct) => (
                 <Link
@@ -206,10 +187,12 @@ export default async function ProductPage({
                 >
                   <article className="pop-card overflow-hidden transition-transform duration-150 group-hover:-translate-x-[2px] group-hover:-translate-y-[2px] group-hover:shadow-[8px_8px_0_var(--color-ink)]">
                     <div className="aspect-square bg-cream-warm relative overflow-hidden border-b-[3px] border-ink">
-                      <img
-                        src={relatedProduct.images[0] || '/placeholder.svg'}
+                      <Image
+                        src={relatedProduct.images[0] || PLACEHOLDER_IMAGE}
                         alt={relatedProduct.name}
-                        className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                        fill
+                        sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                     <div className="p-4 space-y-2">
