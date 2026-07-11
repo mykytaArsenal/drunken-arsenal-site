@@ -16,12 +16,14 @@ const PLACEHOLDER_IMAGE = '/placeholder.svg';
 
 /**
  * Slightly larger, static arrow buttons: the circle and glyph are bumped up and
- * the brutalist hover/active shift is neutralised so the arrows stay put.
+ * the brutalist hover/active shift is neutralised so the arrows stay put. The
+ * buttons are vertically centred via `-translate-y-1/2`, so hover/active must
+ * keep that exact translate (not reset it to 0) or they'd drop by half a height.
  */
 const ARROW_CLASSES = cn(
   'size-10 border-ink bg-cream text-ink shadow-[3px_3px_0_var(--color-ink)]',
-  'media-hover:hover:translate-x-0 media-hover:hover:translate-y-0 media-hover:hover:shadow-[3px_3px_0_var(--color-ink)]',
-  'active:translate-x-0 active:translate-y-0 active:shadow-[3px_3px_0_var(--color-ink)]'
+  'media-hover:hover:translate-x-0 media-hover:hover:-translate-y-1/2 media-hover:hover:shadow-[3px_3px_0_var(--color-ink)]',
+  'active:translate-x-0 active:-translate-y-1/2 active:shadow-[3px_3px_0_var(--color-ink)]'
 );
 
 type IProductGalleryProps = {
