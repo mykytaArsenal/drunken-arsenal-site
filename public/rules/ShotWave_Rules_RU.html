@@ -277,6 +277,12 @@
   }
 
   /* Page break helper для печати */
+  html, body { overflow-x: hidden; }
+
+  @media (max-width: 640px) {
+    .phase-number { font-size: 3.25rem; }
+  }
+
   @media print {
     body { background: white; }
     .no-print { display: none !important; }
@@ -336,12 +342,12 @@
   <div class="absolute top-12 right-16 deco-star text-7xl -rotate-12 opacity-50">★</div>
   <div class="absolute bottom-10 left-1/4 deco-star text-4xl rotate-45 opacity-40">★</div>
 
-  <div class="relative max-w-5xl mx-auto px-8 py-20">
+  <div class="relative max-w-5xl mx-auto px-4 sm:px-8 py-20">
     <div class="mb-6">
       <span class="font-stamp text-sm tracking-widest" style="color: var(--amber);">// FIELD MANUAL · CLASSIFIED · NO. 001</span>
     </div>
 
-    <h1 class="font-display-shade leading-none" style="font-size: clamp(4rem, 12vw, 11rem); color: var(--cream);">
+    <h1 class="font-display-shade leading-none" style="font-size: clamp(2.25rem, 12vw, 11rem); color: var(--cream);">
       SHOTWAVE
     </h1>
 
@@ -380,12 +386,12 @@
 
 
 <!-- ============== СОСТАВ ============== -->
-<section class="max-w-5xl mx-auto px-8 py-16">
+<section class="max-w-5xl mx-auto px-4 sm:px-8 py-16">
   <div class="flex items-end gap-6 mb-10">
     <div class="phase-number">01</div>
     <div>
       <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// briefing</div>
-      <h2 class="font-display text-5xl leading-none">Снаряжение</h2>
+      <h2 class="font-display text-lg md:text-xl leading-none">Снаряжение</h2>
     </div>
   </div>
 
@@ -393,21 +399,21 @@
     <div class="pop-card p-6">
       <div class="font-display text-3xl" style="color: var(--rust-bright);">96</div>
       <div class="font-stamp text-xs uppercase mt-2 opacity-60">Карт в патронташе</div>
-      <h3 class="font-display text-xl mt-3">Числовые</h3>
+      <h3 class="font-display text-base mt-3">Числовые</h3>
       <p class="body-text mt-2">Значения 1–12, по 8 копий каждой. Это твой основной боезапас — ими ты сбрасываешь рюк­зак.</p>
     </div>
 
     <div class="pop-card p-6">
       <div class="font-display text-3xl" style="color: var(--rust-bright);">64</div>
       <div class="font-stamp text-xs uppercase mt-2 opacity-60">Тактических</div>
-      <h3 class="font-display text-xl mt-3">Тактики</h3>
+      <h3 class="font-display text-base mt-3">Тактики</h3>
       <p class="body-text mt-2">События, атаки, манёвры. Каждая помечена званием (★) и иконкой эффекта.</p>
     </div>
 
     <div class="pop-card p-6">
       <div class="font-display text-3xl" style="color: var(--rust-bright);">d12</div>
       <div class="font-stamp text-xs uppercase mt-2 opacity-60">Решает судьбу</div>
-      <h3 class="font-display text-xl mt-3">Кубик</h3>
+      <h3 class="font-display text-base mt-3">Кубик</h3>
       <p class="body-text mt-2">Числа от 1 до 12. Бросаешь в начале своего хода — определяет, на сколько ты избавишься от карт.</p>
     </div>
   </div>
@@ -422,12 +428,12 @@
 
 
 <!-- ============== МАРКИРОВКА ============== -->
-<section class="max-w-5xl mx-auto px-8 py-16">
+<section class="max-w-5xl mx-auto px-4 sm:px-8 py-16">
   <div class="flex items-end gap-6 mb-10">
     <div class="phase-number">02</div>
     <div>
       <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// recon</div>
-      <h2 class="font-display text-5xl leading-none">Маркировка карт</h2>
+      <h2 class="font-display text-lg md:text-xl leading-none">Маркировка карт</h2>
     </div>
   </div>
 
@@ -555,12 +561,12 @@
 
 
 <!-- ============== ПОДГОТОВКА ============== -->
-<section class="max-w-5xl mx-auto px-8 py-16">
+<section class="max-w-5xl mx-auto px-4 sm:px-8 py-16">
   <div class="flex items-end gap-6 mb-10">
     <div class="phase-number">03</div>
     <div>
       <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// deploy</div>
-      <h2 class="font-display text-5xl leading-none">Подготовка</h2>
+      <h2 class="font-display text-lg md:text-xl leading-none">Подготовка</h2>
     </div>
   </div>
 
@@ -624,12 +630,12 @@
 
 
 <!-- ============== СТРУКТУРА РАУНДА ============== -->
-<section class="max-w-5xl mx-auto px-8 py-16">
+<section class="max-w-5xl mx-auto px-4 sm:px-8 py-16">
   <div class="flex items-end gap-6 mb-10">
     <div class="phase-number">04</div>
     <div>
       <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// engagement</div>
-      <h2 class="font-display text-5xl leading-none">Структура раунда</h2>
+      <h2 class="font-display text-lg md:text-xl leading-none">Структура раунда</h2>
     </div>
   </div>
 
@@ -643,7 +649,7 @@
       <div class="flex items-start gap-5">
         <div class="font-display-shade text-7xl leading-none" style="color: var(--rust-bright);">1</div>
         <div class="flex-1">
-          <h3 class="font-display text-2xl">Добор тактики</h3>
+          <h3 class="font-display text-base">Добор тактики</h3>
           <p class="body-text mt-2">По часовой стрелке от первого игрока, каждый добирает <strong>1 тактическую карту</strong>.</p>
           <div class="mt-4 stripes-warning p-1">
             <div class="bg-black p-3 text-sm font-stamp" style="color: var(--cream);">
@@ -659,7 +665,7 @@
       <div class="flex items-start gap-5">
         <div class="font-display-shade text-7xl leading-none" style="color: var(--rust-bright);">2</div>
         <div class="flex-1">
-          <h3 class="font-display text-2xl">Pre-round · обязательные</h3>
+          <h3 class="font-display text-base">Pre-round · обязательные</h3>
           <p class="body-text mt-2">Игроки, у которых на руках <strong>Around the World</strong> или <strong>Mine</strong>, играют их сейчас. Эти карты обязательны к розыгрышу — иначе они сгорят без эффекта в конце раунда.</p>
           <p class="body-text mt-2 font-stamp italic">Принцип «кто первее объявил вслух — тот играет первым».</p>
         </div>
@@ -671,7 +677,7 @@
       <div class="flex items-start gap-5">
         <div class="font-display-shade text-7xl leading-none" style="color: var(--rust-bright);">3</div>
         <div class="flex-1">
-          <h3 class="font-display text-2xl">Объявления атак</h3>
+          <h3 class="font-display text-base">Объявления атак</h3>
           <p class="body-text mt-2">Игроки могут объявить атакующие тактики на других:</p>
           <ul class="mt-3 grid md:grid-cols-2 gap-3">
             <li class="bg-black px-3 py-2 font-mono-c text-xs" style="color: var(--cream);"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;display:inline-block"><path d="m9 18 6-6-6-6"/></svg> Timeout</li>
@@ -693,7 +699,7 @@
       <div class="flex items-start gap-5">
         <div class="font-display-shade text-7xl leading-none" style="color: var(--amber);">4</div>
         <div class="flex-1">
-          <h3 class="font-display text-2xl">Ходы · бросок и сброс</h3>
+          <h3 class="font-display text-base">Ходы · бросок и сброс</h3>
           <p class="font-stamp text-base mt-2 opacity-90">Игроки по очереди, по часовой стрелке, делают свой ход:</p>
           <ol class="mt-4 space-y-2 font-stamp">
             <li><span class="font-display" style="color: var(--amber);">a.</span> Бросают кубик (1–12)</li>
@@ -713,7 +719,7 @@
       <div class="flex items-start gap-5">
         <div class="font-display-shade text-7xl leading-none" style="color: var(--cream);">5</div>
         <div class="flex-1">
-          <h3 class="font-display text-2xl">Конец раунда</h3>
+          <h3 class="font-display text-base">Конец раунда</h3>
           <p class="font-stamp text-base mt-2">Все <strong>несыгранные тактические карты</strong> в руках игроков сгорают — отправляются в сброс. Раунд закончен, начинается новый.</p>
         </div>
       </div>
@@ -726,12 +732,12 @@
 
 
 <!-- ============== СНАЙПЕРСКАЯ ПОЗИЦИЯ ============== -->
-<section class="max-w-5xl mx-auto px-8 py-16">
+<section class="max-w-5xl mx-auto px-4 sm:px-8 py-16">
   <div class="flex items-end gap-6 mb-10">
     <div class="phase-number">05</div>
     <div>
       <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// reward</div>
-      <h2 class="font-display text-5xl leading-none">Снайперская позиция</h2>
+      <h2 class="font-display text-lg md:text-xl leading-none">Снайперская позиция</h2>
     </div>
   </div>
 
@@ -770,12 +776,12 @@
 
 
 <!-- ============== ПОБЕДА ============== -->
-<section class="max-w-5xl mx-auto px-8 py-16">
+<section class="max-w-5xl mx-auto px-4 sm:px-8 py-16">
   <div class="flex items-end gap-6 mb-10">
     <div class="phase-number">06</div>
     <div>
       <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// victory</div>
-      <h2 class="font-display text-5xl leading-none">Победа</h2>
+      <h2 class="font-display text-lg md:text-xl leading-none">Победа</h2>
     </div>
   </div>
 
@@ -825,12 +831,12 @@
 
 
 <!-- ============== КАРТЫ — REFERENCE ============== -->
-<section class="max-w-5xl mx-auto px-8 py-16 page-break">
+<section class="max-w-5xl mx-auto px-4 sm:px-8 py-16 page-break">
   <div class="flex items-end gap-6 mb-10">
     <div class="phase-number">07</div>
     <div>
       <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// arsenal</div>
-      <h2 class="font-display text-5xl leading-none">Карты — справочник</h2>
+      <h2 class="font-display text-lg md:text-xl leading-none">Карты — справочник</h2>
     </div>
   </div>
 
@@ -1141,12 +1147,12 @@
 
 
 <!-- ============== СОСТАВ КОЛОДЫ ============== -->
-<section class="max-w-5xl mx-auto px-8 py-16 page-break">
+<section class="max-w-5xl mx-auto px-4 sm:px-8 py-16 page-break">
   <div class="flex items-end gap-6 mb-10">
     <div class="phase-number">08</div>
     <div>
       <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// inventory</div>
-      <h2 class="font-display text-5xl leading-none">Состав колоды</h2>
+      <h2 class="font-display text-lg md:text-xl leading-none">Состав колоды</h2>
     </div>
   </div>
 
@@ -1217,12 +1223,12 @@
 
 
 <!-- ============== FAQ ============== -->
-<section class="max-w-5xl mx-auto px-8 py-16">
+<section class="max-w-5xl mx-auto px-4 sm:px-8 py-16">
   <div class="flex items-end gap-6 mb-10">
     <div class="phase-number">09</div>
     <div>
       <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// intel</div>
-      <h2 class="font-display text-5xl leading-none">Спорные ситуации</h2>
+      <h2 class="font-display text-lg md:text-xl leading-none">Спорные ситуации</h2>
     </div>
   </div>
 
@@ -1258,7 +1264,7 @@
 <!-- ============== FOOTER ============== -->
 <footer class="mt-20" style="background: var(--olive-deep); color: var(--cream);">
   <div class="halftone-bg absolute inset-0 opacity-20"></div>
-  <div class="relative max-w-5xl mx-auto px-8 py-14">
+  <div class="relative max-w-5xl mx-auto px-4 sm:px-8 py-14">
     <div class="flex flex-wrap items-center justify-between gap-6">
       <div>
         <div class="font-display-shade text-4xl">SHOTWAVE</div>

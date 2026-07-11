@@ -234,6 +234,12 @@
     line-height: 1;
   }
 
+  html, body { overflow-x: hidden; }
+
+  @media (max-width: 640px) {
+    .phase-number { font-size: 3.25rem; }
+  }
+
   @media print {
     body { background: white; }
     .no-print { display: none !important; }
@@ -287,12 +293,12 @@
   <div class="absolute top-12 right-16 deco-star text-7xl -rotate-12 opacity-50">★</div>
   <div class="absolute bottom-10 left-1/4 deco-star text-4xl rotate-45 opacity-40">★</div>
 
-  <div class="relative max-w-5xl mx-auto px-8 py-20">
+  <div class="relative max-w-5xl mx-auto px-4 sm:px-8 py-20">
     <div class="mb-6">
       <span class="font-stamp text-sm tracking-widest" style="color: var(--amber);">// FIELD MANUAL · CLASSIFIED · NO. 001</span>
     </div>
 
-    <h1 class="font-display-shade leading-none" style="font-size: clamp(4rem, 12vw, 11rem); color: var(--cream);">
+    <h1 class="font-display-shade leading-none" style="font-size: clamp(2.25rem, 12vw, 11rem); color: var(--cream);">
       SHOTWAVE
     </h1>
 
@@ -330,12 +336,12 @@
 
 
 <!-- ============== EQUIPMENT ============== -->
-<section class="max-w-5xl mx-auto px-8 py-16">
+<section class="max-w-5xl mx-auto px-4 sm:px-8 py-16">
   <div class="flex items-end gap-6 mb-10">
     <div class="phase-number">01</div>
     <div>
       <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// briefing</div>
-      <h2 class="font-display text-5xl leading-none">Equipment</h2>
+      <h2 class="font-display text-lg md:text-xl leading-none">Equipment</h2>
     </div>
   </div>
 
@@ -343,21 +349,21 @@
     <div class="pop-card p-6">
       <div class="font-display text-3xl" style="color: var(--rust-bright);">96</div>
       <div class="font-stamp text-xs uppercase mt-2 opacity-60">Rounds in the belt</div>
-      <h3 class="font-display text-xl mt-3">Numbered cards</h3>
+      <h3 class="font-display text-base mt-3">Numbered cards</h3>
       <p class="body-text mt-2">Values 1–12, eight copies each. Your main ammo — these are how you dump cards each turn.</p>
     </div>
 
     <div class="pop-card p-6">
       <div class="font-display text-3xl" style="color: var(--rust-bright);">64</div>
       <div class="font-stamp text-xs uppercase mt-2 opacity-60">Tactical pieces</div>
-      <h3 class="font-display text-xl mt-3">Tactic cards</h3>
+      <h3 class="font-display text-base mt-3">Tactic cards</h3>
       <p class="body-text mt-2">Events, attacks, maneuvers. Each marked with a rank (★) and an effect icon.</p>
     </div>
 
     <div class="pop-card p-6">
       <div class="font-display text-3xl" style="color: var(--rust-bright);">d12</div>
       <div class="font-stamp text-xs uppercase mt-2 opacity-60">Decides your fate</div>
-      <h3 class="font-display text-xl mt-3">The die</h3>
+      <h3 class="font-display text-base mt-3">The die</h3>
       <p class="body-text mt-2">Numbers 1–12. Roll it at the start of your turn — the result sets how many cards you ditch.</p>
     </div>
   </div>
@@ -372,12 +378,12 @@
 
 
 <!-- ============== CARD MARKINGS ============== -->
-<section class="max-w-5xl mx-auto px-8 py-16">
+<section class="max-w-5xl mx-auto px-4 sm:px-8 py-16">
   <div class="flex items-end gap-6 mb-10">
     <div class="phase-number">02</div>
     <div>
       <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// recon</div>
-      <h2 class="font-display text-5xl leading-none">Card markings</h2>
+      <h2 class="font-display text-lg md:text-xl leading-none">Card markings</h2>
     </div>
   </div>
 
@@ -503,12 +509,12 @@
 
 
 <!-- ============== SETUP ============== -->
-<section class="max-w-5xl mx-auto px-8 py-16">
+<section class="max-w-5xl mx-auto px-4 sm:px-8 py-16">
   <div class="flex items-end gap-6 mb-10">
     <div class="phase-number">03</div>
     <div>
       <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// deploy</div>
-      <h2 class="font-display text-5xl leading-none">Setup</h2>
+      <h2 class="font-display text-lg md:text-xl leading-none">Setup</h2>
     </div>
   </div>
 
@@ -570,12 +576,12 @@
 
 
 <!-- ============== ROUND STRUCTURE ============== -->
-<section class="max-w-5xl mx-auto px-8 py-16">
+<section class="max-w-5xl mx-auto px-4 sm:px-8 py-16">
   <div class="flex items-end gap-6 mb-10">
     <div class="phase-number">04</div>
     <div>
       <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// engagement</div>
-      <h2 class="font-display text-5xl leading-none">Round structure</h2>
+      <h2 class="font-display text-lg md:text-xl leading-none">Round structure</h2>
     </div>
   </div>
 
@@ -589,7 +595,7 @@
       <div class="flex items-start gap-5">
         <div class="font-display-shade text-7xl leading-none" style="color: var(--rust-bright);">1</div>
         <div class="flex-1">
-          <h3 class="font-display text-2xl">Tactic draw</h3>
+          <h3 class="font-display text-base">Tactic draw</h3>
           <p class="body-text mt-2">In clockwise order, starting from the first player, each player draws <strong>1 tactic card</strong>.</p>
           <div class="mt-4 stripes-warning p-1">
             <div class="bg-black p-3 text-sm font-stamp" style="color: var(--cream);">
@@ -605,7 +611,7 @@
       <div class="flex items-start gap-5">
         <div class="font-display-shade text-7xl leading-none" style="color: var(--rust-bright);">2</div>
         <div class="flex-1">
-          <h3 class="font-display text-2xl">Pre-round · forced plays</h3>
+          <h3 class="font-display text-base">Pre-round · forced plays</h3>
           <p class="body-text mt-2">Players holding <strong>Around the World</strong> or <strong>Mine</strong> must play them now. These cards are mandatory — if not played, they burn at the end of the round with no effect.</p>
           <p class="body-text mt-2 font-stamp italic">Conflict rule: whoever calls it out first plays first.</p>
         </div>
@@ -617,7 +623,7 @@
       <div class="flex items-start gap-5">
         <div class="font-display-shade text-7xl leading-none" style="color: var(--rust-bright);">3</div>
         <div class="flex-1">
-          <h3 class="font-display text-2xl">Attack declarations</h3>
+          <h3 class="font-display text-base">Attack declarations</h3>
           <p class="body-text mt-2">Players may declare attack tactics on others:</p>
           <ul class="mt-3 grid md:grid-cols-2 gap-3">
             <li class="bg-black px-3 py-2 font-mono-c text-xs" style="color: var(--cream);"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;display:inline-block"><path d="m9 18 6-6-6-6"/></svg> Timeout</li>
@@ -639,7 +645,7 @@
       <div class="flex items-start gap-5">
         <div class="font-display-shade text-7xl leading-none" style="color: var(--amber);">4</div>
         <div class="flex-1">
-          <h3 class="font-display text-2xl">Turns · roll &amp; discard</h3>
+          <h3 class="font-display text-base">Turns · roll &amp; discard</h3>
           <p class="font-stamp text-base mt-2 opacity-90">In clockwise order, each player takes their turn:</p>
           <ol class="mt-4 space-y-2 font-stamp">
             <li><span class="font-display" style="color: var(--amber);">a.</span> Roll the die (1–12)</li>
@@ -659,7 +665,7 @@
       <div class="flex items-start gap-5">
         <div class="font-display-shade text-7xl leading-none" style="color: var(--cream);">5</div>
         <div class="flex-1">
-          <h3 class="font-display text-2xl">End of round</h3>
+          <h3 class="font-display text-base">End of round</h3>
           <p class="font-stamp text-base mt-2">All <strong>unplayed tactic cards</strong> in players' hands burn — sent to the discard pile. Round over, next one begins.</p>
         </div>
       </div>
@@ -672,12 +678,12 @@
 
 
 <!-- ============== SNIPER'S NEST ============== -->
-<section class="max-w-5xl mx-auto px-8 py-16">
+<section class="max-w-5xl mx-auto px-4 sm:px-8 py-16">
   <div class="flex items-end gap-6 mb-10">
     <div class="phase-number">05</div>
     <div>
       <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// reward</div>
-      <h2 class="font-display text-5xl leading-none">Sniper's Nest</h2>
+      <h2 class="font-display text-lg md:text-xl leading-none">Sniper's Nest</h2>
     </div>
   </div>
 
@@ -716,12 +722,12 @@
 
 
 <!-- ============== VICTORY ============== -->
-<section class="max-w-5xl mx-auto px-8 py-16">
+<section class="max-w-5xl mx-auto px-4 sm:px-8 py-16">
   <div class="flex items-end gap-6 mb-10">
     <div class="phase-number">06</div>
     <div>
       <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// victory</div>
-      <h2 class="font-display text-5xl leading-none">Victory</h2>
+      <h2 class="font-display text-lg md:text-xl leading-none">Victory</h2>
     </div>
   </div>
 
@@ -770,12 +776,12 @@
 
 
 <!-- ============== CARD REFERENCE ============== -->
-<section class="max-w-5xl mx-auto px-8 py-16 page-break">
+<section class="max-w-5xl mx-auto px-4 sm:px-8 py-16 page-break">
   <div class="flex items-end gap-6 mb-10">
     <div class="phase-number">07</div>
     <div>
       <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// arsenal</div>
-      <h2 class="font-display text-5xl leading-none">Card reference</h2>
+      <h2 class="font-display text-lg md:text-xl leading-none">Card reference</h2>
     </div>
   </div>
 
@@ -1086,12 +1092,12 @@
 
 
 <!-- ============== DECK COMPOSITION ============== -->
-<section class="max-w-5xl mx-auto px-8 py-16 page-break">
+<section class="max-w-5xl mx-auto px-4 sm:px-8 py-16 page-break">
   <div class="flex items-end gap-6 mb-10">
     <div class="phase-number">08</div>
     <div>
       <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// inventory</div>
-      <h2 class="font-display text-5xl leading-none">Deck composition</h2>
+      <h2 class="font-display text-lg md:text-xl leading-none">Deck composition</h2>
     </div>
   </div>
 
@@ -1161,12 +1167,12 @@
 
 
 <!-- ============== FAQ ============== -->
-<section class="max-w-5xl mx-auto px-8 py-16">
+<section class="max-w-5xl mx-auto px-4 sm:px-8 py-16">
   <div class="flex items-end gap-6 mb-10">
     <div class="phase-number">09</div>
     <div>
       <div class="font-stamp text-sm uppercase tracking-widest" style="color: var(--rust-bright);">// intel</div>
-      <h2 class="font-display text-5xl leading-none">Edge cases</h2>
+      <h2 class="font-display text-lg md:text-xl leading-none">Edge cases</h2>
     </div>
   </div>
 
@@ -1202,7 +1208,7 @@
 <!-- ============== FOOTER ============== -->
 <footer class="mt-20" style="background: var(--olive-deep); color: var(--cream);">
   <div class="halftone-bg absolute inset-0 opacity-20"></div>
-  <div class="relative max-w-5xl mx-auto px-8 py-14">
+  <div class="relative max-w-5xl mx-auto px-4 sm:px-8 py-14">
     <div class="flex flex-wrap items-center justify-between gap-6">
       <div>
         <div class="font-display-shade text-4xl">SHOTWAVE</div>
