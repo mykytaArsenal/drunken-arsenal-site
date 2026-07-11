@@ -14,6 +14,16 @@ import { cn } from '@/lib/utils';
 
 const PLACEHOLDER_IMAGE = '/placeholder.svg';
 
+/**
+ * Slightly larger, static arrow buttons: the circle and glyph are bumped up and
+ * the brutalist hover/active shift is neutralised so the arrows stay put.
+ */
+const ARROW_CLASSES = cn(
+  'size-10 border-ink bg-cream text-ink shadow-[3px_3px_0_var(--color-ink)]',
+  'media-hover:hover:translate-x-0 media-hover:hover:translate-y-0 media-hover:hover:shadow-[3px_3px_0_var(--color-ink)]',
+  'active:translate-x-0 active:translate-y-0 active:shadow-[3px_3px_0_var(--color-ink)]'
+);
+
 type IProductGalleryProps = {
   images: string[];
   name: string;
@@ -59,8 +69,8 @@ export function ProductGallery({ images, name }: IProductGalleryProps) {
 
         {hasMultiple && (
           <>
-            <CarouselPrevious className="left-3 border-ink bg-cream text-ink shadow-[3px_3px_0_var(--color-ink)]" />
-            <CarouselNext className="right-3 border-ink bg-cream text-ink shadow-[3px_3px_0_var(--color-ink)]" />
+            <CarouselPrevious className={cn('left-3', ARROW_CLASSES)} />
+            <CarouselNext className={cn('right-3', ARROW_CLASSES)} />
           </>
         )}
       </Carousel>
