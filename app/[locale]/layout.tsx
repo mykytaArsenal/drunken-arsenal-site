@@ -8,6 +8,8 @@ import { getCurrency } from '@/lib/currency/getCurrency';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Toaster } from '@/components/ui/sonner';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/next';
 import { Metadata } from 'next';
 import { Russo_One, Oswald, PT_Mono, IBM_Plex_Mono } from 'next/font/google';
 
@@ -88,6 +90,8 @@ export default async function LocaleLayout({
           src="https://cdn.iubenda.com/iubenda.js"
           strategy="lazyOnload"
         />
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );

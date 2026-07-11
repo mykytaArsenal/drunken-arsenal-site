@@ -41,6 +41,7 @@
     "@stripe/react-stripe-js": "latest",
     "@stripe/stripe-js": "latest",
     "@vercel/analytics": "1.6.1",
+    "@vercel/speed-insights": "^2.0.0",
     "autoprefixer": "^10.5.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
