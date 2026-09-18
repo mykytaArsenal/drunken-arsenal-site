@@ -44,72 +44,44 @@ const MOCK_PRODUCTS: IProduct[] = [
     updatedAt: new Date(),
   },
   {
-    id: 'artillery-shells-6pack', // Updated to match database ID
-    name: 'Artillery Shells - 6 Pack',
-    slug: 'artillery-shells-6pack',
+    id: 'shot-mine',
+    name: 'Shot Mine',
+    slug: 'shot-mine',
     description:
-      'Premium shot glass shells designed for maximum impact. Rugged construction for intense party operations.',
-    price: 1499,
-    category: 'accessory',
-    stock: 200,
-    images: ['/artillery-shell-shot-glasses.jpg'],
-    featured: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: 'tactical-mines-4pack', // Updated to match database ID
-    name: 'Tactical Mines - 4 Pack',
-    slug: 'tactical-mines-4pack',
-    description:
-      'Strategic drinking obstacles. Place these tactical mines on the battlefield and watch your opponents navigate carefully.',
-    price: 999,
-    category: 'accessory',
-    stock: 180,
-    images: ['/military-tactical-mine-coasters.jpg'],
+      'A tactical mine with 8 shot glasses and the Shotwave game inside. Hit the trigger — the mine bursts open and 8 shot-glass petals pop out.',
+    price: 0,
+    category: 'bundle',
+    stock: 0,
+    images: [],
     featured: false,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
   {
-    id: 'full-arsenal-bundle', // Updated to match database ID
-    name: 'Full Arsenal Bundle',
-    slug: 'full-arsenal-bundle',
+    id: 'ice-grenade',
+    name: 'Ice Grenade',
+    slug: 'ice-grenade',
     description:
-      'Go all in. Shotwave game + 12 Artillery Shells + 4 Tactical Mines. Complete tactical superiority. Save 20%.',
-    price: 7999,
-    category: 'bundle',
-    stock: 50,
-    images: ['/tactical-drinking-game-bundle.jpg'],
-    featured: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: 'artillery-shells-12pack', // Added to match database
-    name: 'Artillery Shells - 12 Pack',
-    slug: 'artillery-shells-12pack',
-    description:
-      'Double the firepower. Stock up for extended missions with this tactical 12-pack of premium shot glass shells.',
-    price: 2499,
+      'An ice mold shaped like a hand grenade. Chill your drinks with frag-shaped ice.',
+    price: 0,
     category: 'accessory',
-    stock: 150,
-    images: ['/game-expansion-cards.jpg'],
+    stock: 0,
+    images: [],
     featured: false,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
   {
-    id: 'basic-deployment-bundle', // Added to match database
-    name: 'Basic Deployment Bundle',
-    slug: 'basic-deployment-bundle',
+    id: 'artillery-shell-155',
+    name: '155mm Shell',
+    slug: 'artillery-shell-155',
     description:
-      'Everything you need for your first mission: Shotwave game + 6 Artillery Shells. Save 15% compared to buying separately.',
-    price: 5999,
+      'A case shaped like a 155mm artillery shell: the Shotwave game, a slot for a bottle and 2 shot glasses.',
+    price: 0,
     category: 'bundle',
-    stock: 75,
-    images: ['/sniper-rifle-shot-glass.jpg'],
-    featured: true,
+    stock: 0,
+    images: [],
+    featured: false,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -118,18 +90,6 @@ const MOCK_PRODUCTS: IProduct[] = [
 export async function getAllProducts(): Promise<IProduct[]> {
   // Return mock data
   return MOCK_PRODUCTS;
-}
-
-export async function getFeaturedProducts(): Promise<IProduct[]> {
-  return MOCK_PRODUCTS.filter((p) => p.featured);
-}
-
-export async function getProductBySlug(slug: string): Promise<IProduct | null> {
-  return MOCK_PRODUCTS.find((p) => p.slug === slug) || null;
-}
-
-export async function getProductById(id: string): Promise<IProduct | null> {
-  return MOCK_PRODUCTS.find((p) => p.id === id) || null;
 }
 
 export function formatPrice(

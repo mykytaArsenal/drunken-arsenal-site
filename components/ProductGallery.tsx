@@ -11,8 +11,10 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
+import { PLACEHOLDER_IMAGE } from '@/lib/products';
+import { hasEnteredView, useRevealOnScroll } from '@/hooks/useRevealOnScroll';
 
-const PLACEHOLDER_IMAGE = '/placeholder.svg';
+const PRELOAD_DISTANCE = '300px';
 
 /**
  * Slightly larger, static arrow buttons: the circle and glyph are bumped up and
@@ -37,6 +39,9 @@ export function ProductGallery({ images, name }: IProductGalleryProps) {
 
   const [api, setApi] = React.useState<CarouselApi>();
   const [selected, setSelected] = React.useState(0);
+  const { ref: galleryRef, state } =
+    useRevealOnScroll<HTMLDivElement>(PRELOAD_DISTANCE);
+  const isNearViewport = hasEnteredView(state);
 
   React.useEffect(() => {
     if (!api) return;
@@ -51,19 +56,21 @@ export function ProductGallery({ images, name }: IProductGalleryProps) {
   }, [api]);
 
   return (
-    <div className="space-y-4">
+    <div ref={galleryRef} className="space-y-4">
       <Carousel setApi={setApi} opts={{ loop: hasMultiple }} className="w-full">
         <CarouselContent>
           {slides.map((image, index) => (
             <CarouselItem key={index}>
               <div className="pop-card aspect-square overflow-hidden">
-                <Image
-                  src={image || PLACEHOLDER_IMAGE}
-                  alt={index === 0 ? name : `${name} — ${index + 1}`}
-                  fill
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="object-cover"
-                />
+                {(index === 0 || isNearViewport) && (
+                  <Image
+                    src={image || PLACEHOLDER_IMAGE}
+                    alt={index === 0 ? name : `${name} — ${index + 1}`}
+                    fill
+                    sizes="(min-width: 1152px) 516px, (min-width: 1024px) calc(50vw - 60px), calc(100vw - 48px)"
+                    className="object-cover"
+                  />
+                )}
               </div>
             </CarouselItem>
           ))}
@@ -93,13 +100,15 @@ export function ProductGallery({ images, name }: IProductGalleryProps) {
                   : 'opacity-60 media-hover:hover:opacity-100'
               )}
             >
-              <Image
-                src={image || PLACEHOLDER_IMAGE}
-                alt=""
-                fill
-                sizes="80px"
-                className="object-cover"
-              />
+              {isNearViewport && (
+                <Image
+                  src={image || PLACEHOLDER_IMAGE}
+                  alt=""
+                  fill
+                  sizes="74px"
+                  className="object-cover"
+                />
+              )}
             </button>
           ))}
         </div>

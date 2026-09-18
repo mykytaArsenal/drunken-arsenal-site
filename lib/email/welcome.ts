@@ -1,4 +1,10 @@
-import { BRAND, PRODUCT_NAME, SUPPORT_EMAIL } from '@/lib/i18n/brand';
+import {
+  BRAND,
+  EARLY_BIRD_DISCOUNT_PERCENT,
+  EARLY_BIRD_LIMIT,
+  PRODUCT_NAME,
+  SUPPORT_EMAIL,
+} from '@/lib/i18n/brand';
 
 type IWelcomeEmail = {
   subject: string;
@@ -23,7 +29,7 @@ export function buildWelcomeEmail({
     `You're officially on the ${BRAND} pre-launch roster. We'll ping you the moment ${PRODUCT_NAME} ships.`,
     ``,
     `What you've locked in:`,
-    `  - Early-bird discount: 10% off your first order`,
+    `  - Early Bird: ${EARLY_BIRD_DISCOUNT_PERCENT}% off ${PRODUCT_NAME} for the first ${EARLY_BIRD_LIMIT} buyers`,
     `  - Recipe Manual PDF — tactical drink recipes for your squad`,
     `  - First-wave access before the public launch`,
     ``,
@@ -49,7 +55,7 @@ export function buildWelcomeEmail({
 </head>
 <body style="margin:0;padding:0;background-color:#1f2516;font-family:Arial,Helvetica,sans-serif;color:#131210;">
   <span style="display:none!important;visibility:hidden;opacity:0;color:transparent;height:0;width:0;overflow:hidden;">
-    Early-bird 10% off + Recipe Manual PDF inside — locked in.
+    Early Bird ${EARLY_BIRD_DISCOUNT_PERCENT}% off ${escapeHtml(PRODUCT_NAME)} + Recipe Manual PDF inside — locked in.
   </span>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#1f2516;">
     <tr>
@@ -97,7 +103,7 @@ export function buildWelcomeEmail({
                     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                       <tr>
                         <td style="padding:6px 0;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.5;color:#ede4cf;">
-                          <span style="color:#e8a93a;font-weight:bold;">·</span>&nbsp;&nbsp;<strong>Early-bird discount</strong> — 10% off your first order
+                          <span style="color:#e8a93a;font-weight:bold;">·</span>&nbsp;&nbsp;<strong>Early Bird</strong> — ${EARLY_BIRD_DISCOUNT_PERCENT}% off ${escapeHtml(PRODUCT_NAME)} for the first ${EARLY_BIRD_LIMIT} buyers
                         </td>
                       </tr>
                       <tr>

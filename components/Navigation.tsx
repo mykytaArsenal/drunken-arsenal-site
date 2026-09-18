@@ -7,15 +7,9 @@ import { Link } from '@/i18n/navigation';
 import { MenuIcon, XIcon } from './Icons';
 import { Button } from '@/components/ui/button';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import { CurrencySwitcher } from './CurrencySwitcher';
-import type { ICurrency } from '@/lib/currency/config';
 import { AnimatedLink } from '@/components/shared/AnimatedLink';
 
-type INavigationProps = {
-  currency?: ICurrency;
-};
-
-export function Navigation({ currency = 'USD' }: INavigationProps) {
+export function Navigation() {
   const t = useTranslations();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -60,13 +54,14 @@ export function Navigation({ currency = 'USD' }: INavigationProps) {
           <div className="flex items-center justify-end gap-2">
             <div className="hidden md:flex items-center gap-2">
               <LanguageSwitcher />
-              <CurrencySwitcher currentCurrency={currency} />
             </div>
 
             <Button
               variant="ghost"
               size="icon"
               className="md:hidden text-cream media-hover:hover:bg-olive media-hover:hover:text-amber"
+              aria-label={t('nav.menu')}
+              aria-expanded={mobileMenuOpen}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? (
@@ -82,28 +77,27 @@ export function Navigation({ currency = 'USD' }: INavigationProps) {
           <div className="md:hidden border-t-2 border-amber/30 py-4 space-y-2 flex flex-col items-stretch">
             <Link
               href="/#products"
-              className="block px-4 py-2 font-stamp uppercase tracking-[0.12em] text-xs text-cream hover:bg-olive hover:text-amber"
+              className="block px-4 py-3 font-stamp uppercase tracking-[0.12em] text-sm text-cream hover:bg-olive hover:text-amber"
               onClick={() => setMobileMenuOpen(false)}
             >
               {t('nav.products')}
             </Link>
             <Link
               href="/how-to-play"
-              className="block px-4 py-2 font-stamp uppercase tracking-[0.12em] text-xs text-cream hover:bg-olive hover:text-amber"
+              className="block px-4 py-3 font-stamp uppercase tracking-[0.12em] text-sm text-cream hover:bg-olive hover:text-amber"
               onClick={() => setMobileMenuOpen(false)}
             >
               {t('nav.howToPlay')}
             </Link>
             <Link
               href="/about"
-              className="block px-4 py-2 font-stamp uppercase tracking-[0.12em] text-xs text-cream hover:bg-olive hover:text-amber"
+              className="block px-4 py-3 font-stamp uppercase tracking-[0.12em] text-sm text-cream hover:bg-olive hover:text-amber"
               onClick={() => setMobileMenuOpen(false)}
             >
               {t('nav.about')}
             </Link>
             <div className="flex items-center gap-2 px-4 pt-3 border-t-2 border-amber/30">
               <LanguageSwitcher />
-              <CurrencySwitcher currentCurrency={currency} />
             </div>
           </div>
         )}

@@ -9,7 +9,7 @@ import { dirname, join } from 'node:path';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const MESSAGES_DIR = join(__dirname, '..', 'messages');
 const SOURCE = 'en';
-const TARGETS = ['es', 'de', 'fr', 'ru'];
+const TARGETS = ['ru'];
 
 function load(locale) {
   const path = join(MESSAGES_DIR, `${locale}.json`);

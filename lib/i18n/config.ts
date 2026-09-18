@@ -1,20 +1,15 @@
-export const locales = ['en', 'es', 'de', 'fr', 'ru'] as const;
-export type ILocale = (typeof locales)[number];
+import { routing, type ILocale } from '@/i18n/routing';
 
-export const defaultLocale: ILocale = 'en';
+export type { ILocale };
+
+export const locales = routing.locales;
 
 export const localeNames: Record<ILocale, string> = {
   en: 'English',
-  es: 'Español',
-  de: 'Deutsch',
-  fr: 'Français',
   ru: 'Русский',
 };
 
 export const localeFlags: Record<ILocale, string> = {
   en: '🇺🇸',
-  es: '🇪🇸',
-  de: '🇩🇪',
-  fr: '🇫🇷',
   ru: '🇷🇺',
 };

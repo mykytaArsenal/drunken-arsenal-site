@@ -8,16 +8,19 @@ export const HeroSection = async () => {
 
   return (
     <section className="relative overflow-hidden scanlines bg-olive-deep text-cream">
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 md:left-1/2">
         <Image
-          src="/heroImage.png"
-          alt="Tactical evening deployed"
+          src="/images/hero-cards.webp"
+          alt="Shotwave card decks"
           fill
-          priority
-          className="object-cover opacity-30"
+          preload
+          fetchPriority="high"
+          quality={50}
+          sizes="(min-width: 768px) 50vw, 100vw"
+          className="object-cover"
         />
-        <div className="absolute inset-0 bg-olive-deep/80" />
-        <div className="halftone-bg absolute inset-0 opacity-25" />
+        <div className="absolute inset-0 bg-olive-deep/80 md:bg-olive-deep/50" />
+        <div className="hidden md:block absolute inset-0 bg-linear-to-r from-olive-deep via-olive-deep/60 to-transparent" />
       </div>
 
       <span
@@ -39,7 +42,7 @@ export const HeroSection = async () => {
         ★
       </span>
 
-      <div className="relative max-w-5xl mx-auto px-6 sm:px-10 py-20 md:py-28 flex flex-col items-start gap-6">
+      <div className="relative max-w-5xl mx-auto px-6 sm:px-10 py-12 md:py-28 flex flex-col items-start gap-6">
         <span className="tag-line text-amber">// {t('home.ageWarning')}</span>
 
         <h1 className="font-display-shade leading-[0.95] text-[clamp(3rem,9vw,7rem)]">
@@ -48,23 +51,20 @@ export const HeroSection = async () => {
           Arsenal
         </h1>
 
-        <div className="flex flex-wrap items-center gap-4">
-          <span className="ribbon text-lg">{t('home.taglineRibbon')}</span>
-          <span className="font-stamp text-base text-amber tracking-wider">
-            // {t('home.taglineNote')}
-          </span>
-        </div>
+        <span className="font-stamp text-base text-amber tracking-wider">
+          // {t('home.taglineNote')}
+        </span>
 
         <p className="max-w-2xl text-lg font-stamp leading-relaxed text-cream-warm">
           {t('home.subtitle')}
         </p>
 
-        <div className="flex flex-wrap gap-4 pt-2">
-          <Button size="lg" variant="primary" asChild>
-            <Link href="#products">{t('home.browseArsenal')}</Link>
+        <div className="flex flex-col sm:flex-row gap-4 pt-2 self-stretch sm:self-auto">
+          <Button size="xl" variant="primary" asChild>
+            <Link href="#products">{t('home.shopNow')}</Link>
           </Button>
 
-          <Button size="lg" variant="amber" asChild>
+          <Button size="xl" variant="amber" asChild>
             <Link href="/how-to-play">{t('home.howToPlay')}</Link>
           </Button>
         </div>

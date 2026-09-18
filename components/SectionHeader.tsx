@@ -12,6 +12,7 @@ type ISectionHeaderProps = {
   as?: 'h1' | 'h2';
   /** Extra classes on the outer wrapper (spacing such as mb-10 / pt-6). */
   className?: string;
+  id?: string;
   /** Override the title classes (e.g. to drop the responsive size bump). */
   titleClassName?: string;
 };
@@ -27,10 +28,11 @@ export function SectionHeader({
   subtitle,
   as: Heading = 'h2',
   className,
+  id,
   titleClassName = 'font-display text-3xl md:text-4xl leading-none text-ink',
 }: ISectionHeaderProps) {
   return (
-    <div className={cn('flex items-end gap-6', className)}>
+    <div id={id} className={cn('flex items-end gap-6', className)}>
       <div className="phase-number">{phase}</div>
       <div>
         <div className="tag-line">{tag}</div>

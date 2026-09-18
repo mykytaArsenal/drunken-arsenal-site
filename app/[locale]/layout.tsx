@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
+import { preconnect } from 'react-dom';
 import { notFound } from 'next/navigation';
 import Script from 'next/script';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { isLocale, routing } from '@/i18n/routing';
-import { getCurrency } from '@/lib/currency/getCurrency';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Toaster } from '@/components/ui/sonner';
@@ -68,11 +68,9 @@ export default async function LocaleLayout({
   }
 
   setRequestLocale(locale);
+  preconnect('https://cdn.iubenda.com');
 
-  const [messages, currency] = await Promise.all([
-    getMessages(),
-    getCurrency(),
-  ]);
+  const messages = await getMessages();
 
   const fontVars = `${russoOne.variable} ${oswald.variable} ${ptMono.variable} ${ibmPlexMono.variable}`;
 
@@ -80,7 +78,7 @@ export default async function LocaleLayout({
     <html lang={locale} className={fontVars}>
       <body>
         <NextIntlClientProvider messages={messages} locale={locale}>
-          <Navigation currency={currency} />
+          <Navigation />
           {children}
           <Footer />
           <Toaster />

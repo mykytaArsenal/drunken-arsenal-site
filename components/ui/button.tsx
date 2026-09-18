@@ -19,8 +19,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-rust-bright text-cream',
-        primary: 'bg-rust-bright text-cream',
+        default: 'bg-rust-bright text-white',
+        primary: 'bg-rust-bright text-white',
         accent: 'bg-amber text-ink',
         secondary: 'bg-olive text-cream',
         destructive: 'bg-rust text-cream',

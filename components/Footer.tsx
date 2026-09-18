@@ -1,111 +1,90 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { IubendaPolicyLink } from '@/components/IubendaPolicyLink';
+import { INSTAGRAM_URL, PRODUCT_NAME, SUPPORT_EMAIL } from '@/lib/i18n/brand';
+
+const LINK_CLASS =
+  'inline-block py-2 md:py-0 text-ink/80 hover:text-rust-bright transition-colors';
 
 export async function Footer() {
   const t = await getTranslations();
 
   return (
-    <footer className="relative overflow-hidden bg-olive-deep text-cream mt-16">
+    <footer className="relative overflow-hidden bg-cream-warm text-ink">
       <div className="panel-divider" />
-      <div className="halftone-bg absolute inset-0 opacity-20 pointer-events-none" />
 
-      <div className="relative container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          <div className="space-y-4 md:col-span-1">
+      <div className="relative container mx-auto px-6 py-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10 md:gap-10">
+          <div className="space-y-4 col-span-2 md:col-span-1">
             <div className="font-display-shade text-3xl leading-none">
               Drunken
               <br />
               Arsenal
             </div>
-            <p className="font-stamp text-sm text-cream-warm leading-relaxed">
+            <p className="font-stamp text-sm text-ink/70 leading-relaxed">
               {t('footer.tagline')}
             </p>
-            <div className="inline-block stamp text-xs">18+ Only</div>
+            <div className="inline-block stamp text-xs opacity-100">
+              18+ Only
+            </div>
           </div>
 
           <div className="space-y-3">
-            <h4 className="font-display text-base text-amber tracking-wider">
+            <h2 className="font-display text-base text-rust tracking-wider">
               {t('footer.shop')}
-            </h4>
-            <ul className="space-y-2 font-stamp text-sm">
+            </h2>
+            <ul className="md:space-y-2 font-stamp text-sm">
               <li>
-                <Link
-                  href="/#products"
-                  className="text-cream-warm hover:text-amber transition-colors"
-                >
-                  · {t('footer.allProducts')}
+                <Link href="/#products" className={LINK_CLASS}>
+                  · {PRODUCT_NAME}
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/#products"
-                  className="text-cream-warm hover:text-amber transition-colors"
-                >
-                  · {t('footer.bundles')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#products"
-                  className="text-cream-warm hover:text-amber transition-colors"
-                >
-                  · {t('footer.accessories')}
+                <Link href="/#coming-soon" className={LINK_CLASS}>
+                  · {t('arsenal.title')}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div className="space-y-3">
-            <h4 className="font-display text-base text-amber tracking-wider">
+            <h2 className="font-display text-base text-rust tracking-wider">
               {t('footer.support')}
-            </h4>
-            <ul className="space-y-2 font-stamp text-sm">
+            </h2>
+            <ul className="md:space-y-2 font-stamp text-sm">
               <li>
-                <Link
-                  href="/how-to-play"
-                  className="text-cream-warm hover:text-amber transition-colors"
-                >
+                <Link href="/how-to-play" className={LINK_CLASS}>
                   · {t('nav.howToPlay')}
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/faq"
-                  className="text-cream-warm hover:text-amber transition-colors"
-                >
-                  · {t('footer.faq')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-cream-warm hover:text-amber transition-colors"
-                >
+                <a href={`mailto:${SUPPORT_EMAIL}`} className={LINK_CLASS}>
                   · {t('footer.contact')}
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
-                  href="/shipping"
-                  className="text-cream-warm hover:text-amber transition-colors"
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={LINK_CLASS}
                 >
-                  · {t('footer.shipping')}
-                </Link>
+                  · {t('footer.instagram')}
+                </a>
               </li>
             </ul>
           </div>
 
-          <div className="space-y-3">
-            <h4 className="font-display text-base text-amber tracking-wider">
+          <div className="space-y-3 col-span-2 md:col-span-1">
+            <h2 className="font-display text-base text-rust tracking-wider">
               {t('footer.legal')}
-            </h4>
-            <ul className="space-y-2 font-stamp text-sm">
+            </h2>
+            <ul className="md:space-y-2 font-stamp text-sm">
               <li>
                 <IubendaPolicyLink
                   href="https://www.iubenda.com/privacy-policy/20021284"
                   title={t('footer.privacy')}
-                  className="text-cream-warm hover:text-amber transition-colors"
+                  className={LINK_CLASS}
                 >
                   · {t('footer.privacy')}
                 </IubendaPolicyLink>
@@ -114,37 +93,21 @@ export async function Footer() {
                 <IubendaPolicyLink
                   href="https://www.iubenda.com/privacy-policy/20021284/cookie-policy"
                   title={t('footer.cookies')}
-                  className="text-cream-warm hover:text-amber transition-colors"
+                  className={LINK_CLASS}
                 >
                   · {t('footer.cookies')}
                 </IubendaPolicyLink>
-              </li>
-              <li>
-                <Link
-                  href="/terms"
-                  className="text-cream-warm hover:text-amber transition-colors"
-                >
-                  · {t('footer.terms')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/returns"
-                  className="text-cream-warm hover:text-amber transition-colors"
-                >
-                  · {t('footer.returns')}
-                </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t-2 border-amber/30 flex flex-col sm:flex-row justify-between gap-4 font-stamp text-xs text-cream-warm/70">
+        <div className="mt-10 pt-6 border-t-2 border-ink/20 flex flex-col sm:flex-row justify-between gap-4 font-stamp text-xs text-ink/70">
           <p className="tracking-wider">
             &copy; {new Date().getFullYear()} Drunken Arsenal.{' '}
             {t('footer.rights')}
           </p>
-          <p className="tracking-[0.2em] text-amber">
+          <p className="tracking-[0.2em] text-rust">
             // EXPLOSIVE FUN! · v0.1 · 2026
           </p>
         </div>

@@ -77,6 +77,7 @@ export async function subscribe(
     const { data, error: sendError } = await resend.emails.send({
       from: EMAIL_FROM,
       to: email,
+      replyTo: SUPPORT_EMAIL,
       subject: welcome.subject,
       html: welcome.html,
       text: welcome.text,

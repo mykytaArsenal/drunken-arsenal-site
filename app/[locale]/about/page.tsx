@@ -65,19 +65,19 @@ export default async function AboutPage() {
                 </h2>
                 <div className="space-y-3 font-stamp text-base text-ink/80">
                   <p className="leading-relaxed">
-                    <span className="font-display text-rust-bright">
+                    <span className="font-display text-rust">
                       {t('valueResponsibleFun')}:
                     </span>{' '}
                     {t('valueResponsibleFunText')}
                   </p>
                   <p className="leading-relaxed">
-                    <span className="font-display text-rust-bright">
+                    <span className="font-display text-rust">
                       {t('valueQualityFirst')}:
                     </span>{' '}
                     {t('valueQualityFirstText')}
                   </p>
                   <p className="leading-relaxed">
-                    <span className="font-display text-rust-bright">
+                    <span className="font-display text-rust">
                       {t('valueCommunity')}:
                     </span>{' '}
                     {t('valueCommunityText')}
